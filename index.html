@@ -17,6 +17,17 @@
     $(this).siblings('.panel-heading').removeClass('active');
   });</script>
 
+	<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
   
 <style>
 body {
@@ -141,66 +152,8 @@ background:#3d5c5c;
   
 <body>
 
-  
-<nav class="navbar navbar-inverse navbar-fixed-bottom" class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">giomon.hithub.io</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">HOTELS<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Hotel Normadia JAVASCRIPT</a></li>
-            <li><a href="#">Hotel Botero WORDSPRESS</a></li>
-            <li><a href="#">Hotel Latino DRUPAL</a></li>
-          </ul>
-        </li>
-        <li><a href="#">PERFIL</a></li>
-        <li><a href="#">CONTACT</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-  <div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Portafolio</a>
-  <a href="#">Contacto</a>
-</div>
-
-<div id="main">
-  <button class="openbtn" onclick="openNav()">☰ EXPLORE</button>  
-  
-</div>
-
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-</script>
-  
-  
-<div class="container">
+	
+	<div class="container">
   
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -222,7 +175,7 @@ function closeNav() {
       </div>
 
       <div class="item">
-        <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/brain.jpg" alt="Chicago" style="width:100%;">
+        <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/brain.jpg" alt="DEVELOPER WEBMASTER" style="width:100%;">
         <div class="carousel-caption">
           <h3>GIOVANNI MONTOYA ALZATE</h3>
           <p>Licenciado en Educación Especial </p>
@@ -231,10 +184,10 @@ function closeNav() {
       </div>
     
       <div class="item">
-        <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/fc.jpg" alt="New York" style="width:100%;">
+        <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/fc.jpg" alt="DEVELOPER WEBMASTER" style="width:100%;">
         <div class="carousel-caption">
           <h3>DEVELOPER WEBMASTER </h3>
-          <p>xyz</p>
+          <p>Desarollo de Sistemas de Información,  Sitios Web,  WebApp y Mobil Apps</p>
         </div>
       </div>
   
@@ -309,6 +262,52 @@ function closeNav() {
     </div>
   </div>
 </div>
+</div>
+	
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top" class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">giomon.hithub.io</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">HOTELS<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Hotel Normadia JAVASCRIPT</a></li>
+            <li><a href="#">Hotel Botero WORDSPRESS</a></li>
+            <li><a href="#">Hotel Latino DRUPAL</a></li>
+          </ul>
+        </li>
+        <li><a href="#">PERFIL</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+  <div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Portafolio</a>
+  <a href="#">Contacto</a>
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰ EXPLORE</button>  
+  
 </div>
  </body>
 </html>
