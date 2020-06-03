@@ -13,6 +13,7 @@
 <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 <link href="//fonts.googleapis.com/css?family=Fjalla One:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
@@ -22,6 +23,7 @@
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <script>  $('.panel-collapse').on('show.bs.collapse', function () {
     $(this).siblings('.panel-heading').addClass('active');
   });
@@ -53,81 +55,6 @@ body {
 }
 
 
-
-
-	
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 110;
-  background-color: #595959;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.sidenav2 {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #333333;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-.sidenav2 a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-.sidenav2 a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-.sidenav2 .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-@media screen and (max-height: 100%) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}	
-
-
-
 .sidebar3 {
   height: 100%;
   width: 0;
@@ -155,7 +82,7 @@ body {
   color: #f1f1f1;
 }
 
-.sidebar3 .closebtn3 {
+.sidebar .closebtn {
   position: absolute;
   top: 80;
   right: 25px;
@@ -163,16 +90,20 @@ body {
   margin-left: 50px;
 }
 
-.openbtn3 {
+.openbtn {
   font-size: 30px;
   cursor: pointer;
   background-color: #111;
   color: white;
   padding: 10px 15px;
   border: none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  
 }
 
-.openbtn3:hover {
+.openbtn:hover {
   background-color: #444;
 }
 
@@ -217,13 +148,13 @@ body {
 	transform: rotate(180deg);
 } 
 .carousel-caption {
-  float: center;	
+  	float: center;	
 	margin: 0;
-  font-family: 'Fjalla One';font-size: 14px;
-  text-align: center;
-  color: white;
+  	font-family: 'Fjalla One';font-size: 14px;
+  	text-align: center;
+  	color: white;
 	position: absolute;
-  top: 30%;
+  	top: 30%;
 } 
 
 .bonito {
@@ -234,7 +165,7 @@ body {
 
 
 
-/*jssor slider loading skin spin css*/
+
 .jssorl-009-spin img {
             animation-name: jssorl-009-spin;
             animation-duration: 1.6s;
@@ -283,44 +214,34 @@ body {
 </head> 
 <body>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">PAGINAS WEB</a>
-  <a href="#">CATALOGOS DIGITALES</a>
-  <a href="#">MOBILES</a>
-  <a href="#">APLICACIONES WEB</a>
- <a href="#">REALIDAD VIRTUAL Y AUMENTADA</a>	
-	 <a href="#">VISITAS VIRTUALES</a>
-	 <a href="#">GEOLOCALIZACION GOOGLE MAPS </a>
+<button class="openbtn" onclick="openNav3()">☰  DESAROLLO WEB </button> 
+<button class="openbtn" onclick="openNav3()">☰  EDUCACIÓN </button> 
+<button class="openbtn" onclick="openNav3()">☰  TURISMO </button> 
+
+
+<div  id="mySidebar3" class="sidebar3">
+
+<div href="javascript:void(0)" class="openbtn" onclick="closeNav3()">  X
+</div> 
+
+<a class="openbtn" href="#">PARQUE</a>
+<a class="openbtn" href="#">CATEDRAL METROPOLITANA</a>
+<a class="openbtn" href="#">CALLE JUNIN </a>
+<a class="openbtn" href="#">AVENIDA LA PLAYA</a>
+<a class="openbtn" href="#">COMUNA 13 ESCALERAS ELECTRICAS GRAFITi TOUR</a>
+<a class="openbtn" href="#">PARQUE LLERAS</a>
+<a class="openbtn" href="#">CALLE 10</a>
+<a class="openbtn" href="#">CALLE 70</a>
+<a class="openbtn" href="#">UNIVERSIDAD DE ANTIOQUIA</a>
+<a class="openbtn" href="#">JARDIN BOTANICO</a>
+<a class="openbtn" href="#">PARQUE EXPLORA</a>
+
+
 </div>
 
-<div id="mySidenav2" class="sidenav2">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
- 
-  <a href="https://giomon.github.io/dev/index.html">DESARROLLO WEB</a>
-  <a href="#">PEDAGOGIA</a>
-  <a href="#">TURISMO</a>
-</div>
 
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
 
-<span style="font-size:30px;cursor:pointer" onclick="openNav2()">&#9776; </span>
 
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-function openNav2() {
-  document.getElementById("mySidenav2").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-function closeNav2() {
-  document.getElementById("mySidenav2").style.width = "0";
-}
-</script>
 
 	
 
@@ -560,27 +481,7 @@ function closeNav2() {
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.283091150643!2d-75.5688426473885!3d6.248413580585732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442855c0122731%3A0x7501ac2b6a4405dd!2sSan%20Antonio!5e0!3m2!1ses-419!2sco!4v1590600760535!5m2!1ses-419!2sco" width="100%" height="120" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 	
     
-<button class="openbtn3" onclick="openNav3()">☰ EXPLORE MEDELLÍN VIRTUAL</button>  
 
-<div  id="mySidebar3" class="sidebar3">
-  <div href="javascript:void(0)" class="openbtn3" onclick="closeNav3()">  CERRAR/CLOSE
- </div> 
-<a class="openbtn3" href="#">PARQUE DE BOTERO</a>
-<a class="openbtn3" href="#">CATEDRAL METROPOLITANA</a>
-<a class="openbtn3" href="#">CALLE JUNIN </a>
-<a class="openbtn3" href="#">AVENIDA LA PLAYA</a>
-<a class="openbtn3" href="#">COMUNA 13 ESCALERAS ELECTRICAS GRAFITi TOUR</a>
-<a class="openbtn3" href="#">PARQUE LLERAS</a>
-<a class="openbtn3" href="#">CALLE 10</a>
-<a class="openbtn3" href="#">CALLE 70</a>
-<a class="openbtn3" href="#">UNIVERSIDAD DE ANTIOQUIA</a>
-<a class="openbtn3" href="#">JARDIN BOTANICO</a>
-<a class="openbtn3" href="#">PARQUE EXPLORA</a>
-<a class="openbtn3" href="https://giomon.github.io"></a>
- 	  
-<div href="javascript:void(0)" class="openbtn3" onclick="closeNav3()">  CERRAR / CLOSE
-
-</div>
 
 <a href="https://giomon.github.io"> giomon@msn.com 2020</a>
 </body>
