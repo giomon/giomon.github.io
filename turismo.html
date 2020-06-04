@@ -1,19 +1,289 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Berkshire Swash">
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Cinzel">
+<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Fjalla One' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+<link href="//fonts.googleapis.com/css?family=Fjalla One:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+      $(document).foundation();
+    </script>	
+	
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+<script>
+
+function openNav1() {
+  document.getElementById("mySidebar1").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav1() {
+  document.getElementById("mySidebar1").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+function openNav2() {
+  document.getElementById("mySidebar2").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav2() {
+  document.getElementById("mySidebar2").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+function openNav3() {
+  document.getElementById("mySidebar3").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav3() {
+  document.getElementById("mySidebar3").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+
+</script>
+
+
+
+
+
 <style>
-div.sticky {
+body {
+ margin: 0;
+  font-family: 'Fjalla One';font-size: 14px;
+  background-color: rgb(116, 18, 18);
+  text-align: center;
+  color: white;
+}
+
+
+.sidebar1 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+
+.sidebar1 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar2 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+
+.sidebar2 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sideba3r a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar1 .closebtn {
+  position: absolute;
+  top: 80;
+  right: 25px;
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  padding: 5px;
-  background-color: #cae8ca;
-  border: 2px solid #4CAF50;
+  
 }
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+.wrapper{
+  width:100%;
+}
+
+}
+.panel-heading {
+  padding: 0;
+	border:0;
+}
+.panel-title>a, .panel-title>a:active{
+	display:block;
+	padding:15px;
+  color:#100;
+  font-size:16px;
+  font-weight:bold;
+	text-transform:uppercase;
+	letter-spacing:1px;
+  word-spacing:3px;
+	text-decoration:none;
+}
+
+
+
+
+
+.bonito {
+  	font-family: 'Fjalla One';
+    font-size: 50px;
+	display:block;
+	padding:15px;
+	color: white;
+	font-weight:bold;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	word-spacing:3px;
+	position: absolute;
+	top: 80;
+	right: 25px;
+	background-color:rgb(0,0,0);
+   	opacity:0.7; /* Opacidad 60% */
+	margin-left: 50px;
+}
+
+
+
+
+	
+	
+
+
+
+
 </style>
 </head>
 <body>
 
+<title>Giovanni Montoya Alzate</title>
+</head> 
+<body>
+
+<button class="openbtn" onclick="openNav1()">☰  DESAROLLO WEB </button> 
+<button class="openbtn" onclick="openNav2()">☰  EDUCACIÓN </button> 
+<button class="openbtn" onclick="openNav3()">☰  TURISMO </button> 
+<a class="bonito" href="#">FUENTE PARQUE DE BOLIVAR</a>
+
+<div  id="mySidebar1" class="sidebar2">
+
+<div href="javascript:void(0)" class="openbtn" onclick="closeNav1()">  X
+</div> 
+
+<a class="openbtn" href="#">TIENDAS VIRTUALES E-COMMERCE</a>
+<a class="openbtn" href="#">PAGINAS WEB </a>
+<a class="openbtn" href="#">CATÁLOGOS DIGITALES</a>
+<a class="openbtn" href="#">APPS ANDROID IOS</a>
+<a class="openbtn" href="#">APLICACIONES WEB ANGULAR - REACT - VUE </a>
+<a class="openbtn" href="#">RECORRIDOS VIRTUALES</a>
+<a class="openbtn" href="#">GOOGLE y  WHATSAPP MAPS</a>
+<a class="openbtn" href="#">REALIDAD VIRTUAL Y AUMENTADA</a>
+<a class="openbtn" href="#">CONEXION NIDEK </a>
+
+</div>
+
+<div  id="mySidebar2" class="sidebar1">
+
+<div href="javascript:void(0)" class="openbtn" onclick="closeNav2()">  X
+</div> 
+
+<a class="openbtn" href="https://giomon.github.io/turismo/">CONFERENCIAS y CAPACITACIONES EN INCLUSIÓN y TIC</a>
+<a class="openbtn" href="#">CLASES  DE INGLÉS WHATSAPP</a>
+<a class="openbtn" href="#">TUTORIAS y ACOMPAÑAMIENTO ESCOLAR PRESENCIAL Y VIRTUAL</a>
+
+
+
+
+</div>
+
+<div  id="mySidebar3" class="sidebar1">
+
+<div href="javascript:void(0)" class="openbtn" onclick="closeNav3()">  X
+</div> 
+
+<a  class="openbtn" href="https://giomon.github.io/turismo.html">PARQUE DE BOLIVAR y CATEDRAL METROPOLITANA</a>
+<a class="openbtn" href="#">CATEDRAL METROPOLITANA</a>
+<a class="openbtn" href="#">CALLE JUNIN </a>
+<a class="openbtn" href="#">AVENIDA LA PLAYA</a>
+<a class="openbtn" href="#">COMUNA 13 ESCALERAS ELECTRICAS GRAFITi TOUR</a>
+<a class="openbtn" href="#">PARQUE LLERAS</a>
+<a class="openbtn" href="#">CALLE 10</a>
+<a class="openbtn" href="#">CALLE 70</a>
+<a class="openbtn" href="#">UNIVERSIDAD DE ANTIOQUIA</a>
+<a class="openbtn" href="#">JARDIN BOTANICO</a>
+<a class="openbtn" href="#">PARQUE EXPLORA</a>
+
+
+</div>
+
+<iframe src="https://www.google.com/maps/embed?pb=!4v1591292723056!6m8!1m7!1sCAoSLEFGMVFpcE96QVVrTEVLUDdzOVJ5M1ZjWk1MTzdGSWVQeGgwcUdUdHR5X2dM!2m2!1d6.253988199999999!2d-75.56394929999999!3f7.421325156151511!4f68.96423161602902!5f0.7820865974627469" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+
 <iframe src="https://www.google.com/maps/embed?pb=!4v1591200026070!6m8!1m7!1sCAoSK0FGMVFpcE00T3VCYmdPV3NlejNlZ0FxR18wenB6a3ItTkZuMEo3VGtLYWc.!2m2!1d6.2532916!2d-75.5643896!3f48.11!4f36.510000000000005!5f0.4000000000000002" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!4v1591292940380!6m8!1m7!1sCAoSLEFGMVFpcE13QWpDZUV6ZVV6a256THJranQ2ekFHNEdYRklMSXhnNmpqRWV1!2m2!1d6.2541641!2d-75.563812!3f146.3668262846248!4f-4.957785782331285!5f0.7820865974627469" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+
+<iframe src="https://www.google.com/maps/embed?pb=!4v1591200026070!6m8!1m7!1sCAoSK0FGMVFpcE00T3VCYmdPV3NlejNlZ0FxR18wenB6a3ItTkZuMEo3VGtLYWc.!2m2!1d6.2532916!2d-75.5643896!3f48.11!4f36.510000000000005!5f0.4000000000000002" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+
+<iframe src="https://www.google.com/maps/embed?pb=!4v1591293030780!6m8!1m7!1sCAoSLEFGMVFpcE51UGpzUXBOQlpxR2tOWGtmM3FGZEw5UGZ6OVJENHdIZGRMaEZZ!2m2!1d6.2538849!2d-75.5639963!3f2.4324717186226223!4f2.768600191179459!5f0.7820865974627469" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+</iframe><iframe src="https://www.google.com/maps/embed?pb=!4v1591200026070!6m8!1m7!1sCAoSK0FGMVFpcE00T3VCYmdPV3NlejNlZ0FxR18wenB6a3ItTkZuMEo3VGtLYWc.!2m2!1d6.2532916!2d-75.5643896!3f48.11!4f36.510000000000005!5f0.4000000000000002" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+
+<iframe src="https://www.google.com/maps/embed?pb=!4v1591293235625!6m8!1m7!1sCAoSLEFGMVFpcE9sUDZvMjRkSnpJQmIyTXF5ZFliTWpNV2ZWOWk0UjZkaThEQ0lV!2m2!1d6.2534136!2d-75.5640777!3f6.9572312971817025!4f35.15388199742007!5f0.41003866481528717" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+
 </body>
 </html>
