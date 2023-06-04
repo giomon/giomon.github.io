@@ -3,7 +3,7 @@
 <head>
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-   	<title>giovanni montoya alzate</title>
+   	<title>GIOVANNI MONTOYA +57 311 342 7966</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Berkshire Swash">
@@ -282,9 +282,8 @@ body {
 <body>
 
 
-<button class="openbtn" onclick="openNav1()">☰  DESAROLLO WEB </button> 
-<button class="openbtn1" onclick="openNav2()">☰  EDUCACIÓN </button> 
-<button class="openbtn2" onclick="openNav3()">☰  TURISMO </button> 
+<button class="openbtn" onclick="openNav1()">☰  HOME </button>  
+<button class="openbtn2" onclick="openNav3()">☰  MEDELLIN CITY TOURS </button> 
 
 
 <div  id="mySidebar1" class="sidebar1">
@@ -292,15 +291,10 @@ body {
 <div href="javascript:void(0)" class="openbtn" onclick="closeNav1()">  X
 </div> 
 
-<a class="openbtn" href="#">TIENDAS VIRTUALES E-COMMERCE</a>
-<a class="openbtn" href="#">PAGINAS WEB DRUPAL WORDPRESS </a>
-<a class="openbtn" href="#">CATÁLOGOS DIGITALES</a>
-<a class="openbtn" href="#">APPS ANDROID IOS</a>
-<a class="openbtn" href="#">APLICACIONES WEB DRUPAL ANGULAR - REACT - VUE </a>
-<a class="openbtn" href="#">RECORRIDOS VIRTUALES</a>
-<a class="openbtn" href="#">GOOGLE y WHATSAPP MAPS</a>
-<a class="openbtn" href="#">REALIDAD VIRTUAL Y AUMENTADA</a>
-<a class="openbtn" href="#">CONEXION REFRACTOMETROS NIDEK </a>
+<a class="openbtn" href="#">PROFILE</a>
+<a class="openbtn" href="#">REVIEWS </a>
+<a class="openbtn" href="#">CONTACT</a>
+
 
 </div>
 
@@ -323,17 +317,16 @@ body {
 <div href="javascript:void(0)" class="openbtn2" onclick="closeNav3()">  X
 </div> 
 
-<a class="openbtn2" href="https://giomon.github.io/turismo.html">PARQUE DE BOLIVAR</a>
-<a class="openbtn2" href="#">CATEDRAL METROPOLITANA</a>
-<a class="openbtn2" href="#">CALLE JUNIN </a>
-<a class="openbtn2" href="#">AVENIDA LA PLAYA</a>
-<a class="openbtn2" href="#">COMUNA 13 ESCALERAS ELECTRICAS GRAFITi TOUR</a>
-<a class="openbtn2" href="#">PARQUE LLERAS</a>
-<a class="openbtn2" href="#">CALLE 10</a>
-<a class="openbtn2" href="#">CALLE 70</a>
-<a class="openbtn2" href="#">UNIVERSIDAD DE ANTIOQUIA</a>
-<a class="openbtn2" href="#">JARDIN BOTANICO</a>
-<a class="openbtn2" href="#">PARQUE EXPLORA</a>
+<a class="openbtn2" href="https://giomon.github.io/turismo.html">DOWN TOWN WALKING  CITY TOUR</a>
+<a class="openbtn2" href="#">COMUNA 13 GRAFFITI ARTS AND  INOVATION TOUR</a>
+<a class="openbtn2" href="#">FLY OVER MEDELLIN IN METRO CABLE</a>
+<a class="openbtn2" href="#">PABLO ESCOBAR</a>
+<a class="openbtn2" href="#">GUATAPE AND PIEDRA DEL PEÑOL</a>
+<a class="openbtn2" href="#">REAL STATE TOUR</a>
+<a class="openbtn2" href="#">CAFE FARM TOUR</a>
+<a class="openbtn2" href="#">VISITING ANTIOQUIA TOWNS : JARDIN</a>
+<a class="openbtn2" href="#">VISITING ANTIOQUIA TOWNS : SANTAFE DE ANTIOQUIA</a>
+ <a class="openbtn2" href="#">MEDELLIN WALKING TOUR: BOTANICAL GARDEN MORAVIA CULTURAL CENTER UNIVERSIDAD DE ANTIOQUIA</a>
 
 
 </div>
@@ -556,7 +549,7 @@ body {
     </script>
     <!-- #endregion Jssor Slider End -->
 	
-	<div class="airbnb-embed-frame" data-id="43205938" data-view="home" style="width:450px;height:300px;margin:auto"><a href="https://www.airbnb.es/rooms/43205938?s=66&amp;unique_share_id=5be5d62e-d882-4ac0-a9b9-1f370439b07e&amp;source=embed_widget">Ver en Airbnb</a><a href="https://www.airbnb.es/rooms/43205938?s=66&amp;unique_share_id=5be5d62e-d882-4ac0-a9b9-1f370439b07e&amp;source=embed_widget" rel="nofollow">Luxury Double Bedroom Poblado</a><script async="" src="https://www.airbnb.es/embeddable/airbnb_jssdk"></script></div>
-	<div class="airbnb-embed-frame" data-id="670519" data-view="experience" style="width:410px;height:300px;margin:auto"><a href="https://es.airbnb.com/experiences/670519?s=66&amp;unique_share_id=15c86418-b681-457c-a32f-0a382d7b9f30&amp;source=embed_widget">Ver en Airbnb</a><a href="https://es.airbnb.com/experiences/670519?s=66&amp;unique_share_id=15c86418-b681-457c-a32f-0a382d7b9f30&amp;source=embed_widget" rel="nofollow">vuele sobre Medellin colgado en una cabina del Metro Cable</a><script async="" src="https://es.airbnb.com/embeddable/airbnb_jssdk"></script></div>
+	
 </body>
 </html>
+
