@@ -1,543 +1,258 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-	
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8" <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <title>Cards</title>
+
+
+<style>
+body {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+}
+
+ul {
+  padding-left: 0;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px 10px;
+  transition: all 0.3s ease;
+}
+
+.container {
+  max-width: 100%;
+  padding: 2em;
+}
+
+.card {
+  display: block;
+  width: 150px;
+  height: 175px;
+  padding: 80px 50px;
+  background-color: #51aae5;
+  border-radius: 7px;
+  margin: 5px;
+  text-align: center;
+  line-height: 27px;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  -webkit-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
+  -moz-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
+  box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
+  will-change: transform;
+}
+
+li:hover {
+  transform: scale(1.1);
+}
+
+li:nth-child(-n + 3) .card {
+  background-color: #e65f51;
+}
+
+li:nth-child(2n + 1) .card {
+  background-color: #a17de9;
+}
+
+li:nth-child(4n) .card {
+  background-color: #feca34;
+}
+
+li:nth-child(5n-2) .card {
+  background-color: #51aae5;
+}
+
+li:nth-child(4n + 4) .card {
+  background-color: #feca34;
+}
+
+li:nth-child(-7n + 7) .card {
+  background-color: #e46055;
+}
+
+.delete-card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px 15px;
+  opacity: 0.4;
+  transition: all 0.5s ease;
+}
+
+.delete-card:hover,
+.error {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+.flip-enter-active {
+  transition: all 0.4s ease;
+}
+
+.flip-leave-active {
+  display: none;
+}
+
+.flip-enter,
+.flip-leave {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+/* Form */
+.flashcard-form {
+  position: relative;
+}
+
+label {
+  font-weight: 400;
+  color: #333;
+  margin-right: 10px;
+}
+
+input {
+  border-radius: 5px;
+  border: 2px solid #eaeaea;
+  padding: 10px;
+  outline: none;
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid #87cb84;
+  background-color: #87cb84;
+  padding: 8px 15px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #70a66f;
+}
+
+.error {
+  margin-top: 10px;
+  display: block;
+  color: #e44e42;
+  font-weight: 600;
+}
+
+  </style>
   
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Berkshire Swash">
-<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Cinzel">
-<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Fjalla One' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-<link href="//fonts.googleapis.com/css?family=Fjalla One:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  <script>
+const cards = [
+  {
+    front: 'The "First Computer Programmer"',
+    back: "Ada Lovelace",
+    flipped: false
+  },
+  {
+    front: 'Invented the "Clarke Calculator"',
+    back: "Edith Clarke",
+    flipped: false
+  },
+  {
+    front: "Famous World War II Enigma code breaker",
+    back: "Alan Turing",
+    flipped: false
+  },
+  {
+    front: "Created satellite orbit analyzation software for NASA",
+    back: "Dr. Evelyn Boyd Granville",
+    flipped: false
+  }
+];
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-      $(document).foundation();
-    </script>	
-	
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+//TO DO
+// Vue instance
+// Display our data
+// On click: flip cards back and forth
+// Get info for new cards from the user
+//Create data properties for the front and back of new card
+//Bind those properties to the form inputs using v-model
+// Add new card when user hits enter or clicks button
+//Create a method that creates a new card object containing the new card info
+//Push that card object into the cards array
+// Delete cards
+// Animate card flip
+// Display an error message if form fields are blank
 
-<script>  $('.panel-collapse').on('show.bs.collapse', function () {
-    $(this).siblings('.panel-heading').addClass('active');
-  });
-
-  $('.panel-collapse').on('hide.bs.collapse', function () {
-    $(this).siblings('.panel-heading').removeClass('active');
-  });</script>
-
-
-<script>
-
-function openNav1() {
-  document.getElementById("mySidebar1").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav1() {
-  document.getElementById("mySidebar1").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-
-function openNav2() {
-  document.getElementById("mySidebar2").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav2() {
-  document.getElementById("mySidebar2").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-
-function openNav3() {
-  document.getElementById("mySidebar3").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav3() {
-  document.getElementById("mySidebar3").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-
+new Vue({
+  el: "#flashcard-app",
+  data: {
+    cards: cards,
+    newFront: "",
+    newBack: "",
+    error: false
+  },
+  methods: {
+    toggleCard: function(card) {
+      card.flipped = !card.flipped;
+    },
+    addNew: function() {
+      if (!this.newFront || !this.newBack) {
+        this.error = true;
+      } else {
+        this.cards.push({
+          front: this.newFront,
+          back: this.newBack,
+          flipped: false
+        });
+        this.newFront = "";
+        this.newBack = "";
+        this.error = false;
+      }
+    }
+  }
+});
 
 </script>
   
-<style>
+</head>
 
-body {
- margin: 0;
-  font-family: 'Fjalla One';font-size: 14px;
-  background-color: rgb(116, 18, 18);
-  text-align: center;
-  color: white;
-}
-
-
-.sidebar1 {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-
-.sidebar1 a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sideba3r a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar1 .closebtn {
-  position: absolute;
-  top: 80;
-  right: 25px;
-  font-size: 25px;
-  margin-left: 50px;
-}
-
-.openbtn {
-  font-size: 30px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
-.wrapper{
-  width:100%;
-}
-
-}
-.panel-heading {
-  padding: 0;
-	border:0;
-}
-.panel-title>a, .panel-title>a:active{
-	display:block;
-	padding:15px;
-  color:#100;
-  font-size:16px;
-  font-weight:bold;
-	text-transform:uppercase;
-	letter-spacing:1px;
-  word-spacing:3px;
-	text-decoration:none;
-}
-.panel-heading  a:before {
-   font-family: 'Glyphicons Halflings';
-   content: "\e114";
-   float: right;
-   transition: all 0.5s;
-}
-.panel-body {
-
- background:#4e8e9e;
-} 
-.panel-heading.active a:before {
-	-webkit-transform: rotate(180deg);
-	-moz-transform: rotate(180deg);
-	transform: rotate(180deg);
-} 
-.carousel-caption {
-  	float: center;	
-	margin: 0;
-  	font-family: 'Fjalla One';font-size: 14px;
-  	text-align: center;
-  	color: white;
-	position: absolute;
-  	top: 30%;
-} 
-
-.bonito {
-  font-family: 'Fjalla One;font-size: 14px;
-  font-size: 48px;
-  text-shadow: 4px 4px 4px #aaa;
-}
-
-
-
-
-.jssorl-009-spin img {
-            animation-name: jssorl-009-spin;
-            animation-duration: 1.6s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        @keyframes jssorl-009-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /*jssor slider bullet skin 032 css*/
-.jssorb032 {position:absolute;}
-.jssorb032 .i {position:absolute;cursor:pointer;}
-.jssorb032 .i .b {fill:#fff;fill-opacity:0.7;stroke:#000;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.25;}
-.jssorb032 .i:hover .b {fill:#000;fill-opacity:.6;stroke:#fff;stroke-opacity:.35;}
-.jssorb032 .iav .b {fill:#000;fill-opacity:1;stroke:#fff;stroke-opacity:.35;}
-.jssorb032 .i.idn {opacity:.3;}
-
-        /*jssor slider arrow skin 051 css*/
-.jssora051 {display:block;position:absolute;cursor:pointer;}
-.jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
-.jssora051:hover {opacity:.8;}
-.jssora051.jssora051dn {opacity:.5;}
-.jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-	
-	
-@media screen and (max-width: 100%) {
-  .topnav a:not(:first-child) {display: none;}
-   .sidebar3 {padding-top: 15px;}
-  .sidebar3 a {font-size: 18px;}
-  .topnav a.icon {
-    float: left;
-    display: block;
-  }
-}
-
- 
-}
-
-}
-</style>
-  
-<title>Giovanni Montoya Alzate</title>
-</head> 
 <body>
-
-<button class="openbtn" onclick="openNav1()">☰  DESAROLLO WEB </button> 
-<button class="openbtn" onclick="openNav2()">☰  EDUCACIÓN </button> 
-<button class="openbtn" onclick="openNav3()">☰  TURISMO </button> 
-
-
-<div  id="mySidebar1" class="sidebar1">
-
-<div href="javascript:void(0)" class="openbtn" onclick="closeNav1()">  X
-</div> 
-
-<a class="openbtn" href="#">TIENDAS VIRTUALES E-COMMERCE</a>
-<a class="openbtn" href="#">PAGINAS WEB </a>
-<a class="openbtn" href="#">CATÁLOGOS DIGITALES</a>
-
-<a class="openbtn" href="#">APPS ANDROID IOS</a>
-<a class="openbtn" href="#">APLICACIONES WEB ANGULAR - REACT - VUE </a>
-<a class="openbtn" href="#">RECORRIDOS VIRTUALES</a>
-<a class="openbtn" href="#">GOOGLE y  WHATSAPP MAPS</a>
-<a class="openbtn" href="#">REALIDAD VIRTUAL Y AUMENTADA</a>
-<a class="openbtn" href="#">CONEXION NIDEK </a>
-
-</div>
-
-<div  id="mySidebar2" class="sidebar1">
-
-<div href="javascript:void(0)" class="openbtn" onclick="closeNav2()">  X
-</div> 
-
-<a class="openbtn" href="https://giomon.github.io/turismo/">CONFERENCIAS y CAPACITACIONES EN INCLUSIÓN y TIC</a>
-<a class="openbtn" href="https://giomon.github.io/turismo/eng/index.html">CLASES  DE INGLÉS WHATSAPP</a>
-<a class="openbtn" href="#">TUTORIAS y ACOMPAÑAMIENTO ESCOLAR PRESENCIAL Y VIRTUAL</a>
-
-
-
-
-</div>
-
-<div  id="mySidebar3" class="sidebar1">
-
-<div href="javascript:void(0)" class="openbtn" onclick="closeNav3()">  X
-</div> 
-
-<a class="openbtn" href="https://giomon.github.io/turismo.html">PARQUE DE BOLIVAR</a>
-<a class="openbtn" href="#">CATEDRAL METROPOLITANA</a>
-<a class="openbtn" href="#">CALLE JUNIN </a>
-<a class="openbtn" href="#">AVENIDA LA PLAYA</a>
-<a class="openbtn" href="#">COMUNA 13 ESCALERAS ELECTRICAS GRAFITi TOUR</a>
-<a class="openbtn" href="#">PARQUE LLERAS</a>
-<a class="openbtn" href="#">CALLE 10</a>
-<a class="openbtn" href="#">CALLE 70</a>
-<a class="openbtn" href="#">UNIVERSIDAD DE ANTIOQUIA</a>
-<a class="openbtn" href="#">JARDIN BOTANICO</a>
-<a class="openbtn" href="#">PARQUE EXPLORA</a>
-
-
-</div>
-
-
-
-
-	
-
-<script src="jssor.slider-27.5.0.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-        jssor_1_slider_init = function() {
-
-            var jssor_1_SlideoTransitions = [
-              [{b:-1,d:1,o:-0.7}],
-              [{b:900,d:2000,x:-379,e:{x:7}}],
-              [{b:900,d:2000,x:-379,e:{x:7}}],
-              [{b:-1,d:1,o:-1,sX:2,sY:2},{b:0,d:900,x:-171,y:-341,o:1,sX:-2,sY:-2,e:{x:3,y:3,sX:3,sY:3}},{b:900,d:1600,x:-283,o:-1,e:{x:16}}]
-            ];
-
-            var jssor_1_options = {
-              $AutoPlay: 1,
-              $SlideDuration: 800,
-              $SlideEasing: $Jease$.$OutQuint,
-              $CaptionSliderOptions: {
-                $Class: $JssorCaptionSlideo$,
-                $Transitions: jssor_1_SlideoTransitions
-              },
-              $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-              },
-              $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-              }
-            };
-
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-            /*#region responsive code begin*/
-
-            var MAX_WIDTH = 3000;
-
-            function ScaleSlider() {
-                var containerElement = jssor_1_slider.$Elmt.parentNode;
-                var containerWidth = containerElement.clientWidth;
-
-                if (containerWidth) {
-
-                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-                    jssor_1_slider.$ScaleWidth(expectedWidth);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            }
-
-            ScaleSlider();
-
-            $Jssor$.$AddEvent(window, "load", ScaleSlider);
-            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-            /*#endregion responsive code end*/
-        };
-    </script>
- 
+  <div id="flashcard-app" class="container">
     
-<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1300px;height:600px;overflow:hidden;visibility:hidden;">
-        <!-- Loading Screen -->
-        <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-            <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="IMG_20200113_172319599_HDR.jpg" />
-        </div>
-        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:600px;overflow:hidden;">
-            <div>
-                <img data-u="image" src="IMG_20200113_172319599_HDR.jpg" />
-		    <div style="position:absolute;top:150px;left:30px;width:600px;height:130px;font-family:'Fjalla One',sans-serif;font-size:40px;color:#000000;line-height:1.5;padding:5px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;">Perfíl Profesional
-<br />
- 	    
-                   <div style="font-family: 'Cinzel', serif;">Giovanni Montoya Alzate</div>
-                   
-                </div>
-
-                <div data-t="0" data-ts="preserve-3d" style="position:absolute;top:300px;left:75px;width:470px;height:220px;">
-                    <img style="position:absolute;top:300px;left:0px;width:470px;height:220px;max-width:470px;" src="https://giomon.github.io/IMG_20200113_172319599_HDR.jpg" />
-                    <div data-ts="preserve-3d" style="position:absolute;top:4px;left:45px;width:379px;height:213px;overflow:hidden;">
-                        <img data-t="1" style="position:absolute;top:300px;left:0px;width:379px;height:213px;max-width:379px;" src="" />
-                        <img data-t="2" style="position:absolute;top:0px;left:379px;width:379px;height:213px;max-width:379px;" src="" />
-                    </div>
-                    <img style="position:absolute;top:4px;left:45px;width:379px;height:213px;max-width:379px;" src="https://giomon.github.io/IMG_20200113_172319599_HDR.jpg" />
-                    <img data-t="3" style="position:absolute;top:476px;left:454px;width:63px;height:77px;max-width:63px;" src="https://giomon.github.io/IMG_20200113_172319599_HDR.jpg" />
-                </div>
-                <div style="position:absolute;top:300px;left:30px;width:600px;height:130px;font-family:'Fjalla One',sans-serif;font-size:40px;color:#000000;line-height:1.27;padding:30px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;">Educador Especial - Developer </div>
-		</div>
-            <div>
-                <img data-u="image" src="IMG_20200113_172319599_HDR.jpg" />
-		    <div style="position:absolute;top:150px;left:30px;width:600px;height:130px;font-family:'Fjalla One',sans-serif;font-size:40px;color:#000000;line-height:1.5;padding:5px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;">Portafolio de Servicios
-			    
-<br />
-
-<div style="font-family: 'Cinzel', serif;">DESARROLLO WEB</div>
-
-           
-                </div>
-                <div style="position:absolute;top:300px;left:30px;width:600px;height:130px;font-family:'Oswald',sans-serif;font-size:30px;color:#000000;line-height:1.27;padding:5px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;"> Tiendas Virtuales, Catálogos, Apps, Realidad Virtual y Aumentada</div>
-
-            </div>
-            <div>
-                <img data-u="image" src="IMG_20200113_172319599_HDR.jpg" />
-                <div style="position:absolute;top:150px;left:30px;width:600px;height:130px;font-family:'Fjalla One',sans-serif;font-size:40px;color:#000000;line-height:1.5;padding:5px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;">Emprendimiento
-<br />
-<div style="font-family: 'Cinzel', serif;">EXPERIENCIAS AIRBNB</div>
-		  
-                </div>
-                <div style="position:absolute;top:300px;left:30px;width:600px;height:130px;font-family:'Oswald',sans-serif;font-size:30px;color:#000000;line-height:1.27;padding:5px 5px 5px 5px;box-sizing:border-box;background-color:rgba(255,188,5,0.8);background-clip:padding-box;">Aventuras - Experiencias</div>
-            </div>
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb032" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-            <div data-u="prototype" class="i" style="width:16px;height:16px;">
-                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                    <circle class="b" cx="8000" cy="8000" r="5800"></circle>
-                </svg>
-            </div>
-        </div>
-        <!-- Arrow Navigator -->
-        <div data-u="arrowleft" class="jssora051" style="width:65px;height:65px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-            </svg>
-        </div>
-        <div data-u="arrowright" class="jssora051" style="width:65px;height:65px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-            </svg>
-        </div>
+    <h1>Flashcard App</h1>
+    
+    <div class="flashcard-form">
+      <label for="front">Front
+      <input v-model="newFront" type="text" id="front">
+    </label>
+      <label for="back">Back
+      <input v-on:keypress.enter="addNew" v-model="newBack" type="text" id="back">
+    </label>
+      <button v-on:click="addNew">Add a New Card</button>
+      <span v-show="error" class="error">Oops! Flashcards need a front and a back.</span>
     </div>
-    <script type="text/javascript">jssor_1_slider_init();</script>
-    <!-- #endregion Jssor Slider End -->	
-
-<!-- #endregion Jssor Slider inicio1 -->	
-<!-- #region Jssor Slider Begin -->
-    <!-- Generator: Jssor Slider Maker -->
-    <!-- Source: https://www.jssor.com -->
-    <script src="jssor.slider-27.5.0.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        jssor_1_slider_init = function() {
-
-            var jssor_1_SlideoTransitions = [
-              [{b:-1,d:1,o:-0.7}],
-              [{b:900,d:2000,x:-379,e:{x:7}}],
-              [{b:900,d:2000,x:-379,e:{x:7}}],
-              [{b:-1,d:1,o:-1,sX:2,sY:2},{b:0,d:900,x:-171,y:-341,o:1,sX:-2,sY:-2,e:{x:3,y:3,sX:3,sY:3}},{b:900,d:1600,x:-283,o:-1,e:{x:16}}]
-            ];
-
-            var jssor_1_options = {
-              $AutoPlay: 1,
-              $SlideDuration: 800,
-              $SlideEasing: $Jease$.$OutQuint,
-              $CaptionSliderOptions: {
-                $Class: $JssorCaptionSlideo$,
-                $Transitions: jssor_1_SlideoTransitions
-              },
-              $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-              },
-              $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-              }
-            };
-
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-            /*#region responsive code begin*/
-
-            var MAX_WIDTH = 3000;
-
-            function ScaleSlider() {
-                var containerElement = jssor_1_slider.$Elmt.parentNode;
-                var containerWidth = containerElement.clientWidth;
-
-                if (containerWidth) {
-
-                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-                    jssor_1_slider.$ScaleWidth(expectedWidth);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            }
-
-            ScaleSlider();
-
-            $Jssor$.$AddEvent(window, "load", ScaleSlider);
-            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-            /*#endregion responsive code end*/
-        };
-    </script>
-
-
     
-    <style>
-        /*jssor slider loading skin spin css*/
-        .jssorl-009-spin img {
-            animation-name: jssorl-009-spin;
-            animation-duration: 1.6s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
+    <ul class="flashcard-list">
+      <li v-on:click="toggleCard(card)" v-for="(card, index) in cards">
+        <transition name="flip">
+          <p v-bind:key="card.flipped" class="card">
+            {{ card.flipped ? card.back : card.front }}
+            <span v-on:click="cards.splice(index, 1)" class="delete-card">X</span>
+          </p>
+        </transition>
+      </li>
+    </ul>
+  </div>
 
-        @keyframes jssorl-009-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /*jssor slider bullet skin 032 css*/
-        .jssorb032 {position:absolute;}
-        .jssorb032 .i {position:absolute;cursor:pointer;}
-        .jssorb032 .i .b {fill:#fff;fill-opacity:0.7;stroke:#000;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.25;}
-        .jssorb032 .i:hover .b {fill:#000;fill-opacity:.6;stroke:#fff;stroke-opacity:.35;}
-        .jssorb032 .iav .b {fill:#000;fill-opacity:1;stroke:#fff;stroke-opacity:.35;}
-        .jssorb032 .i.idn {opacity:.3;}
-
-        /*jssor slider arrow skin 051 css*/
-        .jssora051 {display:block;position:absolute;cursor:pointer;}
-        .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
-        .jssora051:hover {opacity:.8;}
-        .jssora051.jssora051dn {opacity:.5;}
-        .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-    </style>
-		
-		
-    
-
-</div>
-
-
-
-
-	    
-<iframe src="https://www.google.com/maps/embed?pb=!4v1588542605620!6m8!1m7!1sM1T4H-5EYf1_ttvTo8wqZw!2m2!1d6.252147142869554!2d-75.56809612184959!3f287.66059772689766!4f-4.109560720075223!5f0.7820865974627469" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.283091150643!2d-75.5688426473885!3d6.248413580585732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442855c0122731%3A0x7501ac2b6a4405dd!2sSan%20Antonio!5e0!3m2!1ses-419!2sco!4v1590600760535!5m2!1ses-419!2sco" width="100%" height="120" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-	
-    
-
-
-<a href="https://giomon.github.io"> giomon@msn.com 2020</a>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </body>
-</html>
+
+	</html>
