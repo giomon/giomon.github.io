@@ -41,22 +41,26 @@
   <p>Ich bin mude.</p>
   <p>Du bist mein Freund.</p>
   <p>Er istist Glucklic.</p></h3>
- 
- 
-<script> function play() {
+  <button id="button1">ains</button>
+     
+       
+       <audio id="sound1" src="ains.mp3"></audio>
+       
+       
+       <script>
+         const button1 = document.getElementById("button1");
+         
+         const sound1 = document.getElementById("sound1");
+        
+       
+         button1.addEventListener("click", function() {
+           sound1.play();
+         });
+       
+         
+        
+       </script>
 
-var audio =document.getElementById("audio");
-
-        audio.play();
-      }
-</script>
-
- <input type="button" 
-        value="PLAY" 
-        onclick="play()">
-
-    <audio id="audio" 
-           src="ains.mp3">
 </ul>
 
 </div>
@@ -74,22 +78,26 @@ var audio =document.getElementById("audio");
     <p>Sie haben viel Erfahrung.</h2>
 
 
-<script> function play() {
-
-var audio2 =document.getElementById("audio2");
-
-        audio2.play();
-      }
-</script>
-
- <input type="button" 
-        value="PLAY" 
-        onclick="play()">
-
-    <audio id="audio2" 
-           src="habenver.mp3"> </p>
+ </p>
  
 
+<button id="button2">haben</button>
+
+
+<audio id="sound2" src="habenver.mp3"></audio>
+
+<script>
+ 
+  const button2 = document.getElementById("button2");
+  
+  const sound2 = document.getElementById("sound2");
+
+  
+
+  button2.addEventListener("click", function() {
+    sound2.play();
+  });
+</script>
 </ul>  
 </p>
                             </div>
