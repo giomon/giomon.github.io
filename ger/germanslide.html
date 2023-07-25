@@ -38,11 +38,11 @@
                  <h1 style="background-color:red"   class="uk-heading-bullet"> 1 sein </h1> 
   
  <ul> 
-<h3> 
+<h2> 
    <br>Ich bin mude.
    <br>Du bist mein Freund. 
    <br>Er ist Glucklic.
-</h3> 
+</h2> 
    
    <button id="button1">ains</button> 
  <audio id="sound1" src="ains.mp3"></audio> 
@@ -96,15 +96,13 @@
    }); 
  </script> 
  </ul>   
- </p> 
-  
-</div> 
+ </p> > 
 </li> 
   
   
  <li> 
  <div class="uk-container uk-container-small" uk-slide nor-parallax="opacity: 0,1,0"> 
- <h1 style="background: red" class="uk-heading-bullet"> 3 Werden</h1> 
+ <h1 style="background: red" class="uk-heading-bullet"> 3 Werden </h1> 
  <p> 
  <ul> 
  <h2> 
@@ -112,22 +110,26 @@
  <br>Ihr werdet erfolgreichsei. 
  <br>Sie werden veruhmt. 
  </h2> 
- <script> function play() { 
+  
+  <button id="button3">Werden</button> 
+  
+  
+ <audio id="sound3" src="habenver.mp3"></audio> 
+  
+ <script> 
+  
+   const button3 = document.getElementById("button3"); 
+  
+   const sound3 = document.getElementById("sound3"); 
   
   
   
- var audio3 =document.getElementById("audio3"); 
+   button3.addEventListener("click", function() { 
+     sound3.play(); 
+   }); 
+ </script>
   
-         audio3.play(); 
-       } 
- </script> 
-  
-  <input type="button3"  
-         value="Werden"  
-         onclick="play()"> 
-  
-     <audio3 id="audio3"  
-            src="werden.mp3"> 
+    
   
   
  </p> 
