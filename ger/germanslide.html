@@ -67,17 +67,20 @@
    
 
 
-<!-- Replace "your-audio-file.mp3" with the path to your MP3 file -->
-<button class="mp3-button" onclick="openMP3()">Play</button>
+<h1>Two Audio Buttons</h1>
 
-<script>
-  function openMP3() {
-    // Replace "your-audio-file.mp3" with the path to your MP3 file
-    var mp3File = "ains.mp3";
-    var audio = new Audio(mp3File);
-    audio.play();
-  }
-</script>
+  <!-- Button 1 - Play Audio 1 -->
+  <button class="audio-button" onclick="playAudio('audio1.mp3')">Play Audio 1</button>
+
+  <!-- Button 2 - Play Audio 2 -->
+  <button class="audio-button" onclick="playAudio('audio2.mp3')">Play Audio 2</button>
+
+  <script>
+    function playAudio(audioFile) {
+      var audio = new Audio(audioFile);
+      audio.play();
+    }
+  </script>
 
 
 
