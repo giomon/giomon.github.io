@@ -214,15 +214,22 @@
 <li> 
 <div class="uk-container uk-container-small" uk-slider-parallax="opacity: 0,1,0"> 
 <h3 style="background-color:red"   class="uk-heading-bullet" class="uk-heading-bullet"> 7 Wollen</h3> 
- <p> 
+  
  <ul> <h1>
    <br>Ich will ein Eis. 
-    <lbr> Möchtest du mitkommen?  
+    <br> Möchtest du mitkommen?.
    <br> Er will nach Deutschland re piisen. 
   </h1>
  </ul> 
- </p> 
  
+ <button class="mp3-button" onclick="playAudio('gehen.mp3')">Play</button>
+  
+ <script>
+   function playAudio(audioFile) {
+     var audio = new Audio(audioFile);
+     audio.play();
+   }                    
+  </script>
 </div> 
 </li> 
 
