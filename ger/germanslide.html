@@ -236,7 +236,7 @@
 <li> 
 <div class="uk-container uk-container-small" uk-slider-parallax="opacity: 0,1,0"> 
 <h3 style="background-color:red"  class="uk-heading-bullet">8 Sahen</h3> 
-<p> 
+ 
  <ul> 
 <h1>
  <lbr>Was sagst du?
@@ -244,30 +244,44 @@
  <br>Er sagte nichs. 
 </h1>
  </ul> 
- </p>
+ <button class="mp3-button" onclick="playAudio('gehen.mp3')">Play</button>
+  
+ <script>
+   function playAudio(audioFile) {
+     var audio = new Audio(audioFile);
+     audio.play();
+   }                    
+  </script>
 </div> 
 </li>
 
 <li> 
 <div class="uk-container uk-container-small" uk-slider-parallax="opacity: 0,1,0"> 
 <h3 style="background-color:red"  class="uk-heading-bullet"> 9 Müssen</h3> 
-<p> 
+ 
   
- <ul> 
+<ul> 
 <h1>
  <br>Ich muss arbeiten.
  <br>Du must pünktlich sein.
  <br>Wir müssen einkaufen gehen.
 </h1>
  </ul> 
- </p> 
+ <button class="mp3-button" onclick="playAudio('gehen.mp3')">Play</button>
+  
+ <script>
+   function playAudio(audioFile) {
+     var audio = new Audio(audioFile);
+     audio.play();
+   }                    
+  </script>
 </div> 
 </li> 
                        
 <li> 
 <div class="uk-container uk-container-small" uk-slider-parallax="opacity: 0,1,0"> 
 <h3 style="background-color:red"  class="uk-heading-bullet"> 10 Kommen</h3> 
-<p> 
+
 <ul> 
 <h1>
  <br>Woher kommst du? 
@@ -275,7 +289,14 @@
  <br>Wir kommen morgen vorbei.
 </h1>
  </ul> 
- </p> 
+ <button class="mp3-button" onclick="playAudio('gehen.mp3')">Play</button>
+  
+ <script>
+   function playAudio(audioFile) {
+     var audio = new Audio(audioFile);
+     audio.play();
+   }                    
+  </script>
  </div> 
 </li> 
 
