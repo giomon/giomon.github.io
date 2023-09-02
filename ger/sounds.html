@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Color Sound Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+// Define the sounds for each color.
+const sounds = {
+  "red": "assets/sounds/red.mp3",
+  "green": "assets/sounds/green.mp3",
+  "blue": "assets/sounds/blue.mp3",
+  "yellow": "assets/sounds/yellow.mp3",
+  "purple": "assets/sounds/purple.mp3",
+  "orange": "assets/sounds/orange.mp3",
+  "pink": "assets/sounds/pink.mp3",
+  "white": "assets/sounds/white.mp3",
+  "black": "assets/sounds/black.mp3",
+};
+
+// Get the color of the pixel at the mouse cursor.
+function getColor() {
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const mouseX = event.clientX;
+  const mouseY = event.clientY;
+  const pixelData = ctx.getImageData(mouseX, mouseY, 1, 1).data;
+  return [pixelData[0], pixelData[1], pixelData[2]];
+}
+
+// Play the sound for the current color.
+function playSound() {
+  const color = getColor();
+  const sound = sounds[color];
+  if (sound) {
+    const audio = new Audio(sound);
+    audio.play();
+  }
+}
+
+// Add event listeners to the canvas.
+document.getElementById("canvas").addEventListener("mousemove", playSound);
+
+// Generate the sound for the current color.
+function generateSound(color) {
+  // TODO: Implement this function to generate a different sound for each different color.
+}
+</script>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+</body>
+</html>
