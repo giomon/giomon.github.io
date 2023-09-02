@@ -40,13 +40,35 @@ function playSound() {
 // Add event listeners to the canvas.
 document.getElementById("canvas").addEventListener("mousemove", playSound);
 
-// Generate the sound for the current color.
-function generateSound(color) {
-  // TODO: Implement this function to generate a different sound for each different color.
+// Upload the image.
+function uploadImage() {
+  const form = document.getElementById("form");
+  const file = form.querySelector("input[type='file']");
+  const formData = new FormData(form);
+  formData.append("image", file.files[0]);
+
+  fetch("/upload", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Image uploaded successfully!");
+      } else {
+        console.log("Error uploading image!");
+      }
+    })
+    .catch((error) => {
+      console.log("Error uploading image: " + error);
+    });
 }
 </script>
 </head>
 <body>
 <canvas id="canvas" width="500" height="500"></canvas>
+<form id="form" method="post" enctype="multipart/form-data">
+  <input type="file" name="image">
+  <button type="submit">Upload</button>
+</form>
 </body>
 </html>
