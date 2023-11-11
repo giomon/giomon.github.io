@@ -1,6 +1,13 @@
 ​<!DOCTYPE html>
 <html>
 <head>
+
+  <p class="codepen" data-height="300" data-default-tab="js,result" data-slug-hash="pXoEqy" data-user="juliepark" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/juliepark/pen/pXoEqy">
+    Animation (Background &amp; Text)</a> by Julie Park (<a href="https://codepen.io/juliepark">@juliepark</a>)
+    on <a href="https://codepen.io">CodePen</a>.</span>
+  </p>
+  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +17,14 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+@import url('https://fonts.googleapis.com/css?family=Kanit:100,700');
 
+$font: 'Kanit', sans-serif;
+
+$main: #F6A9BD;
+$light: #F4E0E1;
+$white: #FFFFFF;
+$dark: #F0386B;
 <style>
 
 .float{
@@ -31,7 +45,14 @@
 .my-float{
 	margin-top:16px;
 }
+@import url('https://fonts.googleapis.com/css?family=Kanit:100,700');
 
+$font: 'Kanit', sans-serif;
+
+$main: #F6A9BD;
+$light: #F4E0E1;
+$white: #FFFFFF;
+$dark: #F0386B;
 </style>
 
 <style>
@@ -40,8 +61,10 @@
   }
   
   body {
-    margin: 0;
-    font-family: Nunito;
+    font-family: $font;  
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
   }
   
   .header {
@@ -90,9 +113,81 @@
 
 
 <style>
-body {
-  font-family: "Nunito", serif;
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
+.effect1 {
+  justify-content: center;
+  position: absolute;
+  margin: 0;
+  top: 40%;
+  font-size: 2.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 3;
+  color: $main;
+}
+
+.effect1 .letter {
+  display: inline-block;
+  line-height: 1em;
+  justify-content: center;
+}
+
+.text {
+  position: absolute;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: $dark;
+  font-weight: 100;
+  top: 50%;
+  z-index: 3;
+  opacity: 0;
+  top: 50%;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+}
+
+.item {
+  background-color: $light;
+  height: 100vh;
+  z-index: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lighten($light, 5%);
+  width: 100%;
+  height: 40px;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  font-family: $font;
+  p {
+    color: $main;
+    letter-spacing: 5px;
+    padding: 5px;
+  }
+  a {
+    color: $dark;
+    text-decoration: none;
+    transition: all .3s ease;
+    &:hover {
+      background: $main;
+      transition: all .3s ease;
+      color: $white;
+    }
 </style>
 
 </head>
@@ -215,7 +310,7 @@ body {
   <i class="fa fa-whatsapp my-float"></i>
   </a>
 
-
+ 
   <h1>DOWN TOWN WALKING TOUR</h1>
   <h3>Welcome to Medellin! This vibrant city is known for its friendly people, delicious food, and stunning scenery.</h3>
     
