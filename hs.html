@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+<div class="w3-container">
+
+<h2>Accordion Width</h2>
+<p>Use the CSS width property to change the width of the accordion:</p>
+
+<div class="w3-grey w3-section" style="width:25%">
+  <button onclick="myFunction('Demo1')" class="w3-button w3-block">
+  25%</button>
+  <div id="Demo1" class="w3-hide w3-container">
+    <p>Lorem ipsum 25% width</p>
+  </div>
+</div>
+
+<div class="w3-dark-grey w3-section" style="width:50%">
+  <button onclick="myFunction('Demo2')" class="w3-button w3-block">
+  50%</button>
+  <div id="Demo2" class="w3-hide w3-container">
+    <p>Lorem ipsum 50% width</p>
+  </div>
+</div>
+
+<div class="w3-light-grey w3-section" style="width:75%">
+  <button onclick="myFunction('Demo3')" class="w3-button w3-block">
+  75%</button>
+  <div id="Demo3" class="w3-hide w3-container">
+    <p>Lorem ipsum 75% width</p>
+  </div>
+</div>
+
+<div class="w3-light-grey w3-section">
+  <button onclick="myFunction('Demo4')" class="w3-button w3-block">
+  Default (100%)</button>
+  <div id="Demo4" class="w3-hide w3-container">
+    <p>Lorem ipsum 100% width</p>
+  </div>
+</div>
+
+</div>
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>
 
