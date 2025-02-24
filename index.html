@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medellín: Arví Park & Metrocable Adventure</title>
+    <title>Medellín: Arví Park Quick Escape</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,25 +16,38 @@
             background-color: #2a9d8f;
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
         h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
         }
-        .hero-image {
+        /* Parallax Section */
+        .parallax {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            background: url('https://via.placeholder.com/1000x600?text=Medellín+Skyline') no-repeat center;
+            background-size: cover;
+        }
+        .parallax-foreground {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
+            height: 100%;
+            background: url('https://via.placeholder.com/1000x300?text=Metrocable+Cars') no-repeat center;
+            background-size: cover;
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
         }
         .section {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         .highlight {
             background-color: #f4a261;
@@ -47,7 +60,7 @@
             display: inline-block;
             background-color: #e76f51;
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
@@ -68,39 +81,48 @@
 </head>
 <body>
     <header>
-        <h1>Medellín: Arví Park Walking Tour & Metrocable Views</h1>
-        <p>Discover Nature, Culture, and Stunning Cityscapes in One Unforgettable Day</p>
+        <h1>Medellín: Arví Park Quick Escape</h1>
+        <p>A 2–3 Hour Nature Adventure with Epic Views</p>
     </header>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/1200x400?text=Metrocable+over+Medellín" alt="Metrocable over Medellín" class="hero-image">
+    <div class="parallax">
+        <div class="parallax-foreground"></div>
+    </div>
 
+    <div class="container">
         <div class="section">
-            <h2>Your 6-Hour Private Adventure</h2>
-            <p>Embark on a journey through Medellín’s innovative spirit and natural wonders. This private 6-hour tour blends breathtaking city views with serene trails in Arví Park, guided by a local expert who brings the experience to life.</p>
+            <h2>Your Short & Sweet Adventure</h2>
+            <p>Dive into Medellín’s natural side with this 2–3 hour group tour! Ride the iconic Metrocable, soak in stunning city views, and explore Arví Park’s trails—all in a quick, fun escape from the urban buzz.</p>
             <ul>
-                <li><strong>Hotel Pickup:</strong> Start your day with ease as we whisk you away from your accommodation.</li>
-                <li><strong>Metrocable Ride:</strong> Soar above the city to Comuna 2 for panoramic views of Medellín’s vibrant landscape.</li>
-                <li><strong>Arví Park Exploration:</strong> Trek through indigenous trails, past creeks and natural pools, while uncovering the park’s rich history and ecosystem.</li>
-                <li><strong>Birdwatching & Scenery:</strong> Spot colorful birds and soak in the tranquility of this lush retreat.</li>
-                <li><strong>Homemade Snack:</strong> Recharge with a delicious, locally made treat.</li>
+                <li><strong>Metrocable Ride:</strong> Glide above the city to a scenic viewpoint in minutes.</li>
+                <li><strong>Arví Park Trails:</strong> Stroll through indigenous paths, spot birds, and breathe fresh mountain air.</li>
+                <li><strong>Local Vibes:</strong> Join fellow explorers and a friendly guide for a laid-back outing.</li>
             </ul>
         </div>
 
         <div class="highlight">
-            <h3>Why You’ll Love This Tour</h3>
-            <p>From Medellín’s famous metro system to the pristine beauty of Arví Park, this tour is a perfect fusion of urban innovation and nature’s embrace. Travelers rave about the knowledgeable guides and the unique blend of experiences!</p>
+            <h3>Why This Tour Rocks</h3>
+            <p>Perfect for a quick getaway, this tour packs Medellín’s best—innovative cable cars and lush nature—into just a couple hours. Travelers love the views and the chill pace!</p>
         </div>
 
         <div class="section">
             <h2>Pricing & Booking</h2>
-            <p>Starting at just <strong>$70–80 USD</strong> (depending on group size), this private tour offers incredible value for an immersive day out. Ready to see Medellín like never before?</p>
+            <p>Only <strong>$20 USD</strong> for this unbeatable slice of Medellín magic. Ready for a breathtaking break?</p>
             <a href="https://www.getyourguide.com/medellin-l1215/arvi-park-walking-tour-and-city-views-from-metrocable-t574685/" target="_blank" class="cta-button">Book Now</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Medellín Adventures | Powered by xAI</p>
+        <p>© 2025 Medellín Quick Tours | Powered by xAI</p>
     </footer>
+
+    <script>
+        // Parallax effect
+        window.addEventListener('scroll', function() {
+            const foreground = document.querySelector('.parallax-foreground');
+            const scrollPosition = window.scrollY;
+            foreground.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+        });
+    </script>
 </body>
 </html>
