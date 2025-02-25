@@ -1,201 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tour Booking</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-    }
-    .message {
-      margin-top: 10px;
-      text-align: center;
-      color: #28a745;
-    }
-    .error {
-      color: #dc3545;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arví Park Adventure - Medellín’s Lively Wild Escape</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .parallax {
+            height: 100vh;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .section1 {
+            background-image: url('https://grok-assets-bucket.s3.us-west-2.amazonaws.com/lively_arvi_park_tour_sunset.jpg');
+        }
+        .section2 {
+            background-image: url('https://grok-assets-bucket.s3.us-west-2.amazonaws.com/lively_arvi_park_tour_sunset.jpg');
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+        h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        }
+        p {
+            font-size: 1.3em;
+            line-height: 1.7;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #27ae60;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.3em;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #219653;
+        }
+        .text-section {
+            padding: 100px 20px;
+            background: #1a3c34;
+            color: #fff;
+            text-align: center;
+        }
+        .text-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
-
-  <!-- Load React and ReactDOM from CDN -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-  <!-- Our React Component -->
-  <script type="text/javascript">
-    const { useState } = React;
-
-    function TourBookingForm() {
-      const [formData, setFormData] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        date: '',
-        time: '10 AM',
-      });
-      const [isSubmitting, setIsSubmitting] = useState(false);
-      const [submitMessage, setSubmitMessage] = useState('');
-
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-      };
-
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitMessage('');
-
-        // Replace with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyxzJO_w9e3gmtpaiPAwCPntG-MwVEuBG2sbbpiYKBZdgHgonZMuNrtzw2dGP_0cN6Z/exec';
-
-        try {
-          const response = await fetch(scriptURL, {
-            method: 'POST',
-            body: new FormData(e.target),
-          });
-
-          if (response.ok) {
-            setSubmitMessage('Booking submitted successfully!');
-            setFormData({ name: '', phone: '', email: '', date: '', time: '10 AM' });
-          } else {
-            setSubmitMessage('Something went wrong. Please try again.');
-          }
-        } catch (error) {
-          setSubmitMessage('Error submitting booking. Please try again.');
-        } finally {
-          setIsSubmitting(false);
-        }
-      };
-
-      return (
-        <div className="container">
-          <h2>Book a Tour</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone">Phone:</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="date">Date:</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="time">Time:</label>
-              <select
-                id="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-              >
-                <option value="10 AM">10 AM</option>
-                <option value="2 PM">2 PM</option>
-              </select>
-            </div>
-
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Book Tour'}
-            </button>
-          </form>
-          {submitMessage && (
-            <p className={`message ${submitMessage.includes('Error') || submitMessage.includes('wrong') ? 'error' : ''}`}>
-              {submitMessage}
-            </p>
-          )}
+    <!-- Parallax Section 1: Lively Tour Scene -->
+    <div class="parallax section1">
+        <div class="content">
+            <h1>Discover Arví’s Lively Wild Heart</h1>
+            <p>Soar above Medellín on the Metrocable and dive into a joyful adventure with playful toucans and vibrant nature.</p>
+            <a href="#book" class="btn">Book Now</a>
         </div>
-      );
-    }
+    </div>
 
-    // Render the component
-    ReactDOM.render(<TourBookingForm />, document.getElementById('root'));
-  </script>
+    <!-- Text Section: Tour Highlights -->
+    <div class="text-section">
+        <h2>Unleash Joy in Medellín’s Untamed Paradise</h2>
+        <p>Hike ancient trails, laugh with colorful toucans, and savor local flavors in Arví Park’s magical forest, all while supporting sustainable tourism.</p>
+    </div>
+
+    <!-- Parallax Section 2: Lively Forest Trail -->
+    <div class="parallax section2">
+        <div class="content">
+            <h1>Where Nature Dances with Delight</h1>
+            <p>Experience the thrill of Arví’s whimsical trails, stunning vistas, and the heartbeat of Medellín’s wild soul.</p>
+            <a href="#book" class="btn">Reserve Your Spot</a>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div class="text-section" id="book">
+        <h2>Limited Spots – Act Fast!</h2>
+        <p>Join this exclusive, joyful journey into Arví Park. Secure your place today and let nature’s magic captivate you.</p>
+        <a href="https://www.getyourguide.com/medellin-l1215/arvi-park-walking-tour-and-city-views-from-metrocable-t574685/" target="_blank" class="btn">Book Your Adventure</a>
+    </div>
 </body>
 </html>
