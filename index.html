@@ -3,102 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arví Park Adventure - Medellín’s Lively Wild Escape</title>
+    <title>Arví Park Adventure - Medellín's Lively Wild Escape</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary-green: #27ae60;
+            --dark-green: #1a3c34;
+            --light-green: rgba(39, 174, 96, 0.8);
+        }
+        
+        * {
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
             color: #fff;
             overflow-x: hidden;
+            background-color: #111;
         }
-        .parallax {
+        
+        .parallax-container {
             height: 100vh;
-            background-attachment: fixed;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
             background-size: cover;
             background-position: center;
+            transform: translateY(0);
+            will-change: transform;
+        }
+        
+        .section1 .parallax-bg {
+            background-image: url('https://github.com/giomon/giomon.github.io/raw/master/img/001.jpg');
+        }
+        
+        .section2 .parallax-bg {
+            background-image: url('https://github.com/giomon/giomon.github.io/raw/master/img/002.jpg');
+        }
+        
+        .content-wrapper {
             position: relative;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
         }
-        .section1 {
-            background-image: url('https://github.com/giomon/giomon.github.io/raw/master/img/001.jpg'); 
-        }
-        .section2 {
-            background-image: url('https://github.com/giomon/giomon.github.io/raw/master/img/002.jpg');
-        }
+        
         .content {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(26, 60, 52, 0.7);
+            backdrop-filter: blur(5px);
             padding: 40px;
             border-radius: 10px;
             max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
         }
+        
+        .content.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
         h1 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 3.5em;
-            margin: 0;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(120deg, var(--primary-green), #64dd17);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
         }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+        
         p {
             font-size: 1.3em;
             line-height: 1.7;
+            margin-bottom: 20px;
         }
+        
         .btn {
             display: inline-block;
             padding: 15px 35px;
-            background: #27ae60;
+            background: var(--light-green);
             color: #fff;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.3em;
+            border-radius: 50px;
+            font-size: 1.2em;
             margin-top: 25px;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--primary-green);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        
         .btn:hover {
-            background: #219653;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
         .text-section {
             padding: 100px 20px;
-            background: #1a3c34;
+            background: var(--dark-green);
             color: #fff;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://github.com/giomon/giomon.github.io/raw/master/img/pattern.jpg');
+            opacity: 0.05;
+            background-size: cover;
+        }
+        
+        .text-section .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
         .text-section h2 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--primary-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .text-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+        
+        .feature-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .feature {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature i {
+            font-size: 3em;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .booking-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .booking-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .booking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .booking-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+        
+        .booking-card p {
+            font-size: 1.1em;
             margin-bottom: 20px;
+        }
+        
+        .booking-card .price {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--primary-green);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(26, 60, 52, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 20px;
+            background: rgba(26, 60, 52, 0.9);
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+            font-weight: 300;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            animation: bounceDown 2s infinite;
+            z-index: 5;
+        }
+        
+        @keyframes bounceDown {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+        
+        .scroll-down i {
+            font-size: 2em;
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .content {
+                padding: 30px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .feature-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                max-width: 100%;
+            }
+            
+            .booking-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .booking-card {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">Arví <span>Park</span></a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#explore">Explore</a>
+            <a href="#book">Book Now</a>
+        </div>
+    </nav>
+
     <!-- Parallax Section 1: Lively Tour Scene -->
-    <div class="parallax section1">
-        <div class="content">
-            <h1>Discover Arví’s Lively Wild Heart</h1>
-            <p>Soar above Medellín on the Metrocable and dive into a joyful adventure with playful toucans and vibrant nature.</p>
-            <a href="#book" class="btn">Book Now</a>
+    <div class="parallax-container section1" id="home">
+        <div class="parallax-bg"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Discover Arví's Lively Wild Heart</h1>
+                <p>Soar above Medellín on the Metrocable and dive into a joyful adventure with playful toucans and vibrant nature. Experience Colombia's most magical ecological treasure.</p>
+                <a href="#book" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </div>
 
     <!-- Text Section: Tour Highlights -->
-    <div class="text-section">
-        <h2>Unleash Joy in Medellín’s Untamed Paradise</h2>
-        <p>Hike ancient trails, laugh with colorful toucans, and savor local flavors in Arví Park’s magical forest, all while supporting sustainable tourism.</p>
+    <div class="text-section" id="about">
+        <div class="container">
+            <h2>Unleash Joy in Medellín's Untamed Paradise</h2>
+            <p>Hike ancient trails, laugh with colorful toucans, and savor local flavors in Arví Park's magical forest, all while supporting sustainable tourism.</p>
+            
+            <div class="feature-icons">
+                <div class="feature">
+                    <i class="fas fa-mountain"></i>
+                    <h3>Scenic Trails</h3>
+                    <p>Explore lush paths surrounded by endemic flora and fauna.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-cable-car"></i>
+                    <h3>Metrocable Journey</h3>
+                    <p>Breathtaking aerial views of Medellín's vibrant landscape.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Ecological Wonders</h3>
+                    <p>Discover Colombia's rich biodiversity in this protected reserve.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Parallax Section 2: Lively Forest Trail -->
-    <div class="parallax section2">
-        <div class="content">
-            <h1>Where Nature Dances with Delight</h1>
-            <p>Experience the thrill of Arví’s whimsical trails, stunning vistas, and the heartbeat of Medellín’s wild soul.</p>
-            <a href="#book" class="btn">Reserve Your Spot</a>
+    <div class="parallax-container section2" id="explore">
+        <div class="parallax-bg"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Where Nature Dances with Delight</h1>
+                <p>Experience the thrill of Arví's whimsical trails, stunning vistas, and the heartbeat of Medellín's wild soul. Every step reveals new wonders in this ecological paradise.</p>
+                <a href="#book" class="btn">Reserve Your Spot <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </div>
 
     <!-- Booking Section -->
     <div class="text-section" id="book">
-        <h2>Limited Spots – Act Fast!</h2>
-        <p>Join this exclusive, joyful journey into Arví Park. Secure your place today and let nature’s magic captivate you.</p>
-        <a href="https://www.getyourguide.com/medellin-l1215/arvi-park-walking-tour-and-city-views-from-metrocable-t574685/" target="_blank" class="btn">Book Your Adventure</a>
+        <div class="container">
+            <h2>Limited Spots – Act Fast!</h2>
+            <p>Join this exclusive, joyful journey into Arví Park. Secure your place today and let nature's magic captivate you.</p>
+            
+            <div class="booking-cards">
+                <div class="booking-card">
+                    <h3>Basic Adventure</h3>
+                    <p>Guided tour through main trails with Metrocable transport included.</p>
+                    <div class="price">$49</div>
+                    <a href="https://www.getyourguide.com/medellin-l1215/arvi-park-walking-tour-and-city-views-from-metrocable-t574685/" target="_blank" class="btn">Book Now</a>
+                </div>
+                <div class="booking-card">
+                    <h3>Premium Experience</h3>
+                    <p>Full-day adventure with lunch, exclusive trails, and wildlife spotting.</p>
+                    <div class="price">$79</div>
+                    <a href="https://www.getyourguide.com/medellin-l1215/arvi-park-walking-tour-and-city-views-from-metrocable-t574685/" target="_blank" class="btn">Book Now</a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Improved parallax effect
+        const parallaxBgs = document.querySelectorAll('.parallax-bg');
+        const contents = document.querySelectorAll('.content');
+        const navbar = document.querySelector('.navbar');
+        
+        // Reveal content elements when in view
+        function revealContent() {
+            contents.forEach(content => {
+                const contentPosition = content.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (contentPosition < screenPosition) {
+                    content.classList.add('active');
+                }
+            });
+        }
+        
+        // Handle parallax effect on scroll
+        function handleParallax() {
+            // Update navbar
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Update parallax backgrounds
+            parallaxBgs.forEach(bg => {
+                const container = bg.parentElement;
+                const scrollPosition = window.pageYOffset;
+                const containerPosition = container.offsetTop;
+                const containerHeight = container.offsetHeight;
+                
+                // Only apply parallax effect when the section is in view
+                if (scrollPosition + window.innerHeight > containerPosition && 
+                    scrollPosition < containerPosition + containerHeight) {
+                    
+                    const speed = 0.5; // Adjust for more/less movement
+                    const yPos = (scrollPosition - containerPosition) * speed;
+                    bg.style.transform = `translateY(${yPos}px)`;
+                }
+            });
+            
+            // Update content visibility
+            revealContent();
+        }
+        
+        // Smooth scroll for navigation and buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize
+        window.addEventListener('load', function() {
+            handleParallax();
+            revealContent();
+            
+            // Reveal initial content with slight delay for entrance effect
+            setTimeout(() => {
+                contents[0].classList.add('active');
+            }, 300);
+        });
+        
+        window.addEventListener('scroll', handleParallax);
+        window.addEventListener('resize', handleParallax);
+    </script>
 </body>
-</html>
+    </html>
