@@ -5,6 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arví Park Adventure - Medellín's Lively Wild Escape</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+        /* Slider container */
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Slides */
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Images */
+        .slide img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        /* Textbox */
+        .textbox {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+        }
+    </style>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
         
