@@ -449,6 +449,45 @@
     </style>
 </head>
 <body>
+<div class="slider" id="slider">
+    <div class="slides" id="slides">
+        <div class="slide">
+            <img src="image1.jpg" alt="Image 1">
+            <div class="textbox">Text for Image 1</div>
+        </div>
+        <div class="slide">
+            <img src="image2.jpg" alt="Image 2">
+            <div class="textbox">Text for Image 2</div>
+        </div>
+        <div class="slide">
+            <img src="image3.jpg" alt="Image 3">
+            <div class="textbox">Text for Image 3</div>
+        </div>
+        <div class="slide">
+            <img src="image4.jpg" alt="Image 4">
+            <div class="textbox">Text for Image 4</div>
+        </div>
+        <div class="slide">
+            <img src="image5.jpg" alt="Image 5">
+            <div class="textbox">Text for Image 5</div>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="prev" onclick="moveSlide(-1)">&#10094;</div>
+        <div class="next" onclick="moveSlide(1)">&#10095;</div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+
+    function moveSlide(step) {
+        const slides = document.getElementById('slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+        currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+        slides.style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+    }
+</script>
     <!-- Navigation -->
     <nav class="navbar">
         <a href="#" class="logo">Arví <span>Park</span></a>
