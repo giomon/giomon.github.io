@@ -3,14 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Ciencias Naturales</title>
-    <script defer src="script.js"></script>
+    <title>Formulario sobre el Sistema Nervioso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <h1>Esto es lo que debemos saber en Ciencias Naturales</h1>
-    <form id="formulario">
-        <!-- Aquí se generarán las preguntas dinámicamente -->
+    <h1>Formulario sobre el Sistema Nervioso</h1>
+    <form id="formularioNervioso" onsubmit="enviarFormulario(event)">
+        <h3>Instrucciones: Responde basándote en el texto.</h3>
+
+        <label>1. ¿Qué es el sistema nervioso y cuál es su función principal?</label><br>
+        <textarea rows="3" name="pregunta1" required></textarea><br>
+
+        <label>2a. ¿Cuáles son las dos partes principales del sistema nervioso?</label><br>
+        <input type="text" name="pregunta2a" required><br>
+
+        <label>2b. Sistema nervioso central (SNC): ¿Qué incluye?</label><br>
+        <input type="text" name="pregunta2b" required><br>
+
+        <label>2c. Sistema nervioso periférico (SNP): ¿Qué incluye?</label><br>
+        <input type="text" name="pregunta2c" required><br>
+
+        <label>3a. ¿Qué tipos de señales utiliza el sistema nervioso para funcionar?</label><br>
+        <input type="text" name="pregunta3a" required><br>
+
+        <label>3b. Describe cómo el sistema nervioso responde al tocar una estufa caliente:</label><br>
+        <textarea rows="3" name="pregunta3b" required></textarea><br>
+
+        <label>4a. ¿Por qué es esencial el sistema nervioso para la supervivencia?</label><br>
+        <textarea rows="3" name="pregunta4a" required></textarea><br>
+
+        <label>4b. ¿Qué puede pasar si el sistema nervioso sufre daño?</label><br>
+        <input type="text" name="pregunta4b" required><br>
+
+        <label>5. ¿Qué se recomienda para cuidar el sistema nervioso?</label><br>
+        <input type="text" name="pregunta5" required><br>
+
+        <button type="submit">Enviar Respuestas</button>
     </form>
-    <button type="submit" id="enviar">Enviar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault(); // Evita que el formulario se envíe y recargue la página
+            const formulario = document.getElementById("formularioNervioso");
+            const datos = new FormData(formulario);
+            let respuestas = "<h3>Tus respuestas:</h3><ul>";
+
+            for (let [pregunta, respuesta] of datos.entries()) {
+                respuestas += `<li><strong>${pregunta}:</strong> ${respuesta}</li>`;
+            }
+            respuestas += "</ul>";
+
+            document.getElementById("resultado").innerHTML = respuestas + "<p>¡Gracias por completar el formulario!</p>";
+            formulario.reset(); // Limpia el formulario después de enviar
+        }
+    </script>
 </body>
 </html>
