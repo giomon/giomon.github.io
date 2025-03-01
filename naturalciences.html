@@ -56,4 +56,74 @@
         <label>2a. ¿Cuáles son las dos partes principales del sistema nervioso?</label>
         <select name="pregunta2a" required>
             <option value="">Selecciona una opción</option>
-            <option value="Sistema nervioso central y
+            <option value="Sistema nervioso central y periférico">Sistema nervioso central y periférico</option>
+            <option value="Cerebro y corazón">Cerebro y corazón</option>
+            <option value="Sistema muscular y óseo">Sistema muscular y óseo</option>
+        </select>
+
+        <label>2b. Sistema nervioso central (SNC): ¿Qué incluye?</label>
+        <select name="pregunta2b" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Cerebro y médula espinal">Cerebro y médula espinal</option>
+            <option value="Nervios y músculos">Nervios y músculos</option>
+            <option value="Piel y ojos">Piel y ojos</option>
+        </select>
+
+        <label>2c. Sistema nervioso periférico (SNP): ¿Qué incluye?</label>
+        <select name="pregunta2c" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Nervios que se ramifican desde el SNC">Nervios que se ramifican desde el SNC</option>
+            <option value="Cerebro y pulmones">Cerebro y pulmones</option>
+            <option value="Huesos y articulaciones">Huesos y articulaciones</option>
+        </select>
+
+        <label>3a. ¿Qué tipos de señales utiliza el sistema nervioso para funcionar?</label>
+        <select name="pregunta3a" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Señales eléctricas y químicas">Señales eléctricas y químicas</option>
+            <option value="Señales magnéticas y sonoras">Señales magnéticas y sonoras</option>
+            <option value="Señales térmicas y visuales">Señales térmicas y visuales</option>
+        </select>
+
+        <label>3b. ¿Cómo responde el sistema nervioso al tocar una estufa caliente?</label>
+        <select name="pregunta3b" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Receptores envían señales al SNC y luego a los músculos para alejar el brazo">Receptores envían señales al SNC y luego a los músculos para alejar el brazo</option>
+            <option value="El cerebro ignora la señal">El cerebro ignora la señal</option>
+            <option value="Los nervios producen calor para contrarrestarlo">Los nervios producen calor para contrarrestarlo</option>
+        </select>
+
+        <label>4a. ¿Por qué es esencial el sistema nervioso para la supervivencia?</label>
+        <select name="pregunta4a" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Permite interactuar con el mundo y regular funciones corporales">Permite interactuar con el mundo y regular funciones corporales</option>
+            <option value="Solo sirve para mover los brazos">Solo sirve para mover los brazos</option>
+            <option value="Produce energía para el cuerpo">Produce energía para el cuerpo</option>
+        </select>
+
+        <label>4b. ¿Qué puede pasar si el sistema nervioso sufre daño?</label>
+        <select name="pregunta4b" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Consecuencias devastadoras">Consecuencias devastadoras</option>
+            <option value="Nada, el cuerpo sigue funcionando igual">Nada, el cuerpo sigue funcionando igual</option>
+            <option value="Solo afecta la piel">Solo afecta la piel</option>
+        </select>
+
+        <label>5. ¿Qué se recomienda para cuidar el sistema nervioso?</label>
+        <select name="pregunta5" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Llevar un estilo de vida saludable y buscar atención médica">Llevar un estilo de vida saludable y buscar atención médica</option>
+            <option value="Evitar dormir">Evitar dormir</option>
+            <option value="Comer solo azúcar">Comer solo azúcar</option>
+        </select>
+
+        <button type="submit">Enviar Respuestas</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault();
+            const formulario = document.getElementById("formularioNervioso");
+            const datos = new
