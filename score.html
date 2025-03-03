@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario sobre el Sistema Nervioso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado, #respuestas {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        #resultado {
+            display: none;
+        }
+        
+        #respuestas {
+            margin-top: 40px;
+        }
+        .correcto {
+            color: #4CAF50;
+        }
+        .incorrecto {
+            color: #e74c3c;
+        }
+        
+        /* Estilos para la tabla de resultados */
+        #tablaResultados {
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #tablaResultados th, #tablaResultados td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        #tablaResultados th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        #tablaResultados tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        #tablaResultados tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 1px solid white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-top: -1px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tab active" onclick="openTab('quizTab')">Cuestionario</div>
+        <div class="tab" onclick="openTab('resultsTab')">Resultados</div>
+    </div>
+    
+    <div id="quizTab" class="tab-content active">
+        <h1>Formulario sobre el Sistema Nervioso</h1>
+        <form id="formularioNervioso" onsubmit="enviarFormulario(event)">
+            <label for="pregunta1">1. ¿Cuál es la unidad funcional básica del sistema nervioso?</label>
+            <select id="pregunta1" name="pregunta1" required>
+                <option value="">Selecciona una opción</option>
+                <option value="neurona">Neurona</option>
+                <option value="axon">Axón</option>
+                <option value="dendrita">Dendrita</option>
+                <option value="celula_glial">Célula glial</option>
+            </select>
+
+            <label for="pregunta2">2. ¿Qué parte del sistema nervioso controla las funciones involuntarias como la respiración?</label>
+            <select id="pregunta2" name="pregunta2" required>
+                <option value="">Selecciona una opción</option>
+                <option value="sistema_nervioso_central">Sistema nervioso central</option>
+                <option value="sistema_nervioso_somatico">Sistema nervioso somático</option>
+                <option value="sistema_nervioso_autonomo">Sistema nervioso autónomo</option>
+                <option value="sistema_nervioso_periferico">Sistema nervioso periférico</option>
+            </select>
+
+            <label for="pregunta3">3. ¿Qué estructura protege al cerebro?</label>
+            <select id="pregunta3" name="pregunta3" required>
+                <option value="">Selecciona una opción</option>
+                <option value="columna_vertebral">Columna vertebral</option>
+                <option value="craneo">Cráneo</option>
+                <option value="meninges">Meninges</option>
+                <option value="todas_las_anteriores">Todas las anteriores</option>
+            </select>
+
+            <label for="pregunta4">4. ¿Cuál es la principal función del cerebelo?</label>
+            <select id="pregunta4" name="pregunta4" required>
+                <option value="">Selecciona una opción</option>
+                <option value="pensamiento">Pensamiento y razonamiento</option>
+                <option value="coordinacion">Coordinación y equilibrio</option>
+                <option value="emociones">Control de emociones</option>
+                <option value="memoria">Almacenamiento de memoria</option>
+            </select>
+
+            <label for="pregunta5">5. ¿Cómo se llama el espacio entre dos neuronas?</label>
+            <select id="pregunta5" name="pregunta5" required>
+                <option value="">Selecciona una opción</option>
+                <option value="sinapsis">Sinapsis</option>
+                <option value="axon">Axón</option>
+                <option value="mielina">Mielina</option>
+                <option value="ganglio">Ganglio</option>
+            </select>
+
+            <label for="nombre">Nombre del estudiante:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <button type="submit">Enviar respuestas</button>
+        </form>
+
+        <div id="respuestas">
+            <h2>Respuestas correctas</h2>
+            <div id="listaRespuestas" style="display: none;">
+                <p><strong>1. ¿Cuál es la unidad funcional básica del sistema nervioso?</strong> Neurona</p>
+                <p><strong>2. ¿Qué parte del sistema nervioso controla las funciones involuntarias como la respiración?</strong> Sistema nervioso autónomo</p>
+                <p><strong>3. ¿Qué estructura protege al cerebro?</strong> Cráneo</p>
+                <p><strong>4. ¿Cuál es la principal función del cerebelo?</strong> Coordinación y equilibrio</p>
+                <p><strong>5. ¿Cómo se llama el espacio entre dos neuronas?</strong> Sinapsis</p>
+            </div>
+            <button id="mostrarRespuestas" onclick="toggleRespuestas()">Mostrar respuestas</button>
+        </div>
+
+        <div id="resultado"></div>
+    </div>
+    
+    <div id="resultsTab" class="tab-content">
+        <h2>Tabla de Resultados</h2>
+        <table id="tablaResultados">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Puntuación</th>
+                    <th>Porcentaje</th>
+                    <th>Fecha/Hora</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+                <!-- Los resultados se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+        <button onclick="limpiarResultados()">Limpiar historial</button>
+    </div>
+
+    <script>
+        // Función para cambiar entre pestañas
+        function openTab(tabName) {
+            // Ocultar todas las pestañas
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Desactivar todos los botones de pestaña
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            // Mostrar la pestaña solicitada
+            document.getElementById(tabName).classList.add("active");
+            
+            // Activar el botón de pestaña solicitado
+            event.currentTarget.classList.add("active");
+            
+            // Si es la pestaña de resultados, cargar los resultados
+            if (tabName === 'resultsTab') {
+                cargarResultados();
+            }
+        }
+        
+        // Función para mostrar/ocultar respuestas
+        function toggleRespuestas() {
+            const listaRespuestas = document.getElementById('listaRespuestas');
+            const boton = document.getElementById('mostrarRespuestas');
+            
+            if (listaRespuestas.style.display === 'none') {
+                listaRespuestas.style.display = 'block';
+                boton.textContent = 'Ocultar respuestas';
+            } else {
+                listaRespuestas.style.display = 'none';
+                boton.textContent = 'Mostrar respuestas';
+            }
+        }
+        
+        // Función para enviar el formulario
+        function enviarFormulario(event) {
+            event.preventDefault();
+            
+            // Obtener valores del formulario
+            const pregunta1 = document.getElementById('pregunta1').value;
+            const pregunta2 = document.getElementById('pregunta2').value;
+            const pregunta3 = document.getElementById('pregunta3').value;
+            const pregunta4 = document.getElementById('pregunta4').value;
+            const pregunta5 = document.getElementById('pregunta5').value;
+            const nombre = document.getElementById('nombre').value;
+            
+            // Respuestas correctas
+            const respuestasCorrectas = {
+                pregunta1: 'neurona',
+                pregunta2: 'sistema_nervioso_autonomo',
+                pregunta3: 'craneo',
+                pregunta4: 'coordinacion',
+                pregunta5: 'sinapsis'
+            };
+            
+            // Contar respuestas correctas
+            let puntuacion = 0;
+            let resultadoHTML = `<h2>Resultados para ${nombre}:</h2>`;
+            
+            if (pregunta1 === respuestasCorrectas.pregunta1) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 1: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 1: Incorrecto. La respuesta correcta es: Neurona</p>`;
+            }
+            
+            if (pregunta2 === respuestasCorrectas.pregunta2) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 2: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 2: Incorrecto. La respuesta correcta es: Sistema nervioso autónomo</p>`;
+            }
+            
+            if (pregunta3 === respuestasCorrectas.pregunta3) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 3: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 3: Incorrecto. La respuesta correcta es: Cráneo</p>`;
+            }
+            
+            if (pregunta4 === respuestasCorrectas.pregunta4) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 4: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 4: Incorrecto. La respuesta correcta es: Coordinación y equilibrio</p>`;
+            }
+            
+            if (pregunta5 === respuestasCorrectas.pregunta5) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 5: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 5: Incorrecto. La respuesta correcta es: Sinapsis</p>`;
+            }
+            
+            const porcentaje = (puntuacion / 5) * 100;
+            resultadoHTML += `<h3>Puntuación final: ${puntuacion}/5 (${porcentaje}%)</h3>`;
+            
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = resultadoHTML;
+            resultadoDiv.style.display = 'block';
+            
+            // Guardar resultado en el almacenamiento local
+            guardarResultado(nombre, puntuacion, porcentaje);
+            
+            // Desplazarse hasta el resultado
+            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Función para guardar el resultado en localStorage
+        function guardarResultado(nombre, puntuacion, porcentaje) {
+            // Obtener resultados existentes o crear un array vacío si no hay ninguno
+            let resultados = JSON.parse(localStorage.getItem('resultadosQuiz')) || [];
+            
+            // Crear nuevo resultado
+            const nuevoResultado = {
+                nombre: nombre,
+                puntuacion: puntuacion,
+                porcentaje: porcentaje,
+                fecha: new Date().toLocaleString()
+            };
+            
+            // Añadir el nuevo resultado
+            resultados.push(nuevoResultado);
+            
+            // Guardar en localStorage
+            localStorage.setItem('resultadosQuiz', JSON.stringify(resultados));
+        }
+        
+        // Función para cargar resultados del localStorage
+        function cargarResultados() {
+            // Obtener resultados del localStorage
+            const resultados = JSON.parse(localStorage.getItem('resultadosQuiz')) || [];
+            
+            // Obtener el cuerpo de la tabla
+            const cuerpoTabla = document.getElementById('cuerpoTabla');
+            
+            // Limpiar tabla
+            cuerpoTabla.innerHTML = '';
+            
+            // Si no hay resultados, mostrar mensaje
+            if (resultados.length === 0) {
+                const fila = document.createElement('tr');
+                fila.innerHTML = '<td colspan="4">No hay resultados guardados.</td>';
+                cuerpoTabla.appendChild(fila);
+                return;
+            }
+            
+            // Añadir cada resultado a la tabla
+            resultados.forEach(resultado => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${resultado.nombre}</td>
+                    <td>${resultado.puntuacion}/5</td>
+                    <td>${resultado.porcentaje}%</td>
+                    <td>${resultado.fecha}</td>
+                `;
+                cuerpoTabla.appendChild(fila);
+            });
+        }
+        
+        // Función para limpiar todos los resultados
+        function limpiarResultados() {
+            if (confirm('¿Estás seguro de que quieres eliminar todos los resultados?')) {
+                localStorage.removeItem('resultadosQuiz');
+                cargarResultados(); // Recargar la tabla vacía
+            }
+        }
+        
+        // Alternativa: Código para enviar resultados a un servidor
+        // Descomentar y modificar según necesidades
+        /*
+        function enviarResultadoServidor(nombre, puntuacion, porcentaje) {
+            // Crear objeto con los datos
+            const datos = {
+                nombre: nombre,
+                puntuacion: puntuacion,
+                porcentaje: porcentaje,
+                fecha: new Date().toISOString()
+            };
+            
+            // Enviar datos al servidor usando fetch
+            fetch('https://tuservidor.com/guardar-resultado', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datos)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Éxito:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        */
+    </script>
+</body>
+</html>
