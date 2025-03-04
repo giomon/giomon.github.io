@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario del Sistema Nervioso</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div id="quiz-app" class="min-h-screen flex items-center justify-center"></div>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script>
+        const quizData = {
+            title: "Cuestionario del Sistema Nervioso",
+            questions: [
+                {
+                    id: 1,
+                    text: "¿Cuál es la unidad funcional básica del sistema nervioso?",
+                    options: [
+                        { value: "neurona", text: "Neurona" },
+                        { value: "axon", text: "Axón" },
+                        { value: "dendrita", text: "Dendrita" },
+                        { value: "celula_glial", text: "Célula glial" }
+                    ],
+                    correctAnswer: "neurona"
+                },
+                {
+                    id: 2,
+                    text: "¿Qué parte de la neurona transmite los impulsos nerviosos a otras células?",
+                    options: [
+                        { value: "axon", text: "Axón" },
+                        { value: "dendrita", text: "Dendrita" },
+                        { value: "soma", text: "Soma" },
+                        { value: "sinapsis", text: "Sinapsis" }
+                    ],
+                    correctAnswer: "axon"
+                },
+                {
+                    id: 3,
+                    text: "¿Cuál es la función principal de las células gliales?",
+                    options: [
+                        { value: "transmision", text: "Transmisión de impulsos" },
+                        { value: "soporte", text: "Soporte y protección de neuronas" },
+                        { value: "division", text: "División celular" },
+                        { value: "fotosintesis", text: "Fotosíntesis" }
+                    ],
+                    correctAnswer: "soporte"
+                },
+                {
+                    id: 4,
+                    text: "¿Qué es la sinapsis?",
+                    options: [
+                        { value: "union", text: "Unión entre dos neuronas" },
+                        { value: "cubierta", text: "Cubierta de la neurona" },
+                        { value: "nucleo", text: "Núcleo de la neurona" },
+                        { value: "liquido", text: "Líquido intracelular" }
+                    ],
+                    correctAnswer: "union"
+                },
+                {
+                    id: 5,
+                    text: "¿Qué parte del sistema nervioso controla las funciones involuntarias?",
+                    options: [
+                        { value: "central", text: "Sistema nervioso central" },
+                        { value: "periferico", text: "Sistema nervioso periférico" },
+                        { value: "autonomo", text: "Sistema nervioso autónomo" },
+                        { value: "somatico", text: "Sistema nervioso somático" }
+                    ],
+                    correctAnswer: "autonomo"
+                }
+            ]
+        };
+
+        class NervousSystemQuiz extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    answers: {},
+                    studentName: "",
+                    showResults: false,
+                    showAnswers: false,
+                    timer: null,
+                    timeRemaining: 300,
+                    quizStarted: false,
+                    quizCompleted: false,
+                    error: null,
+                };
+            }
+
+            handleAnswerChange = (questionId, value) => {
+                this.setState(prevState => ({
+                    answers: {
+                        ...prevState.answers,
+                        [questionId]: value
+                    }
+                }));
+            };
+
+            startQuiz = () => {
+                if (!this.state.studentName.trim()) {
+                    this.setState({error: "Por favor, ingresa tu nombre antes de comenzar."});
+                    return;
+                }
+                this.setState({error: null});
+
+                this.setState({ quizStarted: true });
+
+                const countdownTimer = setInterval(() => {
+                    this.setState(prevState => {
+                        if (prevState.timeRemaining <= 1) {
+                            clearInterval(countdownTimer);
+                            this.submitQuiz();
+                            return { timeRemaining: 0 };
+                        }
+                        return { timeRemaining: prevState.timeRemaining - 1 };
+                    });
+                }, 1000);
+
+                this.setState({ timer: countdownTimer });
+            };
+
+            formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+            };
+
+            submitQuiz = () => {
+                if (this.state.timer) {
+                    clearInterval(this.state.timer);
+                }
+
+                this.setState({ showResults: true, quizCompleted: true });
+
+                setTimeout(() => {
+                    document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            };
+
+            calculateScore = () => {
+                let score = 0;
+                quizData.questions.forEach(question => {
+                    if (this.state.answers[question.id] === question.correctAnswer) {
+                        score++;
+                    }
+                });
+                return score;
+            };
+
+            resetQuiz = () => {
+                this.setState({
+                    answers: {},
+                    showResults: false,
+                    showAnswers: false,
+                    timeRemaining: 300,
+                    quizCompleted: false,
+                    quizStarted: false,
+                    error: null,
+                });
+            };
+
+            calculatePercentage = () => {
+                const score = this.calculateScore();
+                return (score / quizData.questions.length) * 100;
+            };
+
+            toggleAnswers = () => {
+                this.setState(prevState => ({ showAnswers: !prevState.showAnswers }));
+            };
+
+            render() {
+                return (
+                    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+                        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{quizData.title}</h1>
+                        
+                        {!this.state.quizStarted ? (
+                            <div className="mb-8 p-6 bg-blue-50 rounded-lg">
+                                <h2 className="text-xl font-semibold mb-4">Instrucciones</h2>
+                                <p className="mb-4">Este cuestionario consta de 5 preguntas sobre el sistema nervioso. Tienes 5 minutos para completarlo.</p>
+                                
+                                <div className="mb-4">
+                                    <label htmlFor="studentName" className="block font-medium mb-2">Nombre del estudiante:</label>
+                                    <input 
+                                        type="text" 
+                                        id="studentName"
+                                        value={this.state.studentName}
+                                        onChange={(e) => this.setState({ studentName: e.target.value })}
+                                        className="w-full p-2 border border-gray-300 rounded"
+                                        required
+                                    />
+                                    {this.state.error && <p className="text-red-500 mt-1">{this.state.error}</p>}
+                                </div>
+                                
+                                <button 
+                                    onClick={this.startQuiz}
+                                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
+                                >
+                                    Comenzar cuestionario
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                {!this.state.quizCompleted && (
+                                    <div className="mb-4 flex justify-between items-center bg-yellow-50 p-3 rounded-lg">
+                                        <div>
+                                            <span className="font-bold">Estudiante:</span> {this.state.studentName}
+                                        </div>
+                                        <div className={`font-bold ${this.state.timeRemaining < 60 ? 'text-red-600' : 'text-blue-600'}`}>
+                                            Tiempo restante: {this.formatTime(this.state.timeRemaining)}
+                                        </div>
