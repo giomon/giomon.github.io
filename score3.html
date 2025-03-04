@@ -1,316 +1,278 @@
-import React, { useState, useEffect } from 'react';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario sobre el Sistema Nervioso</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div id="quiz-app"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script>
+        const quizData = {
+            title: "Formulario sobre el Sistema Nervioso",
+            questions: [
+                {
+                    id: 1,
+                    text: "¿Cuál es la unidad funcional básica del sistema nervioso?",
+                    options: [
+                        { value: "neurona", text: "Neurona" },
+                        { value: "axon", text: "Axón" },
+                        { value: "dendrita", text: "Dendrita" },
+                        { value: "celula_glial", text: "Célula glial" }
+                    ],
+                    correctAnswer: "neurona"
+                },
+                // Add more questions here
+            ]
+        };
 
-// Quiz data centralized in one place for better maintenance
-const quizData = {
-  title: "Formulario sobre el Sistema Nervioso",
-  questions: [
-    {
-      id: 1,
-      text: "¿Cuál es la unidad funcional básica del sistema nervioso?",
-      options: [
-        { value: "neurona", text: "Neurona" },
-        { value: "axon", text: "Axón" },
-        { value: "dendrita", text: "Dendrita" },
-        { value: "celula_glial", text: "Célula glial" }
-      ],
-      correctAnswer: "neurona"
-    },
-    {
-      id: 2,
-      text: "¿Qué parte del sistema nervioso controla las funciones involuntarias como la respiración?",
-      options: [
-        { value: "sistema_nervioso_central", text: "Sistema nervioso central" },
-        { value: "sistema_nervioso_somatico", text: "Sistema nervioso somático" },
-        { value: "sistema_nervioso_autonomo", text: "Sistema nervioso autónomo" },
-        { value: "sistema_nervioso_periferico", text: "Sistema nervioso periférico" }
-      ],
-      correctAnswer: "sistema_nervioso_autonomo"
-    },
-    {
-      id: 3,
-      text: "¿Qué estructura protege al cerebro?",
-      options: [
-        { value: "columna_vertebral", text: "Columna vertebral" },
-        { value: "craneo", text: "Cráneo" },
-        { value: "meninges", text: "Meninges" },
-        { value: "todas_las_anteriores", text: "Todas las anteriores" }
-      ],
-      correctAnswer: "craneo"
-    },
-    {
-      id: 4,
-      text: "¿Cuál es la principal función del cerebelo?",
-      options: [
-        { value: "pensamiento", text: "Pensamiento y razonamiento" },
-        { value: "coordinacion", text: "Coordinación y equilibrio" },
-        { value: "emociones", text: "Control de emociones" },
-        { value: "memoria", text: "Almacenamiento de memoria" }
-      ],
-      correctAnswer: "coordinacion"
-    },
-    {
-      id: 5,
-      text: "¿Cómo se llama el espacio entre dos neuronas?",
-      options: [
-        { value: "sinapsis", text: "Sinapsis" },
-        { value: "axon", text: "Axón" },
-        { value: "mielina", text: "Mielina" },
-        { value: "ganglio", text: "Ganglio" }
-      ],
-      correctAnswer: "sinapsis"
-    }
-  ]
-};
+        class NervousSystemQuiz extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    answers: {},
+                    studentName: "",
+                    showResults: false,
+                    showAnswers: false,
+                    timer: null,
+                    timeRemaining: 300, // 5 minutes in seconds
+                    quizStarted: false,
+                    quizCompleted: false
+                };
+            }
 
-const NervousSystemQuiz = () => {
-  // State management with React hooks
-  const [answers, setAnswers] = useState({});
-  const [studentName, setStudentName] = useState("");
-  const [showResults, setShowResults] = useState(false);
-  const [showAnswers, setShowAnswers] = useState(false);
-  const [timer, setTimer] = useState(null);
-  const [timeRemaining, setTimeRemaining] = useState(300); // 5 minutes in seconds
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [quizCompleted, setQuizCompleted] = useState(false);
+            handleAnswerChange = (questionId, value) => {
+                this.setState(prevState => ({
+                    answers: {
+                        ...prevState.answers,
+                        [questionId]: value
+                    }
+                }));
+            };
 
-  // Handle answer changes
-  const handleAnswerChange = (questionId, value) => {
-    setAnswers(prev => ({
-      ...prev,
-      [questionId]: value
-    }));
-  };
+            startQuiz = () => {
+                if (!this.state.studentName.trim()) {
+                    alert("Por favor, ingresa tu nombre antes de comenzar.");
+                    return;
+                }
 
-  // Start the quiz and timer
-  const startQuiz = () => {
-    if (!studentName.trim()) {
-      alert("Por favor, ingresa tu nombre antes de comenzar.");
-      return;
-    }
-    
-    setQuizStarted(true);
-    
-    // Set timer for 5 minutes
-    const countdownTimer = setInterval(() => {
-      setTimeRemaining(prevTime => {
-        if (prevTime <= 1) {
-          clearInterval(countdownTimer);
-          submitQuiz();
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-    
-    setTimer(countdownTimer);
-  };
+                this.setState({ quizStarted: true });
 
-  // Format time remaining
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-  };
-
-  // Submit the quiz
-  const submitQuiz = () => {
-    if (timer) {
-      clearInterval(timer);
-    }
-    
-    setShowResults(true);
-    setQuizCompleted(true);
-    
-    // Scroll to results after short delay
-    setTimeout(() => {
-      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  // Calculate score
-  const calculateScore = () => {
-    let score = 0;
-    quizData.questions.forEach(question => {
-      if (answers[question.id] === question.correctAnswer) {
-        score++;
-      }
-    });
-    return score;
-  };
-
-  // Reset quiz
-  const resetQuiz = () => {
-    setAnswers({});
-    setShowResults(false);
-    setShowAnswers(false);
-    setTimeRemaining(300);
-    setQuizCompleted(false);
-    setQuizStarted(false);
-  };
-
-  // Calculate percentage
-  const calculatePercentage = () => {
-    const score = calculateScore();
-    return (score / quizData.questions.length) * 100;
-  };
-
-  // Toggle showing correct answers
-  const toggleAnswers = () => {
-    setShowAnswers(!showAnswers);
-  };
-  
-  // Clean up timer on unmount
-  useEffect(() => {
-    return () => {
-      if (timer) {
-        clearInterval(timer);
-      }
-    };
-  }, [timer]);
-
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{quizData.title}</h1>
-      
-      {!quizStarted ? (
-        <div className="mb-8 p-6 bg-blue-50 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Instrucciones</h2>
-          <p className="mb-4">Este cuestionario consta de 5 preguntas sobre el sistema nervioso. Tienes 5 minutos para completarlo.</p>
-          
-          <div className="mb-4">
-            <label htmlFor="studentName" className="block font-medium mb-2">Nombre del estudiante:</label>
-            <input 
-              type="text" 
-              id="studentName"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
-              required
-            />
-          </div>
-          
-          <button 
-            onClick={startQuiz}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
-          >
-            Comenzar cuestionario
-          </button>
-        </div>
-      ) : (
-        <>
-          {!quizCompleted && (
-            <div className="mb-4 flex justify-between items-center bg-yellow-50 p-3 rounded-lg">
-              <div>
-                <span className="font-bold">Estudiante:</span> {studentName}
-              </div>
-              <div className={`font-bold ${timeRemaining < 60 ? 'text-red-600' : 'text-blue-600'}`}>
-                Tiempo restante: {formatTime(timeRemaining)}
-              </div>
-            </div>
-          )}
-          
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            submitQuiz();
-          }}>
-            {quizData.questions.map((question) => (
-              <div key={question.id} className="mb-6 p-4 bg-gray-50 rounded-lg">
-                <label className="block font-bold mb-2">
-                  {question.id}. {question.text}
-                </label>
-                <select
-                  value={answers[question.id] || ""}
-                  onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                  disabled={quizCompleted}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required={!quizCompleted}
-                >
-                  <option value="">Selecciona una opción</option>
-                  {question.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.text}
-                    </option>
-                  ))}
-                </select>
-                
-                {showResults && (
-                  <div className="mt-2">
-                    {answers[question.id] === question.correctAnswer ? (
-                      <p className="text-green-600 font-medium">¡Correcto!</p>
-                    ) : (
-                      <p className="text-red-600 font-medium">
-                        Incorrecto. La respuesta correcta es: {
-                          question.options.find(opt => opt.value === question.correctAnswer).text
+                const countdownTimer = setInterval(() => {
+                    this.setState(prevState => {
+                        if (prevState.timeRemaining <= 1) {
+                            clearInterval(countdownTimer);
+                            this.submitQuiz();
+                            return { timeRemaining: 0 };
                         }
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-            
-            {!quizCompleted && (
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded"
-                >
-                  Enviar respuestas
-                </button>
-                <button
-                  type="button"
-                  onClick={resetQuiz}
-                  className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded"
-                >
-                  Reiniciar
-                </button>
-              </div>
-            )}
-          </form>
-          
-          {showResults && (
-            <div id="results-section" className="mt-8 p-6 bg-blue-50 rounded-lg">
-              <h2 className="text-2xl font-bold mb-4">Resultados para {studentName}:</h2>
-              
-              <div className="mb-4">
-                <h3 className="text-xl font-semibold">
-                  Puntuación final: {calculateScore()}/{quizData.questions.length} ({calculatePercentage().toFixed(1)}%)
-                </h3>
-              </div>
-              
-              <div className="flex space-x-4">
-                <button
-                  onClick={toggleAnswers}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
-                >
-                  {showAnswers ? 'Ocultar respuestas' : 'Mostrar respuestas'}
-                </button>
-                
-                <button
-                  onClick={resetQuiz}
-                  className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded"
-                >
-                  Intentar de nuevo
-                </button>
-              </div>
-              
-              {showAnswers && (
-                <div className="mt-6">
-                  <h3 className="text-lg font-bold mb-2">Respuestas correctas:</h3>
-                  {quizData.questions.map((question) => (
-                    <p key={question.id} className="mb-2">
-                      <strong>{question.id}. {question.text}</strong> {" "}
-                      {question.options.find(opt => opt.value === question.correctAnswer).text}
-                    </p>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  );
-};
+                        return { timeRemaining: prevState.timeRemaining - 1 };
+                    });
+                }, 1000);
 
-export default NervousSystemQuiz;
+                this.setState({ timer: countdownTimer });
+            };
+
+            formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+            };
+
+            submitQuiz = () => {
+                if (this.state.timer) {
+                    clearInterval(this.state.timer);
+                }
+
+                this.setState({ showResults: true, quizCompleted: true });
+
+                setTimeout(() => {
+                    document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            };
+
+            calculateScore = () => {
+                let score = 0;
+                quizData.questions.forEach(question => {
+                    if (this.state.answers[question.id] === question.correctAnswer) {
+                        score++;
+                    }
+                });
+                return score;
+            };
+
+            resetQuiz = () => {
+                this.setState({
+                    answers: {},
+                    showResults: false,
+                    showAnswers: false,
+                    timeRemaining: 300,
+                    quizCompleted: false,
+                    quizStarted: false
+                });
+            };
+
+            calculatePercentage = () => {
+                const score = this.calculateScore();
+                return (score / quizData.questions.length) * 100;
+            };
+
+            toggleAnswers = () => {
+                this.setState(prevState => ({ showAnswers: !prevState.showAnswers }));
+            };
+
+            render() {
+                return (
+                    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+                        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{quizData.title}</h1>
+                        
+                        {!this.state.quizStarted ? (
+                            <div className="mb-8 p-6 bg-blue-50 rounded-lg">
+                                <h2 className="text-xl font-semibold mb-4">Instrucciones</h2>
+                                <p className="mb-4">Este cuestionario consta de 5 preguntas sobre el sistema nervioso. Tienes 5 minutos para completarlo.</p>
+                                
+                                <div className="mb-4">
+                                    <label htmlFor="studentName" className="block font-medium mb-2">Nombre del estudiante:</label>
+                                    <input 
+                                        type="text" 
+                                        id="studentName"
+                                        value={this.state.studentName}
+                                        onChange={(e) => this.setState({ studentName: e.target.value })}
+                                        className="w-full p-2 border border-gray-300 rounded"
+                                        required
+                                    />
+                                </div>
+                                
+                                <button 
+                                    onClick={this.startQuiz}
+                                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
+                                >
+                                    Comenzar cuestionario
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                {!this.state.quizCompleted && (
+                                    <div className="mb-4 flex justify-between items-center bg-yellow-50 p-3 rounded-lg">
+                                        <div>
+                                            <span className="font-bold">Estudiante:</span> {this.state.studentName}
+                                        </div>
+                                        <div className={`font-bold ${this.state.timeRemaining < 60 ? 'text-red-600' : 'text-blue-600'}`}>
+                                            Tiempo restante: {this.formatTime(this.state.timeRemaining)}
+                                        </div>
+                                    </div>
+                                )}
+                                
+                                <form onSubmit={(e) => {
+                                    e.preventDefault();
+                                    this.submitQuiz();
+                                }}>
+                                    {quizData.questions.map((question) => (
+                                        <div key={question.id} className="mb-6 p-4 bg-gray-50 rounded-lg">
+                                            <label className="block font-bold mb-2">
+                                                {question.id}. {question.text}
+                                            </label>
+                                            <select
+                                                value={this.state.answers[question.id] || ""}
+                                                onChange={(e) => this.handleAnswerChange(question.id, e.target.value)}
+                                                disabled={this.state.quizCompleted}
+                                                className="w-full p-2 border border-gray-300 rounded"
+                                                required={!this.state.quizCompleted}
+                                            >
+                                                <option value="">Selecciona una opción</option>
+                                                {question.options.map((option) => (
+                                                    <option key={option.value} value={option.value}>
+                                                        {option.text}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            
+                                            {this.state.showResults && (
+                                                <div className="mt-2">
+                                                    {this.state.answers[question.id] === question.correctAnswer ? (
+                                                        <p className="text-green-600 font-medium">¡Correcto!</p>
+                                                    ) : (
+                                                        <p className="text-red-600 font-medium">
+                                                            Incorrecto. La respuesta correcta es: {
+                                                                question.options.find(opt => opt.value === question.correctAnswer).text
+                                                            }
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                    
+                                    {!this.state.quizCompleted && (
+                                        <div className="flex justify-between">
+                                            <button
+                                                type="submit"
+                                                className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded"
+                                            >
+                                                Enviar respuestas
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={this.resetQuiz}
+                                                className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded"
+                                            >
+                                                Reiniciar
+                                            </button>
+                                        </div>
+                                    )}
+                                </form>
+                                
+                                {this.state.showResults && (
+                                    <div id="results-section" className="mt-8 p-6 bg-blue-50 rounded-lg">
+                                        <h2 className="text-2xl font-bold mb-4">Resultados para {this.state.studentName}:</h2>
+                                        
+                                        <div className="mb-4">
+                                            <h3 className="text-xl font-semibold">
+                                                Puntuación final: {this.calculateScore()}/{quizData.questions.length} ({this.calculatePercentage().toFixed(1)}%)
+                                            </h3>
+                                        </div>
+                                        
+                                        <div className="flex space-x-4">
+                                            <button
+                                                onClick={this.toggleAnswers}
+                                                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
+                                            >
+                                                {this.state.showAnswers ? 'Ocultar respuestas' : 'Mostrar respuestas'}
+                                            </button>
+                                            
+                                            <button
+                                                onClick={this.resetQuiz}
+                                                className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded"
+                                            >
+                                                Intentar de nuevo
+                                            </button>
+                                        </div>
+                                        
+                                        {this.state.showAnswers && (
+                                            <div className="mt-6">
+                                                <h3 className="text-lg font-bold mb-2">Respuestas correctas:</h3>
+                                                {quizData.questions.map((question) => (
+                                                    <p key={question.id} className="mb-2">
+                                                        <strong>{question.id}. {question.text}</strong> {" "}
+                                                        {question.options.find(opt => opt.value === question.correctAnswer).text}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<NervousSystemQuiz />, document.getElementById('quiz-app'));
+    </script>
+</body>
+</html>
