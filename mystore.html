@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Online</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Encabezado */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+        }
+
+        /* Sección de productos */
+        .productos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .producto {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .producto img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .producto h3 {
+            margin: 15px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .producto p {
+            margin: 0 0 15px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .producto button {
+            background-color: #ff69b4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .producto button:hover {
+            background-color: #ff1493;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Bienvenido a Mi Tienda Online</h1>
+        <p>Los mejores productos al mejor precio</p>
+    </header>
+
+    <!-- Sección de Productos -->
+    <section class="productos">
+        <div class="producto">
+            <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/IMG_2331.png" alt="Producto 1">
+            <h3>Producto 1</h3>
+            <p>$20.00</p>
+            <button>Añadir al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/IMG_2331.png" alt="Producto 2">
+            <h3>Producto 2</h3>
+            <p>$25.00</p>
+            <button>Añadir al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://raw.githubusercontent.com/giomon/giomon.github.io/master/IMG_2331.png" alt="Producto 3">
+            <h3>Producto 3</h3>
+            <p>$30.00</p>
+            <button>Añadir al carrito</button>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>&copy; 2023 Mi Tienda Online. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
