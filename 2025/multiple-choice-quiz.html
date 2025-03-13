@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Quiz: Immune System and Brain Health</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question h3 {
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        .options {
+            margin-left: 10px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f0f7fa;
+        }
+        
+        .option.selected {
+            background-color: #d5e9f5;
+            border-color: #3498db;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .result-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .incorrect-answer {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .score-display {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Multiple Choice Quiz: Immune System and Brain Health</h1>
+        
+        <form id="quizForm">
+            <div class="question">
+                <h3>1. What is the main function of the immune system?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1a" value="a">
+                        <label for="q1a">To regulate body temperature and metabolism</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1b" value="b">
+                        <label for="q1b">To protect the body from harmful pathogens and foreign substances</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1c" value="c">
+                        <label for="q1c">To control hormone production and regulate growth</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1d" value="d">
+                        <label for="q1d">To facilitate the digestion of food and absorption of nutrients</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. How do the brain and the immune system communicate?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2a" value="a">
+                        <label for="q2a">Only through blood pressure and heart rate regulation</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2b" value="b">
+                        <label for="q2b">They don't communicate directly; they operate independently</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2c" value="c">
+                        <label for="q2c">Through neural connections, hormones, cytokines, and the HPA axis</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2d" value="d">
+                        <label for="q2d">Only during sleep when brain waves synchronize with immune functions</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. How does stress affect the immune system?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3a" value="a">
+                        <label for="q3a">Chronic stress weakens the immune system by increasing cortisol and suppressing immune function</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3b" value="b">
+                        <label for="q3b">Stress has no effect on the immune system</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3c" value="c">
+                        <label for="q3c">Stress always strengthens the immune system by activating emergency responses</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3d" value="d">
+                        <label for="q3d">Stress only affects the digestive system, not the immune system</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>4. Why is gut microbiota important for brain health?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4a" value="a">
+                        <label for="q4a">It isn't – gut microbiota has no connection to brain health</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4b" value="b">
+                        <label for="q4b">Gut microbiota produces neurotransmitters, regulates inflammation, and communicates with the brain via the gut-brain axis</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4c" value="c">
+                        <label for="q4c">It only helps with digestion, which indirectly provides energy to the brain</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4d" value="d">
+                        <label for="q4d">Gut microbiota only affects brain health in infants, not in adults</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Which two habits can strengthen the immune system and improve mental health?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5a" value="a">
+                        <label for="q5a">Watching TV and drinking caffeinated beverages</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5b" value="b">
+                        <label for="q5b">Smoking and staying indoors</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5c" value="c">
+                        <label for="q5c">Regular exercise and quality sleep</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5d" value="d">
+                        <label for="q5d">Eating processed foods and working long hours</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button type="button" id="checkAnswers">Submit Quiz</button>
+                <button type="reset" id="resetQuiz">Reset Quiz</button>
+            </div>
+        </form>
+        
+        <div id="results">
+            <h2>Your Results</h2>
+            <div class="score-display" id="scoreDisplay"></div>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizForm = document.getElementById('quizForm');
+            const checkButton = document.getElementById('checkAnswers');
+            const resetButton = document.getElementById('resetQuiz');
+            const results = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            
+            // Make entire option div clickable
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Remove selected class from all options in this question
+                    const questionOptions = this.parentElement.querySelectorAll('.option');
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to this option
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Answer key
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'a',
+                q4: 'b',
+                q5: 'c'
+            };
+            
+            // Explanations
+            const explanations = {
+                q1: {
+                    correct: "The immune system's primary role is to defend the body against pathogens like bacteria, viruses, and other harmful foreign substances.",
+                    incorrect: "The immune system's main function is to protect the body from harmful pathogens and foreign substances that could cause disease or infection."
+                },
+                q2: {
+                    correct: "The brain and immune system have a bidirectional communication through multiple pathways including neural connections (especially the vagus nerve), hormones, cytokines, and the HPA axis.",
+                    incorrect: "The brain and immune system communicate through multiple pathways including neural connections, hormones, cytokines, and the HPA axis, allowing for bidirectional signaling."
+                },
+                q3: {
+                    correct: "Chronic stress increases cortisol levels, which over time can suppress immune function, leading to increased susceptibility to infections and illness.",
+                    incorrect: "Chronic stress negatively impacts the immune system by increasing cortisol levels, which suppresses immune function and can lead to increased inflammation and susceptibility to illness."
+                },
+                q4: {
+                    correct: "The gut microbiome influences brain health through the gut-brain axis, producing neurotransmitters, regulating inflammation, and creating metabolites that impact cognitive function.",
+                    incorrect: "Gut microbiota is crucial for brain health as it produces neurotransmitters (like serotonin), regulates inflammation, and communicates with the brain through the gut-brain axis."
+                },
+                q5: {
+                    correct: "Regular exercise and quality sleep are both proven to boost immune function and improve mental health through multiple mechanisms.",
+                    incorrect: "Regular exercise and quality sleep are two key habits that strengthen the immune system and improve mental well-being through multiple physiological mechanisms."
+                }
+            };
+            
+            // Check answers
+            checkButton.addEventListener('click', function() {
+                // Check if all questions are answered
+                let allAnswered = true;
+                for (let i = 1; i <= 5; i++) {
+                    const answered = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (!answered) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+                
+                if (!allAnswered) {
+                    alert('Please answer all questions before submitting.');
+                    return;
+                }
+                
+                // Calculate score and generate results
+                let score = 0;
+                let resultsHTML = '';
+                
+                for (let i = 1; i <= 5; i++) {
+                    const questionId = `q${i}`;
+                    const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`).value;
+                    const isCorrect = selectedOption === correctAnswers[questionId];
+                    
+                    if (isCorrect) {
+                        score++;
+                    }
+                    
+                    // Get the text of the selected answer
+                    const selectedText = document.querySelector(`label[for="${questionId}${selectedOption}"]`).textContent;
+                    
+                    // Get the text of the correct answer
+                    const correctText = document.querySelector(`label[for="${questionId}${correctAnswers[questionId]}"]`).textContent;
+                    
+                    resultsHTML += `
+                        <div class="result-item">
+                            <h3>Question ${i}:</h3>
+                            <p>Your answer: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${selectedText}</span></p>
+                            ${!isCorrect ? `<p>Correct answer: <span class="correct-answer">${correctText}</span></p>` : ''}
+                            <p class="explanation">${isCorrect ? explanations[questionId].correct : explanations[questionId].incorrect}</p>
+                        </div>
+                    `;
+                }
+                
+                // Display score and results
+                scoreDisplay.textContent = `Your Score: ${score}/5`;
+                resultContent.innerHTML = resultsHTML;
+                results.style.display = 'block';
+                results.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset the quiz
+            resetButton.addEventListener('click', function() {
+                // Remove selected class from all options
+                options.forEach(option => option.classList.remove('selected'));
+                
+                // Hide results
+                results.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

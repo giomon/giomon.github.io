@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension Quiz: Immune System and Brain Health</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question h3 {
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 15px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .incorrect {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Reading Comprehension Quiz: Immune System and Brain Health</h1>
+        
+        <form id="quizForm">
+            <div class="question">
+                <h3>1. What is the main function of the immune system?</h3>
+                <textarea name="q1" id="q1" required></textarea>
+            </div>
+            
+            <div class="question">
+                <h3>2. How do the brain and the immune system communicate?</h3>
+                <textarea name="q2" id="q2" required></textarea>
+            </div>
+            
+            <div class="question">
+                <h3>3. How does stress affect the immune system?</h3>
+                <textarea name="q3" id="q3" required></textarea>
+            </div>
+            
+            <div class="question">
+                <h3>4. Why is gut microbiota important for brain health?</h3>
+                <textarea name="q4" id="q4" required></textarea>
+            </div>
+            
+            <div class="question">
+                <h3>5. Mention two habits that can strengthen the immune system and improve mental health.</h3>
+                <textarea name="q5" id="q5" required></textarea>
+            </div>
+            
+            <div class="buttons">
+                <button type="button" id="checkAnswers">Check Answers</button>
+                <button type="reset">Reset Form</button>
+            </div>
+        </form>
+        
+        <div id="results">
+            <h2>Your Results</h2>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkButton = document.getElementById('checkAnswers');
+            const results = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            
+            // Model answers (key concepts to look for)
+            const answerKeys = {
+                q1: {
+                    keywords: ['protect', 'defense', 'pathogens', 'bacteria', 'viruses', 'foreign', 'infection', 'disease'],
+                    modelAnswer: "The main function of the immune system is to protect the body from harmful pathogens, such as bacteria, viruses, and other foreign substances, preventing infection and disease."
+                },
+                q2: {
+                    keywords: ['neural', 'hormones', 'cytokines', 'vagus nerve', 'hypothalamus', 'chemical messengers', 'bidirectional', 'hpa axis'],
+                    modelAnswer: "The brain and immune system communicate through several pathways including neural connections (especially the vagus nerve), hormones, cytokines (chemical messengers from immune cells), and the hypothalamic-pituitary-adrenal (HPA) axis. This communication is bidirectional, with signals flowing both ways."
+                },
+                q3: {
+                    keywords: ['weaken', 'suppress', 'cortisol', 'inflammation', 'chronic', 'susceptible', 'impair', 'compromise'],
+                    modelAnswer: "Chronic stress weakens the immune system by increasing cortisol levels, which can suppress immune function over time. This can lead to increased inflammation, decreased production of white blood cells, and make the body more susceptible to infections and illness."
+                },
+                q4: {
+                    keywords: ['gut-brain axis', 'neurotransmitters', 'serotonin', 'microbiome', 'inflammation', 'barrier', 'metabolites', 'vagus nerve'],
+                    modelAnswer: "Gut microbiota is important for brain health because it influences the gut-brain axis. The gut microbiome produces neurotransmitters (like serotonin), regulates inflammation, affects the blood-brain barrier, and creates metabolites that impact cognitive function. An unhealthy gut can contribute to neuroinflammation and potentially affect mood and cognition."
+                },
+                q5: {
+                    keywords: ['exercise', 'sleep', 'diet', 'meditation', 'stress management', 'social connection', 'hydration', 'nutrition', 'probiotics', 'mindfulness'],
+                    modelAnswer: "Habits that strengthen the immune system and improve mental health include: regular exercise, quality sleep, a balanced diet rich in fruits and vegetables, meditation/mindfulness practices, maintaining social connections, stress management techniques, staying hydrated, and consuming probiotic-rich foods."
+                }
+            };
+            
+            checkButton.addEventListener('click', function() {
+                // Get all form inputs
+                const form = document.getElementById('quizForm');
+                const formData = new FormData(form);
+                let formIsValid = true;
+                
+                // Check if all questions are answered
+                for (let i = 1; i <= 5; i++) {
+                    const answer = formData.get('q' + i).trim();
+                    if (answer === '') {
+                        formIsValid = false;
+                        break;
+                    }
+                }
+                
+                if (!formIsValid) {
+                    alert('Please answer all questions before checking.');
+                    return;
+                }
+                
+                // Evaluate answers
+                let resultsHTML = '';
+                let score = 0;
+                
+                for (let i = 1; i <= 5; i++) {
+                    const questionId = 'q' + i;
+                    const userAnswer = formData.get(questionId).toLowerCase().trim();
+                    const answerKey = answerKeys[questionId];
+                    
+                    // Check if answer contains key concepts
+                    const keywordsFound = answerKey.keywords.filter(keyword => 
+                        userAnswer.includes(keyword.toLowerCase())
+                    );
+                    
+                    let correctness = '';
+                    let feedback = '';
+                    
+                    if (keywordsFound.length >= 2) {
+                        correctness = '<span class="correct">Correct!</span>';
+                        feedback = 'Great job, you included key concepts: ' + keywordsFound.join(', ');
+                        score++;
+                    } else {
+                        correctness = '<span class="incorrect">Needs improvement</span>';
+                        feedback = 'Consider including these concepts in your answer:';
+                    }
+                    
+                    resultsHTML += `
+                        <div>
+                            <h3>Question ${i}: ${correctness}</h3>
+                            <p><strong>Your answer:</strong> ${formData.get(questionId)}</p>
+                            <p><strong>Model answer:</strong> ${answerKey.modelAnswer}</p>
+                            <p class="feedback">${feedback}</p>
+                        </div>
+                        <hr>
+                    `;
+                }
+                
+                resultsHTML += `<h3>Total Score: ${score}/5</h3>`;
+                resultContent.innerHTML = resultsHTML;
+                results.style.display = 'block';
+                results.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
