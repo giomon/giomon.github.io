@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Comprensión Lectora</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            min-height: 120px;
+            transition: border 0.3s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3a7bc8;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .question-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .remaining-chars {
+            display: block;
+            text-align: right;
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Preguntas de Comprensión Lectora</h1>
+        <p style="text-align: center; margin-bottom: 20px;">Responde a las siguientes preguntas basándote en el texto leído.</p>
+        
+        <form id="comprensionForm">
+            <div class="form-group">
+                <label for="q1"><span class="question-number">1.</span> ¿Por qué la lectura es importante para el desarrollo del conocimiento?</label>
+                <textarea id="q1" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <span class="remaining-chars" id="count1">0 caracteres</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="q2"><span class="question-number">2.</span> ¿Cómo ayuda la escritura a estructurar los pensamientos?</label>
+                <textarea id="q2" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <span class="remaining-chars" id="count2">0 caracteres</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="q3"><span class="question-number">3.</span> ¿Qué beneficios tiene la lectura frecuente en la creatividad y la empatía?</label>
+                <textarea id="q3" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <span class="remaining-chars" id="count3">0 caracteres</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="q4"><span class="question-number">4.</span> ¿Por qué es importante saber escribir correctamente en la vida cotidiana?</label>
+                <textarea id="q4" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <span class="remaining-chars" id="count4">0 caracteres</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="q5"><span class="question-number">5.</span> ¿Cuál es la conclusión principal del texto?</label>
+                <textarea id="q5" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <span class="remaining-chars" id="count5">0 caracteres</span>
+            </div>
+            
+            <div class="button-container">
+                <button type="submit">Enviar respuestas</button>
+            </div>
+        </form>
+        
+        <div class="message" id="formMessage"></div>
+    </div>
+    
+    <style>
+        /* Estilos adicionales para la sección de respuestas */
+        .answers-section {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #4a90e2;
+        }
+        .answer-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .answer-item:last-child {
+            border-bottom: none;
+        }
+        .answer-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .user-answer {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .correct-answer {
+            background-color: #d1e7dd;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #198754;
+        }
+        .feedback-text {
+            color: #dc3545;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        .history-container {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 10px;
+        }
+        .history-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .history-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('comprensionForm');
+            const message = document.getElementById('formMessage');
+            const minChars = 20;
+            const verRespuestasBtn = document.getElementById('verRespuestas');
+            
+            // Define las respuestas correctas
+            const respuestasCorrectas = {
+                1: "La lectura es fundamental para el desarrollo del conocimiento porque permite acceder a información, ideas y perspectivas diversas. Además, estimula la adquisición de vocabulario y mejora la comprensión de conceptos complejos.",
+                2: "La escritura ayuda a estructurar los pensamientos al obligarnos a ordenar nuestras ideas de manera coherente y lógica. El proceso de escribir requiere clasificar, jerarquizar y relacionar conceptos, lo que promueve un pensamiento más claro y organizado.",
+                3: "La lectura frecuente estimula la creatividad al exponernos a nuevas ideas y formas de expresión. También desarrolla la empatía porque nos permite experimentar situaciones y emociones desde diferentes perspectivas y entender mejor las experiencias humanas diversas.",
+                4: "Saber escribir correctamente es importante en la vida cotidiana porque facilita la comunicación efectiva, aumenta la credibilidad profesional y evita malentendidos. Una escritura clara y correcta transmite respeto por el receptor y demuestra atención al detalle.",
+                5: "La conclusión principal del texto es que tanto la lectura como la escritura son habilidades fundamentales e interconectadas que contribuyen significativamente al desarrollo cognitivo, emocional y social de las personas a lo largo de toda su vida."
+            };
+
+            // Crear un espacio para el historial de respuestas
+            let historialRespuestas = JSON.parse(localStorage.getItem('historialComprensionLectora')) || [];
+            
+            // Set up character counters
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach((textarea, index) => {
+                const counter = document.getElementById(`count${index+1}`);
+                
+                textarea.addEventListener('input', function() {
+                    counter.textContent = `${this.value.length} caracteres`;
+                    
+                    // Optional: Change color based on length
+                    if (this.value.length < minChars) {
+                        counter.style.color = '#dc3545';
+                    } else {
+                        counter.style.color = '#28a745';
+                    }
+                });
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validation
+                let isValid = true;
+                let firstInvalid = null;
+                
+                textareas.forEach((textarea) => {
+                    if (textarea.value.trim().length < minChars) {
+                        textarea.style.borderColor = '#dc3545';
+                        isValid = false;
+                        if (!firstInvalid) firstInvalid = textarea;
+                    } else {
+                        textarea.style.borderColor = '#28a745';
+                    }
+                });
+                
+                if (!isValid) {
+                    message.className = 'message error';
+                    message.textContent = `Por favor, escribe respuestas más elaboradas (mínimo ${minChars} caracteres).`;
+                    message.style.display = 'block';
+                    
+                    // Scroll to first invalid field
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                    }
+                    return;
+                }
+                
+                // Collect responses
+                const responses = Array.from(textareas).map((textarea, index) => {
+                    return {
+                        pregunta: index + 1,
+                        respuesta: textarea.value
+                    };
+                });
+                
+                // Guardar en el historial con fecha y hora
+                const ahora = new Date();
+                const entradaHistorial = {
+                    fecha: ahora.toLocaleDateString(),
+                    hora: ahora.toLocaleTimeString(),
+                    respuestas: responses
+                };
+                
+                historialRespuestas.push(entradaHistorial);
+                localStorage.setItem('historialComprensionLectora', JSON.stringify(historialRespuestas));
+                
+                // Success message
+                message.className = 'message success';
+                message.innerHTML = '¡Gracias! Tus respuestas han sido enviadas correctamente.';
+                message.style.display = 'block';
+                
+                // Scroll to message
+                message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+            
+            // Ver respuestas button functionality
+            verRespuestasBtn.addEventListener('click', function() {
+                // Remove previous answers section if exists
+                const prevAnswersSection = document.getElementById('answersSection');
+                if (prevAnswersSection) prevAnswersSection.remove();
+                
+                // Create answers section
+                const answersSection = document.createElement('div');
+                answersSection.id = 'answersSection';
+                answersSection.className = 'answers-section';
+                
+                // Add current answers
+                let contentHTML = '<h2 style="text-align: center; margin-bottom: 20px;">Revisión de Respuestas</h2>';
+                
+                // Get current answers
+                const currentAnswers = Array.from(textareas).map((textarea, index) => {
+                    return {
+                        pregunta: index + 1,
+                        respuesta: textarea.value.trim()
+                    };
+                });
+                
+                // Display each question with user answer and correct answer
+                currentAnswers.forEach(item => {
+                    const preguntaNum = item.pregunta;
+                    const userAnswer = item.respuesta;
+                    const correctAnswer = respuestasCorrectas[preguntaNum];
+                    const questionText = document.querySelector(`label[for="q${preguntaNum}"]`).textContent;
+                    
+                    contentHTML += `
+                    <div class="answer-item">
+                        <div class="answer-question">${questionText}</div>
+                        <div class="user-answer">
+                            <strong>Tu respuesta:</strong> 
+                            <div>${userAnswer || '<span style="color: #dc3545; font-style: italic;">(Sin respuesta)</span>'}</div>
+                        </div>`;
+                    
+                    // Si la respuesta es muy corta o está vacía, mostrar la respuesta correcta
+                    if (!userAnswer || userAnswer.length < minChars) {
+                        contentHTML += `
+                        <div class="feedback-text">Tu respuesta no es suficientemente elaborada.</div>
+                        <div class="correct-answer">
+                            <strong>Respuesta modelo:</strong> 
+                            <div>${correctAnswer}</div>
+                        </div>`;
+                    }
+                    
+                    contentHTML += `</div>`;
+                });
+                
+                // History section
+                if (historialRespuestas.length > 0) {
+                    contentHTML += `
+                    <div class="history-container">
+                        <div class="history-title">Historial de Respuestas</div>`;
+                    
+                    // Most recent first
+                    historialRespuestas.slice().reverse().forEach((entrada, idx) => {
+                        contentHTML += `
+                        <div class="history-item">
+                            <div class="timestamp">${entrada.fecha} - ${entrada.hora}</div>
+                            <strong>Intento #${historialRespuestas.length - idx}</strong>
+                        </div>`;
+                    });
+                    
+                    contentHTML += `</div>`;
+                }
+                
+                answersSection.innerHTML = contentHTML;
+                form.parentNode.insertBefore(answersSection, message);
+                
+                // Show the section
+                answersSection.style.display = 'block';
+                
+                // Scroll to answers
+                answersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
