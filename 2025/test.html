@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h1>Reading Comprehension Quiz</h1>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Why is reading important for knowledge development?</p>
+            <input type="text" id="q1">
+        </div>
+        <div class="question">
+            <p>2. How does writing help structure thoughts?</p>
+            <input type="text" id="q2">
+        </div>
+        <div class="question">
+            <p>3. What benefits does frequent reading have on creativity and empathy?</p>
+            <input type="text" id="q3">
+        </div>
+        <div class="question">
+            <p>4. Why is it important to know how to write correctly in daily life?</p>
+            <input type="text" id="q4">
+        </div>
+        <div class="question">
+            <p>5. What is the main conclusion of the text?</p>
+            <input type="text" id="q5">
+        </div>
+        <button type="button" onclick="gradeQuiz()">Submit Answers</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script>
+    function gradeQuiz() {
+        let correctAnswers = [
+            "Because it helps us acquire information, develop critical thinking, and expand imagination",
+            "It allows us to express ideas and structure thoughts",
+            "It improves creativity and empathy by understanding different perspectives",
+            "To convey messages clearly and accurately",
+            "That reading and writing enrich our lives and facilitate learning"
+        ];
+
+        let score = 0;
+        for (let i = 1; i <= 5; i++) {
+            let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+            let correctAnswer = correctAnswers[i - 1].toLowerCase();
+            if (userAnswer.includes(correctAnswer.substring(0, 10))) { 
+                score++;
+            }
+        }
+
+        document.getElementById("result").innerText = "Your score is: " + score + " / 5";
+    }
+</script>
+
+</body>
+</html>
