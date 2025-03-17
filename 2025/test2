@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Comprensión Lectora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #respuestas {
+            margin-top: 20px;
+            padding: 10px;
+            background: #ffeeba;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cuestionario de Comprensión Lectora</h1>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. ¿Por qué la lectura es importante para el desarrollo del conocimiento?</p>
+            <input type="text" id="q1">
+        </div>
+        <div class="question">
+            <p>2. ¿Cómo ayuda la escritura a estructurar los pensamientos?</p>
+            <input type="text" id="q2">
+        </div>
+        <div class="question">
+            <p>3. ¿Qué beneficios tiene la lectura frecuente en la creatividad y la empatía?</p>
+            <input type="text" id="q3">
+        </div>
+        <div class="question">
+            <p>4. ¿Por qué es importante saber escribir correctamente en la vida cotidiana?</p>
+            <input type="text" id="q4">
+        </div>
+        <div class="question">
+            <p>5. ¿Cuál es la conclusión principal del texto?</p>
+            <input type="text" id="q5">
+        </div>
+        <button type="button" onclick="calificar()">Enviar respuestas</button>
+    </form>
+    <p id="resultado"></p>
+    
+    <div id="respuestas">
+        <h3>Respuestas correctas:</h3>
+        <ul id="listaRespuestas"></ul>
+    </div>
+</div>
+
+<script>
+    function calificar() {
+        let respuestasCorrectas = [
+            "Porque nos ayuda a adquirir información, desarrollar el pensamiento crítico y expandir la imaginación.",
+            "Nos permite expresar ideas y estructurar pensamientos.",
+            "Mejora la creatividad y la empatía al conocer diferentes perspectivas.",
+            "Para transmitir mensajes de manera clara y precisa.",
+            "Que la lectura y la escritura enriquecen nuestra vida y facilitan el aprendizaje."
+        ];
+
+        let puntaje = 0;
+        let listaRespuestas = document.getElementById("listaRespuestas");
+        listaRespuestas.innerHTML = "";
+        
+        for (let i = 1; i <= 5; i++) {
+            let respuestaUsuario = document.getElementById("q" + i).value.trim().toLowerCase();
+            let respuestaCorrecta = respuestasCorrectas[i - 1].toLowerCase();
+            
+            if (respuestaUsuario.includes(respuestaCorrecta.substring(0, 10))) { 
+                puntaje++;
+            } else {
+                let item = document.createElement("li");
+                item.innerText = `Pregunta ${i}: ${respuestasCorrectas[i - 1]}`;
+                listaRespuestas.appendChild(item);
+            }
+        }
+
+        document.getElementById("resultado").innerText = "Tu puntaje es: " + puntaje + " / 5";
+
+        if (puntaje < 5) {
+            document.getElementById("respuestas").style.display = "block";
+        } else {
+            document.getElementById("respuestas").style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
