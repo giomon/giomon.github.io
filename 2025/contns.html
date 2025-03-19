@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenidos de Lenguaje - 4to Grado Colombia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .accordion {
+            margin-bottom: 20px;
+        }
+        .accordion-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #2980b9;
+        }
+        .accordion-content {
+            background-color: white;
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .accordion-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .accordion-content li {
+            margin-bottom: 10px;
+        }
+        .accordion-content.open {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contenidos de Lenguaje - 4to Grado Colombia</h1>
+    
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="accordion-header">Comprensión de Lectura</div>
+            <div class="accordion-content">
+                <ul>
+                    <li>Lectura de diferentes tipos de textos (narrativos, informativos, poéticos).</li>
+                    <li>Identificación de ideas principales y secundarias.</li>
+                    <li>Reconocimiento de la estructura de los textos.</li>
+                    <li>Desarrollo de la capacidad de hacer inferencias y deducciones.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">Producción de Textos</div>
+            <div class="accordion-content">
+                <ul>
+                    <li>Escritura de narraciones, descripciones, cartas y otros tipos de textos.</li>
+                    <li>Uso adecuado de la gramática y la ortografía.</li>
+                    <li>Desarrollo de la creatividad y la expresión personal.</li>
+                    <li>Planeación de un texto informativo a partir de la silueta del mismo (por ejemplo, una noticia, un reporte, un informe o una entrevista).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">Comunicación Oral</div>
+            <div class="accordion-content">
+                <ul>
+                    <li>Participación en conversaciones y debates.</li>
+                    <li>Expresión clara y coherente de ideas.</li>
+                    <li>Escucha atenta y respetuosa.</li>
+                    <li>Lectura en voz alta, con fluidez, respetando la pronunciación de las palabras y la entonación.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">Conocimiento del Lenguaje</div>
+            <div class="accordion-content">
+                <ul>
+                    <li>Reconocimiento de las diferentes clases de palabras (sustantivos, adjetivos, verbos).</li>
+                    <li>Uso de sinónimos y antónimos.</li>
+                    <li>Conocimiento de las reglas básicas de ortografía y puntuación.</li>
+                    <li>Reconoce que las palabras tienen raíces, afijos y sufijos y las usa para dar significado a nuevas palabras.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">Diversidad Lingüística y Cultural</div>
+            <div class="accordion-content">
+                <ul>
+                    <li>Reconocimiento de la diversidad de lenguas que se hablan en Colombia.</li>
+                    <li>Valoración de las diferentes formas de expresión cultural.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">Recursos Adicionales</div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Colombia Aprende:</strong> Plataforma del Ministerio de Educación Nacional con contenidos educativos digitales.</li>
+                    <li><a href="https://www.colombiaaprende.edu.co/contenidos-para-aprender" target="_blank">Contenidos para aprender – Colombia Aprende</a></li>
+                    <li><a href="#" target="_blank">Unidades Didácticas</a></li>
+                    <li><strong>Ministerio de Educación Nacional:</strong> Estándares Básicos de Competencias y Derechos Básicos de Aprendizaje.</li>
+                    <li><a href="https://www.mineducacion.gov.co/portal/" target="_blank">Lenguaje – Grado 4 – Ministerio de Educación Nacional</a></li>
+                    <li><a href="#" target="_blank">Libro del estudiante de lenguaje grado 4°</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Seleccionar todos los headers del acordeón
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        // Añadir evento de clic a cada header
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling; // Obtener el contenido asociado
+                const isOpen = content.classList.contains('open');
+
+                // Cerrar todos los demás acordeones
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    if (item !== content) {
+                        item.classList.remove('open');
+                        item.style.maxHeight = null;
+                    }
+                });
+
+                // Alternar el estado del acordeón actual
+                if (!isOpen) {
+                    content.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px'; // Ajustar altura al contenido
+                } else {
+                    content.classList.remove('open');
+                    content.style.maxHeight = null; // Colapsar
+                }
+            });
+        });
+    </script>
+</body>
+</html>
