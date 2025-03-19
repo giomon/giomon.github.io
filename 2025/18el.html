@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading and Writing Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 900px;
+            line-height: 1.6;
+            background-color: #f0f2f5;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+            color: #34495e;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        select:focus, input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado, #respuestas {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #resultado {
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+        #respuestas {
+            margin-top: 40px;
+        }
+        .correcto {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .incorrecto {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .texto-lectura {
+            background-color: #fff;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Reading and Writing Quiz</h1>
+    
+    <div class="texto-lectura">
+        <h3>The Importance of Reading and Writing</h3>
+        <p>Reading and writing are fundamental skills for the development of knowledge and communication. Through reading, we acquire information, develop critical thinking, and expand our imagination. Writing, on the other hand, allows us to express ideas, structure thoughts, and share knowledge with others. Both skills are essential in education and daily life, as they facilitate learning across all areas of knowledge.</p>
+        <p>The habit of reading improves comprehension and vocabulary, helping us express ourselves more clearly. Additionally, frequent reading fosters creativity and empathy by allowing us to explore different perspectives and experiences. Meanwhile, writing is a powerful tool for organizing our ideas and communicating them effectively. Whether at school, work, or in personal life, knowing how to write correctly is key to conveying messages clearly and accurately.</p>
+        <p>In conclusion, reading and writing are not only necessary for learning but also enrich our lives. They enable us to access knowledge, express ourselves better, and understand the world around us. Therefore, it is important to encourage these skills from an early age and practice them consistently.</p>
+    </div>
+    
+    <form id="formularioLectura" onsubmit="submitForm(event)">
+        <label for="pregunta1">1. Why is reading important for the development of knowledge?</label>
+        <select id="pregunta1" name="pregunta1" required>
+            <option value="">Select an option</option>
+            <option value="acquire_info">Because we acquire information and develop critical thinking</option>
+            <option value="mandatory">Because it’s mandatory in school</option>
+            <option value="entertaining">Because it’s entertaining and fun</option>
+            <option value="sleep_better">Because it helps us sleep better</option>
+        </select>
+
+        <label for="pregunta2">2. How does writing help structure thoughts?</label>
+        <select id="pregunta2" name="pregunta2" required>
+            <option value="">Select an option</option>
+            <option value="organize_ideas">It allows us to organize and express our ideas</option>
+            <option value="handwriting">It improves our handwriting</option>
+            <option value="exercise_hands">It exercises our hands</option>
+            <option value="impress_others">It impresses other people</option>
+        </select>
+
+        <label for="pregunta3">3. What benefits does frequent reading have on creativity and empathy?</label>
+        <select id="pregunta3" name="pregunta3" required>
+            <option value="">Select an option</option>
+            <option value="improves_vision">It improves vision and focus</option>
+            <option value="saves_money">It saves money on entertainment</option>
+            <option value="perspectives">It allows us to explore different perspectives and experiences</option>
+            <option value="languages">It’s only useful for learning languages</option>
+        </select>
+
+        <label for="pregunta4">4. Why is it important to know how to write correctly in daily life?</label>
+        <select id="pregunta4" name="pregunta4" required>
+            <option value="">Select an option</option>
+            <option value="impress_friends">To impress friends</option>
+            <option value="clear_messages">To convey messages clearly and accurately</option>
+            <option value="pass_exams">Only to pass exams</option>
+            <option value="get_job">Exclusively to get a job</option>
+        </select>
+
+        <label for="pregunta5">5. What is the main conclusion of the text?</label>
+        <select id="pregunta5" name="pregunta5" required>
+            <option value="">Select an option</option>
+            <option value="reading_fun">Reading is fun</option>
+            <option value="writing_hard">Writing is hard to learn</option>
+            <option value="enrich_life">Reading and writing enrich our lives and allow access to knowledge</option>
+            <option value="no_practice">There’s no need to practice these skills</option>
+        </select>
+
+        <label for="nombre">Student Name:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <button type="submit">Submit Answers</button>
+    </form>
+
+    <div id="respuestas">
+        <h2>Correct Answers</h2>
+        <div id="listaRespuestas" style="display: none;">
+            <p><strong>1. Why is reading important for the development of knowledge?</strong> Because we acquire information and develop critical thinking</p>
+            <p><strong>2. How does writing help structure thoughts?</strong> It allows us to organize and express our ideas</p>
+            <p><strong>3. What benefits does frequent reading have on creativity and empathy?</strong> It allows us to explore different perspectives and experiences</p>
+            <p><strong>4. Why is it important to know how to write correctly in daily life?</strong> To convey messages clearly and accurately</p>
+            <p><strong>5. What is the main conclusion of the text?</strong> Reading and writing enrich our lives and allow access to knowledge</p>
+        </div>
+        <button id="mostrarRespuestas" onclick="toggleAnswers()">Show Answers</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <script>
+        // Toggle visibility of correct answers
+        function toggleAnswers() {
+            const answerList = document.getElementById('listaRespuestas');
+            const button = document.getElementById('mostrarRespuestas');
+            if (answerList.style.display === 'none') {
+                answerList.style.display = 'block';
+                button.textContent = 'Hide Answers';
+            } else {
+                answerList.style.display = 'none';
+                button.textContent = 'Show Answers';
+            }
+        }
+
+        // Handle form submission and evaluate answers
+        function submitForm(event) {
+            event.preventDefault();
+
+            // Get form values
+            const pregunta1 = document.getElementById('pregunta1').value;
+            const pregunta2 = document.getElementById('pregunta2').value;
+            const pregunta3 = document.getElementById('pregunta3').value;
+            const pregunta4 = document.getElementById('pregunta4').value;
+            const pregunta5 = document.getElementById('pregunta5').value;
+            const nombre = document.getElementById('nombre').value;
+
+            // Correct answers
+            const correctAnswers = {
+                pregunta1: 'acquire_info',
+                pregunta2: 'organize_ideas',
+                pregunta3: 'perspectives',
+                pregunta4: 'clear_messages',
+                pregunta5: 'enrich_life'
+            };
+
+            // Calculate score
+            let score = 0;
+            let resultHTML = `<h2>Results for ${nombre}:</h2>`;
+
+            // Evaluate each answer
+            if (pregunta1 === correctAnswers.pregunta1) {
+                score++;
+                resultHTML += `<p class="correcto">Question 1: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrecto">Question 1: Incorrect. The correct answer is: Because we acquire information and develop critical thinking</p>`;
+            }
+
+            if (pregunta2 === correctAnswers.pregunta2) {
+                score++;
+                resultHTML += `<p class="correcto">Question 2: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrecto">Question 2: Incorrect. The correct answer is: It allows us to organize and express our ideas</p>`;
+            }
+
+            if (pregunta3 === correctAnswers.pregunta3) {
+                score++;
+                resultHTML += `<p class="correcto">Question 3: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrecto">Question 3: Incorrect. The correct answer is: It allows us to explore different perspectives and experiences</p>`;
+            }
+
+            if (pregunta4 === correctAnswers.pregunta4) {
+                score++;
+                resultHTML += `<p class="correcto">Question 4: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrecto">Question 4: Incorrect. The correct answer is: To convey messages clearly and accurately</p>`;
+            }
+
+            if (pregunta5 === correctAnswers.pregunta5) {
+                score++;
+                resultHTML += `<p class="correcto">Question 5: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrecto">Question 5: Incorrect. The correct answer is: Reading and writing enrich our lives and allow access to knowledge</p>`;
+            }
+
+            // Calculate percentage and display result
+            const percentage = (score / 5) * 100;
+            resultHTML += `<h3>Final Score: ${score}/5 (${percentage}%)</h3>`;
+            
+            const resultDiv = document.getElementById('resultado');
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.style.display = 'block';
+            resultDiv.style.opacity = '0';
+            setTimeout(() => resultDiv.style.opacity = '1', 10); // Smooth fade-in effect
+
+            // Scroll to results
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
