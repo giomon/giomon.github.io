@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprensión Lectora - Selección Múltiple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Comprensión Lectora - Selección Múltiple</h2>
+        <form id="quizForm">
+            
+            <div class="question">
+                <label>1. ¿Cuáles son las principales ramas de las ciencias naturales?</label><br>
+                <input type="radio" name="q1" value="a"> a) Matemáticas, Historia y Geografía <br>
+                <input type="radio" name="q1" value="b"> b) Biología, Química, Física, Geología y Astronomía <br>
+                <input type="radio" name="q1" value="c"> c) Música, Arte y Filosofía <br>
+            </div>
+
+            <div class="question">
+                <label>2. ¿Por qué son importantes las ciencias naturales?</label><br>
+                <input type="radio" name="q2" value="a"> a) Porque ayudan a comprender y mejorar la vida humana y el medio ambiente <br>
+                <input type="radio" name="q2" value="b"> b) Solo sirven para aprobar exámenes en la escuela <br>
+                <input type="radio" name="q2" value="c"> c) No tienen ninguna utilidad práctica <br>
+            </div>
+
+            <div class="question">
+                <label>3. ¿Cómo contribuye la física al estudio de la naturaleza?</label><br>
+                <input type="radio" name="q3" value="a"> a) Estudiando el movimiento, la energía y las fuerzas en la naturaleza <br>
+                <input type="radio" name="q3" value="b"> b) Creando nuevas especies de plantas y animales <br>
+                <input type="radio" name="q3" value="c"> c) Dibujando mapas de ríos y montañas <br>
+            </div>
+
+            <button type="button" onclick="showAnswers()">Mostrar Respuestas</button>
+        </form>
+
+        <div class="result" id="result" style="display:none;">
+            <h3>Respuestas Seleccionadas:</h3>
+            <p><strong>1:</strong> <span id="res1"></span></p>
+            <p><strong>2:</strong> <span id="res2"></span></p>
+            <p><strong>3:</strong> <span id="res3"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function showAnswers() {
+            let res1 = document.querySelector('input[name="q1"]:checked');
+            let res2 = document.querySelector('input[name="q2"]:checked');
+            let res3 = document.querySelector('input[name="q3"]:checked');
+
+            document.getElementById("res1").textContent = res1 ? res1.nextSibling.textContent.trim() : "No respondida";
+            document.getElementById("res2").textContent = res2 ? res2.nextSibling.textContent.trim() : "No respondida";
+            document.getElementById("res3").textContent = res3 ? res3.nextSibling.textContent.trim() : "No respondida";
+
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
