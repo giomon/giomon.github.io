@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprensión Lectora - Selección Múltiple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .result, .score {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Comprensión Lectora - Selección Múltiple</h2>
+        <form id="quizForm">
+            
+            <div class="question">
+                <label>1. ¿Cuáles son las principales ramas de las ciencias naturales?</label><br>
+                <input type="radio" name="q1" value="a"> a) Matemáticas, Historia y Geografía <br>
+                <input type="radio" name="q1" value="b"> b) Biología, Química, Física, Geología y Astronomía <br>
+                <input type="radio" name="q1" value="c"> c) Música, Arte y Filosofía <br>
+            </div>
+
+            <div class="question">
+                <label>2. ¿Por qué son importantes las ciencias naturales?</label><br>
+                <input type="radio" name="q2" value="a"> a) Porque ayudan a comprender y mejorar la vida humana y el medio ambiente <br>
+                <input type="radio" name="q2" value="b"> b) Solo sirven para aprobar exámenes en la escuela <br>
+                <input type="radio" name="q2" value="c"> c) No tienen ninguna utilidad práctica <br>
+            </div>
+
+            <div class="question">
+                <label>3. ¿Cómo contribuye la física al estudio de la naturaleza?</label><br>
+                <input type="radio" name="q3" value="a"> a) Estudiando el movimiento, la energía y las fuerzas en la naturaleza <br>
+                <input type="radio" name="q3" value="b"> b) Creando nuevas especies de plantas y animales <br>
+                <input type="radio" name="q3" value="c"> c) Dibujando mapas de ríos y montañas <br>
+            </div>
+
+            <button type="button" onclick="showResults()">Enviar Respuestas</button>
+        </form>
+
+        <div class="result" id="result">
+            <h3>Respuestas Seleccionadas:</h3>
+            <p><strong>1:</strong> <span id="res1"></span></p>
+            <p><strong>2:</strong> <span id="res2"></span></p>
+            <p><strong>3:</strong> <span id="res3"></span></p>
+        </div>
+
+        <div class="score" id="score">
+            <h3>Calificación:</h3>
+            <p>Has obtenido <span id="correctCount"></span>/3 respuestas correctas.</p>
+        </div>
+    </div>
+
+    <script>
+        function showResults() {
+            let correctAnswers = {
+                q1: "b",
+                q2: "a",
+                q3: "a"
+            };
+
+            let selectedAnswers = {
+                q1: document.querySelector('input[name="q1"]:checked'),
+                q2: document.querySelector('input[name="q2"]:checked'),
+                q3: document.querySelector('input[name="q3"]:checked')
+            };
+
+            let correctCount = 0;
+
+            for (let key in selectedAnswers) {
+                let resElement = document.getElementById("res" + key.charAt(1));
+                if (selectedAnswers[key]) {
+                    resElement.textContent = selectedAnswers[key].nextSibling.textContent.trim();
+                    if (selectedAnswers[key].value === correctAnswers[key]) {
+                        resElement.className = "correct";
+                        correctCount++;
+                    } else {
+                        resElement.className = "incorrect";
+                    }
+                } else {
+                    resElement.textContent = "No respondida";
+                    resElement.className = "incorrect";
+                }
+            }
+
+            document.getElementById("correctCount").textContent = correctCount;
+            document.getElementById("result").style.display = "block";
+            document.getElementById("score").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
