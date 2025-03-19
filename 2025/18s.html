@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario sobre la Lectura y la Escritura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado, #respuestas {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        #resultado {
+            display: none;
+        }
+        
+        #respuestas {
+            margin-top: 40px;
+        }
+        .correcto {
+            color: #4CAF50;
+        }
+        .incorrecto {
+            color: #e74c3c;
+        }
+        .texto-lectura {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario sobre la Lectura y la Escritura</h1>
+    
+    <div class="texto-lectura">
+        <h3>La importancia de la lectura y la escritura</h3>
+        <p>La lectura y la escritura son habilidades fundamentales para el desarrollo del conocimiento y la comunicación. A través de la lectura, adquirimos información, desarrollamos el pensamiento crítico y expandimos nuestra imaginación. La escritura, por su parte, nos permite expresar ideas, estructurar pensamientos y compartir conocimientos con los demás. Ambas habilidades son esenciales en la educación y en la vida cotidiana, ya que facilitan el aprendizaje en todas las áreas del conocimiento.</p>
+        <p>El hábito de la lectura mejora la comprensión y el vocabulario, lo que nos ayuda a expresarnos con mayor claridad. Además, leer con frecuencia fomenta la creatividad y la empatía, al permitirnos conocer diferentes perspectivas y experiencias. Por otro lado, la escritura es una herramienta poderosa para organizar nuestras ideas y comunicarlas de manera efectiva. Ya sea en la escuela, en el trabajo o en la vida personal, saber escribir correctamente es clave para transmitir mensajes de manera clara y precisa.</p>
+        <p>En conclusión, la lectura y la escritura no solo son necesarias para el aprendizaje, sino que también enriquecen nuestra vida. Nos permiten acceder al conocimiento, expresarnos mejor y comprender el mundo que nos rodea. Por ello, es importante fomentar estas habilidades desde una edad temprana y practicarlas constantemente.</p>
+    </div>
+    
+    <form id="formularioLectura" onsubmit="enviarFormulario(event)">
+        <label for="pregunta1">1. ¿Por qué la lectura es importante para el desarrollo del conocimiento?</label>
+        <select id="pregunta1" name="pregunta1" required>
+            <option value="">Selecciona una opción</option>
+            <option value="adquirimos_informacion">Porque adquirimos información y desarrollamos pensamiento crítico</option>
+            <option value="es_obligatorio">Porque es obligatorio en la escuela</option>
+            <option value="es_entretenido">Porque es entretenido y divertido</option>
+            <option value="nos_hace_dormir">Porque nos ayuda a dormir mejor</option>
+        </select>
+
+        <label for="pregunta2">2. ¿Cómo ayuda la escritura a estructurar los pensamientos?</label>
+        <select id="pregunta2" name="pregunta2" required>
+            <option value="">Selecciona una opción</option>
+            <option value="ordena_ideas">Nos permite organizar y expresar nuestras ideas</option>
+            <option value="mejora_caligrafia">Mejora nuestra caligrafía</option>
+            <option value="ejercita_manos">Ejercita nuestras manos</option>
+            <option value="impresiona_otros">Impresiona a otras personas</option>
+        </select>
+
+        <label for="pregunta3">3. ¿Qué beneficios tiene la lectura frecuente en la creatividad y la empatía?</label>
+        <select id="pregunta3" name="pregunta3" required>
+            <option value="">Selecciona una opción</option>
+            <option value="mejora_vista">Mejora la vista y el enfoque</option>
+            <option value="ahorra_dinero">Ahorra dinero en entretenimiento</option>
+            <option value="conocer_perspectivas">Permite conocer diferentes perspectivas y experiencias</option>
+            <option value="aprender_idiomas">Solo sirve para aprender idiomas</option>
+        </select>
+
+        <label for="pregunta4">4. ¿Por qué es importante saber escribir correctamente en la vida cotidiana?</label>
+        <select id="pregunta4" name="pregunta4" required>
+            <option value="">Selecciona una opción</option>
+            <option value="impresionar_amigos">Para impresionar a los amigos</option>
+            <option value="mensajes_claros">Para transmitir mensajes de manera clara y precisa</option>
+            <option value="aprobar_examenes">Solo para aprobar exámenes</option>
+            <option value="conseguir_trabajo">Exclusivamente para conseguir trabajo</option>
+        </select>
+
+        <label for="pregunta5">5. ¿Cuál es la conclusión principal del texto?</label>
+        <select id="pregunta5" name="pregunta5" required>
+            <option value="">Selecciona una opción</option>
+            <option value="lectura_divertida">La lectura es divertida</option>
+            <option value="escritura_dificil">La escritura es difícil de aprender</option>
+            <option value="lectura_escritura_vida">La lectura y escritura enriquecen nuestra vida y permiten acceder al conocimiento</option>
+            <option value="dejar_practicar">No es necesario practicar estas habilidades</option>
+        </select>
+
+        <label for="nombre">Nombre del estudiante:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <button type="submit">Enviar respuestas</button>
+    </form>
+
+    <div id="respuestas">
+        <h2>Respuestas correctas</h2>
+        <div id="listaRespuestas" style="display: none;">
+            <p><strong>1. ¿Por qué la lectura es importante para el desarrollo del conocimiento?</strong> Porque adquirimos información y desarrollamos pensamiento crítico</p>
+            <p><strong>2. ¿Cómo ayuda la escritura a estructurar los pensamientos?</strong> Nos permite organizar y expresar nuestras ideas</p>
+            <p><strong>3. ¿Qué beneficios tiene la lectura frecuente en la creatividad y la empatía?</strong> Permite conocer diferentes perspectivas y experiencias</p>
+            <p><strong>4. ¿Por qué es importante saber escribir correctamente en la vida cotidiana?</strong> Para transmitir mensajes de manera clara y precisa</p>
+            <p><strong>5. ¿Cuál es la conclusión principal del texto?</strong> La lectura y escritura enriquecen nuestra vida y permiten acceder al conocimiento</p>
+        </div>
+        <button id="mostrarRespuestas" onclick="toggleRespuestas()">Mostrar respuestas</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <script>
+        function toggleRespuestas() {
+            const listaRespuestas = document.getElementById('listaRespuestas');
+            const boton = document.getElementById('mostrarRespuestas');
+            
+            if (listaRespuestas.style.display === 'none') {
+                listaRespuestas.style.display = 'block';
+                boton.textContent = 'Ocultar respuestas';
+            } else {
+                listaRespuestas.style.display = 'none';
+                boton.textContent = 'Mostrar respuestas';
+            }
+        }
+        
+        function enviarFormulario(event) {
+            event.preventDefault();
+            
+            // Obtener valores del formulario
+            const pregunta1 = document.getElementById('pregunta1').value;
+            const pregunta2 = document.getElementById('pregunta2').value;
+            const pregunta3 = document.getElementById('pregunta3').value;
+            const pregunta4 = document.getElementById('pregunta4').value;
+            const pregunta5 = document.getElementById('pregunta5').value;
+            const nombre = document.getElementById('nombre').value;
+            
+            // Respuestas correctas
+            const respuestasCorrectas = {
+                pregunta1: 'adquirimos_informacion',
+                pregunta2: 'ordena_ideas',
+                pregunta3: 'conocer_perspectivas',
+                pregunta4: 'mensajes_claros',
+                pregunta5: 'lectura_escritura_vida'
+            };
+            
+            // Contar respuestas correctas
+            let puntuacion = 0;
+            let resultadoHTML = `<h2>Resultados para ${nombre}:</h2>`;
+            
+            if (pregunta1 === respuestasCorrectas.pregunta1) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 1: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 1: Incorrecto. La respuesta correcta es: Porque adquirimos información y desarrollamos pensamiento crítico</p>`;
+            }
+            
+            if (pregunta2 === respuestasCorrectas.pregunta2) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 2: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 2: Incorrecto. La respuesta correcta es: Nos permite organizar y expresar nuestras ideas</p>`;
+            }
+            
+            if (pregunta3 === respuestasCorrectas.pregunta3) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 3: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 3: Incorrecto. La respuesta correcta es: Permite conocer diferentes perspectivas y experiencias</p>`;
+            }
+            
+            if (pregunta4 === respuestasCorrectas.pregunta4) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 4: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 4: Incorrecto. La respuesta correcta es: Para transmitir mensajes de manera clara y precisa</p>`;
+            }
+            
+            if (pregunta5 === respuestasCorrectas.pregunta5) {
+                puntuacion++;
+                resultadoHTML += `<p class="correcto">Pregunta 5: ¡Correcto!</p>`;
+            } else {
+                resultadoHTML += `<p class="incorrecto">Pregunta 5: Incorrecto. La respuesta correcta es: La lectura y escritura enriquecen nuestra vida y permiten acceder al conocimiento</p>`;
+            }
+            
+            const porcentaje = (puntuacion / 5) * 100;
+            resultadoHTML += `<h3>Puntuación final: ${puntuacion}/5 (${porcentaje}%)</h3>`;
+            
+            // Mostrar resultado
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = resultadoHTML;
+            resultadoDiv.style.display = 'block';
+            
+            // Desplazarse hasta el resultado
+            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
