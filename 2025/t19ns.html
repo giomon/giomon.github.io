@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Comprensión Lectora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Comprensión Lectora</h2>
+        <form id="quizForm">
+            <label>1. ¿Cuáles son las principales ramas de las ciencias naturales y qué estudia cada una?</label>
+            <textarea id="answer1"></textarea>
+
+            <label>2. ¿Por qué son importantes las ciencias naturales para la vida humana y el medio ambiente?</label>
+            <textarea id="answer2"></textarea>
+
+            <label>3. ¿Cómo contribuye la física al estudio de la naturaleza?</label>
+            <textarea id="answer3"></textarea>
+
+            <button type="button" onclick="showAnswers()">Mostrar Respuestas</button>
+        </form>
+
+        <div class="result" id="result" style="display:none;">
+            <h3>Respuestas Ingresadas:</h3>
+            <p><strong>1:</strong> <span id="res1"></span></p>
+            <p><strong>2:</strong> <span id="res2"></span></p>
+            <p><strong>3:</strong> <span id="res3"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function showAnswers() {
+            document.getElementById("res1").textContent = document.getElementById("answer1").value;
+            document.getElementById("res2").textContent = document.getElementById("answer2").value;
+            document.getElementById("res3").textContent = document.getElementById("answer3").value;
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
