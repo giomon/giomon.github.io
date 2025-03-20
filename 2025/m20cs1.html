@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reading Comprehension Quiz</h1>
+
+    <form id="quizForm">
+        <div class="question">
+            <p>1. ¿Qué dos cosas hacen las personas del pequeño pueblo durante su festival, según el texto?</p>
+            <input type="radio" name="q1" value="a"> a) Juegan fútbol y leen libros<br>
+            <input type="radio" name="q1" value="b"> b) Celebran con música y comen alimentos tradicionales<br>
+            <input type="radio" name="q1" value="c"> c) Nadan en el río y ven películas<br>
+        </div>
+
+        <div class="question">
+            <p>2. ¿Qué hacían los muiscas con el oro y por qué era importante para ellos?</p>
+            <input type="radio" name="q2" value="a"> a) Hacían objetos hermosos para comerciar con otros<br>
+            <input type="radio" name="q2" value="b"> b) Hacían monedas de oro para comprar comida<br>
+            <input type="radio" name="q2" value="c"> c) Hacían casas de oro para vivir<br>
+        </div>
+
+        <div class="question">
+            <p>3. ¿Cómo ayudó Policarpa Salavarrieta a los patriotas a luchar contra los españoles?</p>
+            <input type="radio" name="q3" value="a"> a) Cocinó comidas para los soldados<br>
+            <input type="radio" name="q3" value="b"> b) Espió a los españoles y compartió información<br>
+            <input type="radio" name="q3" value="c"> c) Escribió canciones sobre la libertad<br>
+        </div>
+
+        <div class="question">
+            <p>4. ¿Cuáles son dos derechos que la Constitución de 1991 garantiza para los colombianos?</p>
+            <input type="radio" name="q4" value="a"> a) El derecho a viajar y el derecho a dormir<br>
+            <input type="radio" name="q4" value="b"> b) El derecho a ir a la escuela y el derecho a ser tratado justamente<br>
+            <input type="radio" name="q4" value="c"> c) El derecho a jugar videojuegos y el derecho a comer dulces<br>
+        </div>
+
+        <div class="question">
+            <p>5. ¿Cuál es un problema causado por talar árboles en la región del Amazonas y qué animales se ven afectados?</p>
+            <input type="radio" name="q5" value="a"> a) Perjudica a jaguares y monos<br>
+            <input type="radio" name="q5" value="b"> b) Ayuda a pájaros y peces<br>
+            <input type="radio" name="q5" value="c"> c) Hace que el río crezca más<br>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Check Results</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            const answers = {
+                q1: 'b', // Celebran con música y comen alimentos tradicionales
+                q2: 'a', // Hacían objetos hermosos para comerciar con otros
+                q3: 'b', // Espió a los españoles y compartió información
+                q4: 'b', // El derecho a ir a la escuela y el derecho a ser tratado justamente
+                q5: 'a'  // Perjudica a jaguares y monos
+            };
+
+            // Check each question
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Your score: ${score} out of 5`;
+            
+            // Optional: Add feedback
+            if (score === 5) {
+                resultDiv.innerHTML += " - Excellent job!";
+            } else if (score >= 3) {
+                resultDiv.innerHTML += " - Good effort!";
+            } else {
+                resultDiv.innerHTML += " - Keep practicing!";
+            }
+        }
+    </script>
+</body>
+</html>
