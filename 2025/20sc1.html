@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Vocabulary Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            width: 200px;
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            font-size: 18px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .word-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .letter {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 40px;
+            border: 2px solid black;
+            display: inline-block;
+        }
+        .correct {
+            background-color: green;
+            color: white;
+        }
+        .incorrect {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Flashcard Vocabulary Game</h1>
+    <p>Guess a word related to the conquest, colony, or republic!</p>
+    
+    <input type="text" id="wordInput" placeholder="Type a word..." maxlength="12">
+    <button onclick="checkWord()">Check</button>
+    
+    <div class="word-box" id="wordBox"></div>
+    
+    <script>
+        const vocabulary = ["Conquista", "Colonia", "Virreinato", "Criollos", "Indígenas", "Esclavitud", "Independencia", "Bolívar", "Santander", "República"];
+
+        function checkWord() {
+            let inputWord = document.getElementById("wordInput").value.trim();
+            let wordBox = document.getElementById("wordBox");
+            wordBox.innerHTML = ""; // Clear previous words
+
+            if (inputWord === "") {
+                alert("Please enter a word!");
+                return;
+            }
+
+            for (let i = 0; i < inputWord.length; i++) {
+                let letterDiv = document.createElement("div");
+                letterDiv.classList.add("letter");
+                letterDiv.innerText = inputWord[i];
+
+                if (vocabulary.includes(inputWord)) {
+                    letterDiv.classList.add("correct");
+                } else {
+                    letterDiv.classList.add("incorrect");
+                }
+                wordBox.appendChild(letterDiv);
+            }
+        }
+    </script>
+
+</body>
+</html>
