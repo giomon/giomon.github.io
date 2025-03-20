@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flashcards</title>
+<style>
+.flashcard {
+  width: 300px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flashcard.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.card-front {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.card-back {
+  background-color: #e0e0e0;
+  color: black;
+  transform: rotateY(180deg);
+}
+
+#nextButton {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="flashcardContainer">
+  <div class="flashcard">
+    <div class="card-inner">
+      <div class="card-face card-front">Question</div>
+      <div class="card-face card-back">Answer</div>
+    </div>
+  </div>
+</div>
+
+<button id="nextButton">Next Card</button>
+
+<script>
+const flashcards = [
+  { question: "What is the capital of France?", answer: "Paris" },
+  { question: "What is 2 + 2?", answer: "4" },
+  { question: "Who wrote Hamlet?", answer: "William Shakespeare" },
+  { question: "What is the largest planet in our solar system?", answer: "Jupiter" },
+  {question: "What is the chemical symbol for water?", answer: "H2O"}
+];
+
+let currentCardIndex = 0;
+const flashcardContainer = document.getElementById("flashcardContainer");
+const flashcard = flashcardContainer.querySelector(".flashcard");
+const cardInner = flashcard.querySelector(".card-inner");
+const cardFront = flashcard.querySelector(".card-front");
+const cardBack = flashcard.querySelector(".card-back");
+const nextButton = document.getElementById("nextButton");
+
+function displayCard() {
+  cardFront.textContent = flashcards[currentCardIndex].question;
+  cardBack.textContent = flashcards[currentCardIndex].answer;
+  cardInner.classList.remove("flipped");
+}
+
+displayCard();
+
+flashcard.addEventListener("click", () => {
+  cardInner.classList.toggle("flipped");
+});
+
+nextButton.addEventListener("click", () => {
+  currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+  displayCard();
+});
+</script>
+
+</body>
+</html>
