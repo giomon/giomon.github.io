@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reading Comprehension Quiz</h1>
+
+    <form id="quizForm">
+        <div class="question">
+            <p>1. What are two things the people in the small town do during their festival?</p>
+            <input type="radio" name="q1" value="a"> a) Play soccer and read books<br>
+            <input type="radio" name="q1" value="b"> b) Celebrate with music and eat traditional foods<br>
+            <input type="radio" name="q1" value="c"> c) Swim in the river and watch movies<br>
+        </div>
+
+        <div class="question">
+            <p>2. What did the Muiscas make with gold, and why was it important to them?</p>
+            <input type="radio" name="q2" value="a"> a) They made beautiful objects to trade with others<br>
+            <input type="radio" name="q2" value="b"> b) They made gold coins to buy food<br>
+            <input type="radio" name="q2" value="c"> c) They made gold houses to live in<br>
+        </div>
+
+        <div class="question">
+            <p>3. How did Policarpa Salavarrieta help the patriots fight the Spanish?</p>
+            <input type="radio" name="q3" value="a"> a) She cooked meals for the soldiers<br>
+            <input type="radio" name="q3" value="b"> b) She spied on the Spanish and shared information<br>
+            <input type="radio" name="q3" value="c"> c) She wrote songs about freedom<br>
+        </div>
+
+        <div class="question">
+            <p>4. What are two rights that the Constitution of 1991 guarantees for Colombians?</p>
+            <input type="radio" name="q4" value="a"> a) The right to travel and the right to sleep<br>
+            <input type="radio" name="q4" value="b"> b) The right to go to school and the right to be treated fairly<br>
+            <input type="radio" name="q4" value="c"> c) The right to play games and the right to eat candy<br>
+        </div>
+
+        <div class="question">
+            <p>5. What is one problem caused by cutting down trees in the Amazon region, and which animals are affected?</p>
+            <input type="radio" name="q5" value="a"> a) It harms jaguars and monkeys<br>
+            <input type="radio" name="q5" value="b"> b) It helps birds and fish<br>
+            <input type="radio" name="q5" value="c"> c) It makes the river grow bigger<br>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Check Results</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            const answers = {
+                q1: 'b', // Celebrate with music and eat traditional foods
+                q2: 'a', // They made beautiful objects to trade with others
+                q3: 'b', // She spied on the Spanish and shared information
+                q4: 'b', // The right to go to school and the right to be treated fairly
+                q5: 'a'  // It harms jaguars and monkeys
+            };
+
+            // Check each question
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Your score: ${score} out of 5`;
+            
+            // Optional: Add feedback
+            if (score === 5) {
+                resultDiv.innerHTML += " - Excellent job!";
+            } else if (score >= 3) {
+                resultDiv.innerHTML += " - Good effort!";
+            } else {
+                resultDiv.innerHTML += " - Keep practicing!";
+            }
+        }
+    </script>
+</body>
+</html>
