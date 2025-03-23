@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards: Numbers 0-10</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .flashcard {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      border: 2px solid #333;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Flashcards: Numbers 0-10</h1>
+  <div class="flashcard" id="flashcard">Click to Flip</div>
+  <button id="listenButton">Listen</button>
+
+  <script>
+    // Data for flashcards
+    const numbers = [
+      { english: "Zero", german: "Null", audio: "https://upload.wikimedia.org/wikipedia/commons/6/6e/De-Nulleins.ogg" },
+      { english: "One", german: "Eins", audio: "https://upload.wikimedia.org/wikipedia/commons/7/7a/De-Eins.ogg" },
+      { english: "Two", german: "Zwei", audio: "https://upload.wikimedia.org/wikipedia/commons/7/7f/De-Zwei.ogg" },
+      { english: "Three", german: "Drei", audio: "https://upload.wikimedia.org/wikipedia/commons/9/9d/De-Drei.ogg" },
+      { english: "Four", german: "Vier", audio: "https://upload.wikimedia.org/wikipedia/commons/7/7a/De-Vier.ogg" },
+      { english: "Five", german: "Fünf", audio: "https://upload.wikimedia.org/wikipedia/commons/3/3c/De-F%C3%BCnf.ogg" },
+      { english: "Six", german: "Sechs", audio: "https://upload.wikimedia.org/wikipedia/commons/6/64/De-Sechs.ogg" },
+      { english: "Seven", german: "Sieben", audio: "https://upload.wikimedia.org/wikipedia/commons/0/0b/De-Sieben.ogg" },
+      { english: "Eight", german: "Acht", audio: "https://upload.wikimedia.org/wikipedia/commons/9/97/De-Acht.ogg" },
+      { english: "Nine", german: "Neun", audio: "https://upload.wikimedia.org/wikipedia/commons/9/97/De-Neun.ogg" },
+      { english: "Ten", german: "Zehn", audio: "https://upload.wikimedia.org/wikipedia/commons/0/03/De-Zehn.ogg" }
+    ];
+
+    let currentCardIndex = 0;
+    let isFront = true;
+
+    const flashcard = document.getElementById("flashcard");
+    const listenButton = document.getElementById("listenButton");
+
+    // Function to update the flashcard display
+    function updateFlashcard() {
+      const currentNumber = numbers[currentCardIndex];
+      if (isFront) {
+        flashcard.textContent = currentNumber.english;
+      } else {
+        flashcard.textContent = currentNumber.german;
+      }
+    }
+
+    // Event listener for flipping the card
+    flashcard.addEventListener("click", () => {
+      isFront = !isFront;
+      updateFlashcard();
+    });
+
+    // Event listener for listening to the audio
+    listenButton.addEventListener("click", () => {
+      const currentNumber = numbers[currentCardIndex];
+      const audio = new Audio(currentNumber.audio);
+      audio.play();
+    });
+
+    // Initialize the flashcard
+    updateFlashcard();
+
+    // Optional: Add navigation buttons to cycle through cards
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        currentCardIndex = (currentCardIndex + 1) % numbers.length;
+        isFront = true;
+        updateFlashcard();
+      } else if (event.key === "ArrowLeft") {
+        currentCardIndex = (currentCardIndex - 1 + numbers.length) % numbers.length;
+        isFront = true;
+        updateFlashcard();
+      }
+    });
+  </script>
+</body>
+</html>
