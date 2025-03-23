@@ -5,92 +5,427 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>German Verbs Flashcards</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6e9bd2;
+            --text-color: #333;
+            --bg-color: #f5f7fa;
+            --card-bg: #fff;
+            --learned-color: #4caf50;
         }
-        .card {
-            width: 350px;
-            height: 200px;
-            margin: auto;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
             padding: 20px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: var(--card-bg);
             font-size: 1.5em;
-            cursor: pointer;
-            background: #f9f9f9;
+            box-sizing: border-box;
         }
-        .buttons {
-            margin-top: 20px;
+
+        .card-front {
+            z-index: 2;
         }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .card-hint {
+            font-size: 0.6em;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .learned-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--learned-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
         button {
-            margin: 5px;
             padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
             font-size: 1em;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button.toggle-learned {
+            background-color: var(--text-color);
+        }
+
+        button.toggle-learned.active {
+            background-color: var(--learned-color);
+        }
+
+        .filter-controls {
+            margin: 15px 0;
+        }
+
+        .progress-info {
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .keyboard-shortcuts {
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #777;
+            text-align: center;
+        }
+
+        .keyboard-key {
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: #f1f1f1;
+            border-radius: 3px;
+            margin: 0 2px;
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                height: 180px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>German Verbs Flashcards</h1>
-    <div class="card" id="flashcard" onclick="toggleLanguage()">
-        Click to show German
-    </div>
-    <div class="buttons">
-        <button onclick="prevCard()">⏮ Previous</button>
-        <button onclick="nextCard()">Next ⏭</button>
+    <div class="container">
+        <h1>German Verbs Flashcards</h1>
+        
+        <div class="filter-controls">
+            <button id="filter-button">
+                <span id="filter-text">Show All Cards</span>
+            </button>
+        </div>
+
+        <div class="progress-info">
+            <span id="progress-text">Card 1 of 10</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span id="learned-count">0 learned</span>
+        </div>
+
+        <div class="card-container">
+            <div class="card" id="flashcard" onclick="toggleCard()">
+                <div class="card-face card-front">
+                    <div id="front-text">Click to show German</div>
+                    <div class="card-hint">Click to flip</div>
+                    <div class="learned-badge" id="learned-badge" style="display: none;">Learned</div>
+                </div>
+                <div class="card-face card-back">
+                    <div id="back-text"></div>
+                    <div class="card-hint">Click to flip back</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="prevCard()">
+                <span>⏮</span> Previous
+            </button>
+            <button onclick="toggleLearned()" id="learned-button" class="toggle-learned">
+                Mark as Learned
+            </button>
+            <button onclick="nextCard()">
+                Next <span>⏭</span>
+            </button>
+        </div>
+
+        <div class="keyboard-shortcuts">
+            Keyboard shortcuts: 
+            <span class="keyboard-key">←</span> Previous card | 
+            <span class="keyboard-key">→</span> Next card | 
+            <span class="keyboard-key">Space</span> Flip card | 
+            <span class="keyboard-key">L</span> Toggle learned
+        </div>
     </div>
 
     <script>
         // Lista de verbos con ejemplos en inglés y alemán
         const flashcards = [
-            { english: "I am tired.", german: "Ich bin müde." },
-            { english: "I have a dog.", german: "Ich habe einen Hund." },
-            { english: "He will be a doctor.", german: "Er wird Arzt." },
-            { english: "She can swim.", german: "Sie kann schwimmen." },
-            { english: "I must go now.", german: "Ich muss jetzt gehen." },
-            { english: "He says hello.", german: "Er sagt Hallo." },
-            { english: "We make a cake.", german: "Wir machen einen Kuchen." },
-            { english: "She gives me a book.", german: "Sie gibt mir ein Buch." },
-            { english: "They come from Berlin.", german: "Sie kommen aus Berlin." },
-            { english: "I want a coffee.", german: "Ich will einen Kaffee." }
+            { english: "I am tired.", german: "Ich bin müde.", learned: false },
+            { english: "I have a dog.", german: "Ich habe einen Hund.", learned: false },
+            { english: "He will be a doctor.", german: "Er wird Arzt.", learned: false },
+            { english: "She can swim.", german: "Sie kann schwimmen.", learned: false },
+            { english: "I must go now.", german: "Ich muss jetzt gehen.", learned: false },
+            { english: "He says hello.", german: "Er sagt Hallo.", learned: false },
+            { english: "We make a cake.", german: "Wir machen einen Kuchen.", learned: false },
+            { english: "She gives me a book.", german: "Sie gibt mir ein Buch.", learned: false },
+            { english: "They come from Berlin.", german: "Sie kommen aus Berlin.", learned: false },
+            { english: "I want a coffee.", german: "Ich will einen Kaffee.", learned: false }
         ];
 
         let currentCardIndex = 0;
-        let showingEnglish = true;
+        let showingFront = true;
+        let showOnlyNotLearned = false;
+        let filteredCards = [...flashcards];
 
         function updateCard() {
             const card = document.getElementById("flashcard");
-            card.textContent = flashcards[currentCardIndex].english;
-            showingEnglish = true;
+            const frontText = document.getElementById("front-text");
+            const backText = document.getElementById("back-text");
+            const learnedBadge = document.getElementById("learned-badge");
+            const learnedButton = document.getElementById("learned-button");
+            
+            // Reset card to front side
+            card.classList.remove("flipped");
+            showingFront = true;
+
+            // Update card content
+            frontText.textContent = filteredCards[currentCardIndex].english;
+            backText.textContent = filteredCards[currentCardIndex].german;
+            
+            // Update learned status
+            if (filteredCards[currentCardIndex].learned) {
+                learnedBadge.style.display = "block";
+                learnedButton.classList.add("active");
+                learnedButton.textContent = "Unmark Learned";
+            } else {
+                learnedBadge.style.display = "none";
+                learnedButton.classList.remove("active");
+                learnedButton.textContent = "Mark as Learned";
+            }
+
+            updateProgressInfo();
         }
 
-        function toggleLanguage() {
+        function toggleCard() {
             const card = document.getElementById("flashcard");
-            if (showingEnglish) {
-                card.textContent = flashcards[currentCardIndex].german;
-            } else {
-                card.textContent = flashcards[currentCardIndex].english;
-            }
-            showingEnglish = !showingEnglish;
+            card.classList.toggle("flipped");
+            showingFront = !showingFront;
         }
 
         function nextCard() {
-            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+            if (filteredCards.length === 0) return;
+            
+            currentCardIndex = (currentCardIndex + 1) % filteredCards.length;
             updateCard();
         }
 
         function prevCard() {
-            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+            if (filteredCards.length === 0) return;
+            
+            currentCardIndex = (currentCardIndex - 1 + filteredCards.length) % filteredCards.length;
             updateCard();
         }
 
-        // Inicializar la primera tarjeta
+        function toggleLearned() {
+            if (filteredCards.length === 0) return;
+            
+            // Find the original card in the main array
+            const originalIndex = flashcards.findIndex(card => 
+                card.english === filteredCards[currentCardIndex].english &&
+                card.german === filteredCards[currentCardIndex].german
+            );
+            
+            if (originalIndex !== -1) {
+                // Toggle learned status in the original array
+                flashcards[originalIndex].learned = !flashcards[originalIndex].learned;
+                
+                // Update current card in filtered array
+                filteredCards[currentCardIndex].learned = flashcards[originalIndex].learned;
+                
+                updateCard();
+                
+                // If we're only showing not learned cards and this one was just marked as learned
+                if (showOnlyNotLearned && flashcards[originalIndex].learned) {
+                    // Remove it from filtered cards
+                    filteredCards = filteredCards.filter((_, index) => index !== currentCardIndex);
+                    
+                    // Handle case when there are no more cards to show
+                    if (filteredCards.length === 0) {
+                        document.getElementById("front-text").textContent = "No cards left!";
+                        document.getElementById("back-text").textContent = "You've learned all cards!";
+                        document.getElementById("learned-badge").style.display = "none";
+                        document.getElementById("learned-button").classList.remove("active");
+                        updateProgressInfo();
+                        return;
+                    }
+                    
+                    // Adjust current index if needed
+                    if (currentCardIndex >= filteredCards.length) {
+                        currentCardIndex = filteredCards.length - 1;
+                    }
+                    
+                    updateCard();
+                }
+            }
+        }
+
+        function toggleFilter() {
+            showOnlyNotLearned = !showOnlyNotLearned;
+            
+            const filterButton = document.getElementById("filter-button");
+            const filterText = document.getElementById("filter-text");
+            
+            if (showOnlyNotLearned) {
+                filterText.textContent = "Show All Cards";
+                filteredCards = flashcards.filter(card => !card.learned);
+            } else {
+                filterText.textContent = "Show Only Not Learned";
+                filteredCards = [...flashcards];
+            }
+            
+            // Handle case when there are no cards to show
+            if (filteredCards.length === 0) {
+                document.getElementById("front-text").textContent = "No cards left!";
+                document.getElementById("back-text").textContent = "You've learned all cards!";
+                document.getElementById("learned-badge").style.display = "none";
+                document.getElementById("learned-button").classList.remove("active");
+                updateProgressInfo();
+                return;
+            }
+            
+            // Reset to first card in filtered list
+            currentCardIndex = 0;
+            updateCard();
+        }
+
+        function updateProgressInfo() {
+            const progressText = document.getElementById("progress-text");
+            const progressFill = document.getElementById("progress-fill");
+            const learnedCount = document.getElementById("learned-count");
+            
+            if (filteredCards.length === 0) {
+                progressText.textContent = "No cards";
+                progressFill.style.width = "100%";
+            } else {
+                progressText.textContent = `Card ${currentCardIndex + 1} of ${filteredCards.length}`;
+                const percentage = ((currentCardIndex + 1) / filteredCards.length) * 100;
+                progressFill.style.width = `${percentage}%`;
+            }
+            
+            const totalLearned = flashcards.filter(card => card.learned).length;
+            learnedCount.textContent = `${totalLearned} learned`;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'ArrowLeft') {
+                prevCard();
+            } else if (event.code === 'ArrowRight') {
+                nextCard();
+            } else if (event.code === 'Space') {
+                toggleCard();
+                event.preventDefault(); // Prevent scrolling
+            } else if (event.code === 'KeyL') {
+                toggleLearned();
+            }
+        });
+
+        // Set up event listeners
+        document.getElementById("filter-button").addEventListener("click", toggleFilter);
+
+        // Initialize
         updateCard();
     </script>
 </body>
