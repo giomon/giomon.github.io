@@ -1,3 +1,12 @@
+Entiendo, el problema es que las cartas no avanzan automáticamente cuando haces clic en ellas. Vamos a corregir esto para que cada vez que se haga clic en la tarjeta, pase al siguiente número.
+
+Aquí está el código actualizado:
+
+---
+
+### Código Corregido
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,12 +44,12 @@
   </style>
 </head>
 <body>
-  <h1>Flashcards: Numbers 0-10</h1>
-  <div class="flashcard" id="flashcard">Click to Flip</div>
-  <button id="listenButton">Listen</button>
+  <h1>Flashcards: Números 0-10</h1>
+  <div class="flashcard" id="flashcard">Click para empezar</div>
+  <button id="listenButton">Escuchar</button>
 
   <script>
-    // Data for flashcards
+    // Datos para las flashcards
     const numbers = [
       { english: "Zero", german: "Null", audio: "https://upload.wikimedia.org/wikipedia/commons/6/6e/De-Nulleins.ogg" },
       { english: "One", german: "Eins", audio: "https://upload.wikimedia.org/wikipedia/commons/7/7a/De-Eins.ogg" },
@@ -61,7 +70,7 @@
     const flashcard = document.getElementById("flashcard");
     const listenButton = document.getElementById("listenButton");
 
-    // Function to update the flashcard display
+    // Función para actualizar la tarjeta
     function updateFlashcard() {
       const currentNumber = numbers[currentCardIndex];
       if (isFront) {
@@ -71,23 +80,27 @@
       }
     }
 
-    // Event listener for flipping the card
+    // Evento para pasar a la siguiente tarjeta o voltear la actual
     flashcard.addEventListener("click", () => {
-      isFront = !isFront;
+      if (!isFront) {
+        // Si está en la parte trasera, pasa a la siguiente tarjeta
+        currentCardIndex = (currentCardIndex + 1) % numbers.length;
+      }
+      isFront = !isFront; // Voltea la tarjeta
       updateFlashcard();
     });
 
-    // Event listener for listening to the audio
+    // Evento para escuchar el audio
     listenButton.addEventListener("click", () => {
       const currentNumber = numbers[currentCardIndex];
       const audio = new Audio(currentNumber.audio);
       audio.play();
     });
 
-    // Initialize the flashcard
+    // Inicializa la primera tarjeta
     updateFlashcard();
 
-    // Optional: Add navigation buttons to cycle through cards
+    // Opcional: Agregar navegación con teclado (flechas izquierda/derecha)
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowRight") {
         currentCardIndex = (currentCardIndex + 1) % numbers.length;
@@ -102,3 +115,35 @@
   </script>
 </body>
 </html>
+```
+
+---
+
+### Cambios Realizados
+
+1. **Avance Automático de Tarjetas**:
+   - Ahora, cuando la tarjeta está en la parte trasera (mostrando la traducción en alemán), hacer clic en ella avanza automáticamente a la siguiente tarjeta.
+   - Esto se logra verificando si `isFront` es `false` antes de avanzar al siguiente índice.
+
+2. **Inicialización Correcta**:
+   - La primera tarjeta se inicializa correctamente al cargar la página.
+
+3. **Actualización de Texto**:
+   - El texto de la tarjeta se actualiza correctamente después de cambiar el índice o voltear la tarjeta.
+
+---
+
+### Cómo Funciona Ahora
+1. Al hacer clic en la tarjeta:
+   - Si está mostrando el lado en inglés, se voltea para mostrar el lado en alemán.
+   - Si está mostrando el lado en alemán, avanza a la siguiente tarjeta y muestra el lado en inglés.
+
+2. Botón "Escuchar":
+   - Reproduce el audio correspondiente al número actual.
+
+3. Navegación con Flechas:
+   - Usa las flechas izquierda/derecha del teclado para navegar entre las tarjetas.
+
+---
+
+Prueba este código y déjame saber si funciona como esperabas. 😊
