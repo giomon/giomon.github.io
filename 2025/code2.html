@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>German Verb Flashcards</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  .flashcard-container {
+    width: 400px;
+    height: 300px;
+    perspective: 1000px;
+  }
+
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  .flashcard.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .front {
+    color: black;
+  }
+
+  .back {
+    background-color: #e0e0e0;
+    color: black;
+    transform: rotateY(180deg);
+  }
+
+  .verb-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .example {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .button-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  button:hover {
+    background-color: #3e8e41;
+  }
+
+  .play-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  .play-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard">
+      <div class="front" id="front">
+      </div>
+      <div class="back" id="back">
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button onclick="previousCard()">Previous</button>
+    <button onclick="flipCard()">Flip</button>
+    <button onclick="nextCard()">Next</button>
+  </div>
+
+
+<script>
+const flashcards = [
+  {
+    german: "sein (to be)",
+    english: "sein (to be)",
+    examples: {
+      1: { de: "Ich bin müde.", en: "I am tired." },
+      2: { de: "Du bist nett.", en: "You are nice." },
+      3: { de: "Er ist groß.", en: "He is tall." }
+    }
+  },
+  {
+    german: "haben (to have)",
+    english: "haben (to have)",
+    examples: {
+      1: { de: "Ich habe ein Auto.", en: "I have a car." },
+      2: { de: "Du hast Hunger.", en: "You are hungry." },
+      3: { de: "Sie hat ein Buch.", en: "She has a book." }
+    }
+  },
+  {
+    german: "werden (to become)",
+    english: "werden (to become)",
+    examples: {
+      1: { de: "Ich werde Lehrer.", en: "I will become a teacher." },
+      2: { de: "Du wirst alt.", en: "You are becoming old." },
+      3: { de: "Es wird kalt.", en: "It's getting cold." }
+    }
+  },
+  {
+    german: "können (can, to be able to)",
+    english: "können (can, to be able to)",
+    examples: {
+      1: { de: "Ich kann singen.", en: "I can sing." },
+      2: { de: "Du kannst Deutsch sprechen.", en: "You can speak German." },
+      3: { de: "Er kann gut kochen.", en: "He can cook well." }
+    }
+  },
+  {
+    german: "müssen (must, to have to)",
+    english: "müssen (must, to have to)",
+    examples: {
+      1: { de: "Ich muss arbeiten.", en: "I must work." },
+      2: { de: "Du musst lernen.", en: "You have to study." },
+      3: { de: "Wir müssen gehen.", en: "We must go." }
+    }
+  },
+  {
+    german: "sagen (to say)",
+    english: "sagen (to say)",
+    examples: {
+      1: { de: "Ich sage die Wahrheit.", en: "I say the truth." },
+      2: { de: "Was sagst du?", en: "What are you saying?" },
+      3: { de: "Er sagt nichts.", en: "He says nothing." }
+    }
+  },
+  {
+    german: "machen (to do, to make)",
+    english: "machen (to do, to make)",
+    examples: {
+      1: { de: "Ich mache das.", en: "I do that." },
+      2: { de: "Du machst einen Fehler.", en: "You are making a mistake." },
+      3: { de: "Wir machen eine Party.", en: "We are having a party." }
+    }
+  },
+  {
+    german: "gehen (to go)",
+    english: "gehen (to go)",
+    examples: {
+      1: { de: "Ich gehe nach Hause.", en: "I go home." },
+      2: { de: "Gehst du ins Kino?", en: "Are you going to the cinema?" },
+      3: { de: "Sie geht spazieren.", en: "She is going for a walk." }
+    }
+  },
+  {
+    german: "wissen (to know)",
+    english: "wissen (to know)",
+    examples: {
+      1: { de: "Ich weiß es nicht.", en: "I don't know it." },
+      2: { de: "Weißt du das?", en: "Do you know that?" },
+      3: { de: "Er weiß viel.", en: "He knows a lot." }
+    }
+  },
+    {
+    german: "sehen (to see)",
+    english: "sehen (to see)",
+    examples: {
+      1: { de: "Ich sehe den Mond.", en: "I see the moon." },
+      2: { de: "Siehst du den Vogel?", en: "Do you see the bird?" },
+      3: { de: "Er sieht gut aus.", en: "He looks good." }
+    }
+  },
+  {
+    german: "kommen (to come)",
+    english: "kommen (to come)",
+    examples: {
+      1: { de: "Ich komme bald.", en: "I'm coming soon." },
+      2: { de: "Kommst du mit?", en: "Are you coming along?" },
+      3: { de: "Er kommt aus Berlin.", en: "He comes from Berlin." }
+    }
+  },
+  {
+    german: "finden (to find)",
+    english: "finden (to find)",
+    examples: {
+      1: { de: "Ich finde es gut.", en: "I find it good." },
+      2: { de: "Findest du das Buch?", en: "Do you find the book?" },
+      3: { de: "Wir finden einen Weg.", en: "We find a way." }
+    }
+  },
+  {
+    german: "denken (to think)",
+    english: "denken (to think)",
+    examples: {
+      1: { de: "Ich denke an dich.", en: "I'm thinking of you." },
+      2: { de: "Was denkst du?", en: "What do you think?" },
+      3: { de: "Er denkt nach.", en: "He is thinking." }
+    }
+  },
+  {
+    german: "nehmen (to take)",
+    english: "nehmen (to take)",
+    examples: {
+      1: { de: "Ich nehme ein Taxi.", en: "I take a taxi." },
+      2: { de: "Nimmst du Kaffee?", en: "Do you take coffee?" },
+      3: { de: "Sie nimmt den Bus.", en: "She takes the bus." }
+    }
+  },
+  {
+    german: "geben (to give)",
+    english: "geben (to give)",
+    examples: {
+      1: { de: "Ich gebe dir das Buch.", en: "I give you the book." },
+      2: { de: "Gibst du mir das Geld?", en: "Do you give me the money?" },
+      3: { de: "Er gibt ein Geschenk.", en: "He gives a gift." }
+    }
+  },
+  {
+    german: "dürfen (may, to be allowed to)",
+    english: "dürfen (may, to be allowed to)",
+    examples: {
+      1: { de: "Ich darf hier parken.", en: "I am allowed to park here." },
+      2: { de: "Darf ich fragen?", en: "May I ask?" },
+      3: { de: "Sie dürfen eintreten.", en: "You may enter." }
+    }
+  },
+  {
+    german: "sprechen (to speak)",
+    english: "sprechen (to speak)",
+    examples: {
+      1: { de: "Ich spreche Deutsch.", en: "I speak German." },
+      2: { de: "Sprichst du Englisch?", en: "Do you speak English?" },
+      3: { de: "Er spricht leise.", en: "He speaks quietly." }
+    }
+  },
+  {
+    german: "bringen (to bring)",
+    english: "bringen (to bring)",
+    examples: {
+      1: { de: "Ich bringe dir das Buch.", en: "I bring you the book." },
+      2: { de: "Bringst du mir Kaffee?", en: "Will you bring me coffee?" },
+      3: { de: "Sie bringt ein Geschenk.", en: "She brings a gift." }
+    }
+  },
+  {
+    german: "leben (to live)",
+    english: "leben (to live)",
+    examples: {
+      1: { de: "Ich lebe in Berlin.", en: "I live in Berlin." },
+      2: { de: "Wo lebst du?", en: "Where do you live?" },
+      3: { de: "Er lebt glücklich.", en: "He lives happily." }
+    }
+  },
+  {
+    german: "glauben (to believe)",
+    english: "glauben (to believe)",
+    examples: {
+      1: { de: "Ich glaube dir.", en: "I believe you." },
+      2: { de: "Glaubst du an Gott?", en: "Do you believe in God?" },
+      3: { de: "Er glaubt es nicht.", en: "He doesn't believe it." }
+    }
+  }
+];
+
+let currentCardIndex = 0;
+const flashcardElement = document.getElementById("flashcard");
+const frontElement = document.getElementById("front");
+const backElement = document.getElementById("back");
+
+function speak(text, lang) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = lang;
+  speechSynthesis.speak(utterance);
+}
+
+function displayCard() {
+  const card = flashcards[currentCardIndex];
+
+  //Front Side (English)
+  frontElement.innerHTML = `
+    <div class="verb-title">${card.english} <button class="play-button" onclick="speak('${card.english}', 'en-US')">Play</button></div>
+    <div class="example">1. ${card.examples[1].en} <button class="play-button" onclick="speak('${card.examples[1].en}', 'en-US')">Play</button></div>
+    <div class="example">2. ${card.examples[2].en} <button class="play-button" onclick="speak('${card.examples[2].en}', 'en-US')">Play</button></div>
+    <div class="example">3. ${card.examples[3].en} <button class="play-button" onclick="speak('${card.examples[3].en}', 'en-US')">Play</button></div>
+  `;
+
+  //Back Side (German)
+  backElement.innerHTML = `
+    <div class="verb-title">${card.german} <button class="play-button" onclick="speak('${card.german}', 'de-DE')">Play</button></div>
+    <div class="example">1. ${card.examples[1].de} <button class="play-button" onclick="speak('${card.examples[1].de}', 'de-DE')">Play</button></div>
+    <div class="example">2. ${card.examples[2].de} <button class="play-button" onclick="speak('${card.examples[2].de}', 'de-DE')">Play</button></div>
+    <div class="example">3. ${card.examples[3].de} <button class="play-button" onclick="speak('${card.examples[3].de}', 'de-DE')">Play</button></div>
+  `;
+}
+
+
+function nextCard() {
+  currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+  flashcardElement.classList.remove("flipped"); // Ensure card is front side up
+  displayCard();
+}
+
+function previousCard() {
+  currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+  flashcardElement.classList.remove("flipped"); // Ensure card is front side up
+  displayCard();
+}
+
+function flipCard() {
+  flashcardElement.classList.toggle("flipped");
+}
+
+displayCard(); // Initial display
+</script>
+
+</body>
+</html>
