@@ -1,0 +1,93 @@
+body {
+    background-color: #f8f9fa; /* Un fondo gris claro */
+}
+
+h1 {
+    color: #0d6efd; /* Azul Bootstrap */
+}
+
+/* Estilos del Calendario */
+#calendar-container .card {
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+#calendar-container .card-header {
+     background-color: #6c757d; /* Gris oscuro Bootstrap */
+     color: white;
+     font-weight: bold;
+     text-align: center;
+}
+
+#calendar-container table {
+    margin-bottom: 0; /* Quita margen inferior default de la tabla */
+    font-size: 0.9rem;
+    background-color: #fff;
+}
+
+#calendar-container th {
+    background-color: #e9ecef; /* Gris claro Bootstrap */
+    font-weight: normal;
+    color: #495057;
+}
+#calendar-container th,
+#calendar-container td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 0.25rem; /* Ajusta padding para celdas pequeñas */
+    height: 40px; /* Altura fija para celdas */
+    width: calc(100% / 7); /* Ancho igual para las 7 columnas */
+}
+
+#calendar-container td {
+     border: 1px solid #dee2e6; /* Borde suave */
+}
+
+#calendar-container .other-month {
+    color: #adb5bd; /* Color para días de otros meses */
+    background-color: #f8f9fa;
+}
+
+#calendar-container .session-day {
+    background-color: #cfe2ff; /* Azul claro Bootstrap */
+    font-weight: bold;
+    color: #0a58ca;
+    cursor: pointer;
+    border: 1px solid #9ec5fe;
+    position: relative; /* Para pseudo-elementos si se quieren añadir */
+}
+
+#calendar-container .session-day:hover {
+    background-color: #b6d4fe; /* Un poco más oscuro al pasar el mouse */
+}
+
+/* Estilos del Acordeón */
+.accordion-button {
+    font-size: 0.95rem; /* Ligeramente más pequeño */
+    font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #052c65;
+  background-color: #cfe2ff; /* Coincide con el día de sesión */
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Sombra foco Bootstrap */
+}
+
+.accordion-body ul {
+    padding-left: 1.2rem; /* Indentación para la lista */
+    margin-bottom: 0; /* Quita margen inferior default de ul */
+}
+
+.accordion-body li {
+    margin-bottom: 0.5rem; /* Espacio entre indicadores */
+}
+
+/* Sticky top adjustment for smaller screens if needed */
+@media (max-width: 991.98px) {
+  .sticky-top {
+    position: static; /* Desactiva sticky en pantallas medianas y pequeñas */
+  }
+}
