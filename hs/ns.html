@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario en Sidebar con Acordeón</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 300px;
+      background-color: #f4f4f4;
+      border-right: 1px solid #ddd;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .calendar-day {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .calendar-day:hover {
+      background-color: #f0f0f0;
+    }
+    .highlight {
+      background-color: #cce5ff;
+      font-weight: bold;
+    }
+    /* Main Content */
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .accordion {
+      margin-top: 20px;
+    }
+    .accordion-item {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .accordion-content {
+      display: none;
+      padding: 10px;
+      background-color: #e9ecef;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Temas y Fechas - Calendario en Sidebar</h1>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Calendario</h2>
+      <div class="calendar" id="calendar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="accordion" id="accordion">
+        <div class="accordion-item" onclick="toggleAccordion('item1')">Jueves, 10 de abril de 2025</div>
+        <div class="accordion-content" id="item1">
+          Tema: Seres Vivos y Célula<br>
+          Indicadores:<br>
+          - Identifica las características comunes de los seres vivos.<br>
+          - Reconoce la célula como unidad básica estructural y funcional.<br>
+          - Describe niveles básicos de organización en seres vivos.<br>
+          - Compara las diferencias entre células animales y vegetales.
+        </div>
+
+        <div class="accordion-item" onclick="toggleAccordion('item2')">Jueves, 24 de abril de 2025</div>
+        <div class="accordion-content" id="item2">
+          Tema: Funciones Vitales (Nutrición, Respiración, Circulación)<br>
+          Indicadores:<br>
+          - Explica las funciones básicas de la nutrición y respiración.<br>
+          - Describe la función general del sistema circulatorio.<br>
+          - Compara formas de obtención de alimentos en seres vivos.<br>
+          - Relaciona la importancia del oxígeno en la respiración celular.
+        </div>
+
+        <div class="accordion-item" onclick="toggleAccordion('item3')">Jueves, 15 de mayo de 2025</div>
+        <div class="accordion-content" id="item3">
+          Tema: Ecosistemas y Adaptaciones<br>
+          Indicadores:<br>
+          - Identifica componentes bióticos y abióticos de un ecosistema.<br>
+          - Construye cadenas alimentarias sencillas.<br>
+          - Explica cómo las adaptaciones permiten sobrevivir a los seres vivos.<br>
+          - Analiza el impacto de cambios ambientales en los ecosistemas.
+        </div>
+
+        <div class="accordion-item" onclick="toggleAccordion('item4')">Jueves, 26 de junio de 2025</div>
+        <div class="accordion-content" id="item4">
+          Tema: Materia, Energía y sus Cambios<br>
+          Indicadores:<br>
+          - Clasifica materiales según su estado y describe propiedades observables.<br>
+          - Describe los cambios de estado del agua.<br>
+          - Identifica diferentes formas de energía y sus fuentes.<br>
+          - Explica cómo la energía puede transformarse de una forma a otra.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Función para alternar el contenido del acordeón
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    }
+
+    // Generar calendario interactivo
+    const calendarDays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+    const topics = {
+      "2025-04-10": "item1",
+      "2025-04-24": "item2",
+      "2025-05-15": "item3",
+      "2025-06-26": "item4"
+    };
+
+    const calendarContainer = document.getElementById("calendar");
+
+    // Crear encabezados del calendario
+    calendarDays.forEach(day => {
+      const dayHeader = document.createElement("div");
+      dayHeader.textContent = day;
+      calendarContainer.appendChild(dayHeader);
+    });
+
+    // Generar días del mes
+    const startDate = new Date(2025, 3, 1); // Abril 2025 (mes empieza en 0)
+    const endDate = new Date(2025, 5, 30); // Junio 2025
+
+    let currentDate = new Date(startDate);
+
+    for (let i = 0; i < currentDate.getDay(); i++) {
+      const emptyDay = document.createElement("div");
+      calendarContainer.appendChild(emptyDay);
+    }
+
+    while (currentDate <= endDate) {
+      const calendarDay = document.createElement("div");
+      calendarDay.classList.add("calendar-day");
+      calendarDay.textContent = currentDate.getDate();
+
+      const dateKey = currentDate.toISOString().split("T")[0]; // Formato YYYY-MM-DD
+      if (topics[dateKey]) {
+        calendarDay.classList.add("highlight");
+        calendarDay.onclick = () => {
+          toggleAccordion(topics[dateKey]);
+        };
+      }
+
+      calendarContainer.appendChild(calendarDay);
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  </script>
+</body>
+</html>
