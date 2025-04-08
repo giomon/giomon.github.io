@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombian 4th Grade Curriculum Calendar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e88e5;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2962ff;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-nav button {
+            background-color: #2962ff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .calendar-nav button:hover {
+            background-color: #1565c0;
+        }
+        
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calendar-day {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .calendar-day.header {
+            background-color: #2962ff;
+            color: white;
+            font-weight: bold;
+            height: auto;
+        }
+        
+        .calendar-day.empty {
+            background-color: #f5f5f5;
+        }
+        
+        .date {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .event {
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        
+        .event.science {
+            background-color: #bbdefb;
+            color: #0d47a1;
+        }
+        
+        .event.math {
+            background-color: #c8e6c9;
+            color: #1b5e20;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: #1e88e5;
+            margin: 0;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #555;
+        }
+        
+        .topic-header {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .topic-list {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .logro-header {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .logro-list {
+            list-style-type: decimal;
+            margin-left: 20px;
+        }
+        
+        .month-selector {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .month-selector select {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 1rem;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .legend-color.science {
+            background-color: #bbdefb;
+        }
+        
+        .legend-color.math {
+            background-color: #c8e6c9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Colombian 4th Grade Curriculum Calendar</h1>
+    
+    <div class="month-selector">
+        <select id="month-select">
+            <option value="3">April 2025</option>
+            <option value="4">May 2025</option>
+            <option value="5">June 2025</option>
+        </select>
+    </div>
+    
+    <div class="calendar-header">
+        <div class="calendar-title" id="calendar-title">April 2025</div>
+        <div class="calendar-nav">
+            <button id="prev-month">&lt; Prev</button>
+            <button id="next-month">Next &gt;</button>
+        </div>
+    </div>
+    
+    <div class="calendar" id="calendar-container">
+        <!-- Calendar will be generated here -->
+    </div>
+    
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color science"></div>
+            <span>Natural Sciences (Thursday)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color math"></div>
+            <span>Mathematics (Tuesday)</span>
+        </div>
+    </div>
+    
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Event Details</h2>
+                <button class="close-button" id="close-modal">&times;</button>
+            </div>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Science lessons data
+        const scienceLessons = [
+            {
+                date: new Date(2025, 3, 17), // April 17, 2025
+                title: "Ecosystems and Habitats",
+                subject: "science",
+                topics: [
+                    "Colombian ecosystems (Amazon rainforest, Andean mountains, coastal regions)",
+                    "Interactions between living organisms and their environment",
+                    "Food chains and food webs in local ecosystems"
+                ],
+                logros: [
+                    "Identifies and describes the main characteristics of Colombian ecosystems",
+                    "Explains the relationships between organisms in a food chain",
+                    "Creates models representing different habitats and their components"
+                ]
+            },
+            {
+                date: new Date(2025, 3, 24), // April 24, 2025
+                title: "Plants and Their Functions",
+                subject: "science",
+                topics: [
+                    "Plant anatomy and physiology",
+                    "Photosynthesis process",
+                    "Plant adaptations in different Colombian regions"
+                ],
+                logros: [
+                    "Describes the parts of plants and their functions",
+                    "Explains the process of photosynthesis and its importance",
+                    "Identifies adaptations of plants to their specific environments"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 1), // May 1, 2025
+                title: "Animal Classification",
+                subject: "science",
+                topics: [
+                    "Vertebrates and invertebrates",
+                    "Colombian biodiversity",
+                    "Animal adaptations for survival"
+                ],
+                logros: [
+                    "Classifies animals according to their characteristics",
+                    "Recognizes the diversity of animals in Colombian ecosystems",
+                    "Explains how animal adaptations help them survive in their habitats"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 8), // May 8, 2025
+                title: "Matter and Its Properties",
+                subject: "science",
+                topics: [
+                    "States of matter (solid, liquid, gas)",
+                    "Physical properties of materials",
+                    "Changes in matter (physical vs. chemical)"
+                ],
+                logros: [
+                    "Identifies the states of matter and their characteristics",
+                    "Conducts simple experiments to observe changes in matter",
+                    "Classifies materials based on their physical properties"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 15), // May 15, 2025
+                title: "Forces and Motion",
+                subject: "science",
+                topics: [
+                    "Types of forces (push, pull, gravity)",
+                    "Simple machines and their uses",
+                    "Motion and speed concepts"
+                ],
+                logros: [
+                    "Describes how forces affect the movement of objects",
+                    "Identifies simple machines in everyday contexts",
+                    "Measures and compares the speed of different objects"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 22), // May 22, 2025
+                title: "Energy",
+                subject: "science",
+                topics: [
+                    "Forms of energy (light, heat, sound)",
+                    "Energy transformations",
+                    "Renewable vs. non-renewable energy sources in Colombia"
+                ],
+                logros: [
+                    "Identifies different forms of energy in daily life",
+                    "Explains simple energy transformations",
+                    "Compares renewable and non-renewable energy sources"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 29), // May 29, 2025
+                title: "Earth's Resources",
+                subject: "science",
+                topics: [
+                    "Water cycle",
+                    "Soil formation and properties",
+                    "Natural resources in Colombia"
+                ],
+                logros: [
+                    "Explains the water cycle and its importance for life",
+                    "Identifies different types of soil and their components",
+                    "Recognizes the importance of conservation of natural resources"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 5), // June 5, 2025
+                title: "Weather and Climate",
+                subject: "science",
+                topics: [
+                    "Weather elements (temperature, precipitation, wind)",
+                    "Climate regions of Colombia",
+                    "Seasonal changes and their effects"
+                ],
+                logros: [
+                    "Measures and records weather conditions",
+                    "Describes the main climate regions of Colombia",
+                    "Relates seasonal changes to plant and animal behaviors"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 12), // June 12, 2025
+                title: "The Solar System",
+                subject: "science",
+                topics: [
+                    "Sun, Earth, and Moon relationships",
+                    "Day and night cycle",
+                    "Planets and their characteristics"
+                ],
+                logros: [
+                    "Explains the day and night cycle using models",
+                    "Identifies the planets in our solar system",
+                    "Describes the movement of Earth around the Sun"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 19), // June 19, 2025
+                title: "Human Body Systems",
+                subject: "science",
+                topics: [
+                    "Digestive system",
+                    "Respiratory system",
+                    "Circulatory system"
+                ],
+                logros: [
+                    "Identifies the main organs of each body system",
+                    "Explains the basic functions of the digestive, respiratory, and circulatory systems",
+                    "Recognizes the importance of healthy habits for body systems"
+                ]
+            }
+        ];
+        
+        // Math lessons data
+        const mathLessons = [
+            {
+                date: new Date(2025, 3, 15), // April 15, 2025
+                title: "Números Naturales",
+                subject: "math",
+                topics: [
+                    "Lectura y escritura de números naturales hasta seis dígitos",
+                    "Valor posicional (unidades, decenas, centenas, unidades de mil, etc.)",
+                    "Comparación y ordenamiento de números naturales"
+                ],
+                logros: [
+                    "Lee y escribe correctamente números naturales hasta 999,999",
+                    "Identifica el valor posicional de los dígitos en un número de hasta seis cifras",
+                    "Compara y ordena números naturales utilizando los símbolos >, < e ="
+                ]
+            },
+            {
+                date: new Date(2025, 3, 22), // April 22, 2025
+                title: "Operaciones con Números Naturales",
+                subject: "math",
+                topics: [
+                    "Suma y resta de números naturales de hasta seis dígitos",
+                    "Multiplicación por números de dos y tres dígitos",
+                    "División con divisores de una y dos cifras"
+                ],
+                logros: [
+                    "Resuelve operaciones de suma y resta con números de hasta seis dígitos",
+                    "Aplica el algoritmo de la multiplicación con multiplicadores de dos y tres dígitos",
+                    "Realiza divisiones con divisores de una y dos cifras, interpretando el cociente y el residuo"
+                ]
+            },
+            {
+                date: new Date(2025, 3, 29), // April 29, 2025
+                title: "Fracciones",
+                subject: "math",
+                topics: [
+                    "Concepto de fracción como parte de un todo",
+                    "Fracciones propias, impropias y números mixtos",
+                    "Fracciones equivalentes"
+                ],
+                logros: [
+                    "Identifica y representa fracciones como parte de un todo en contextos cotidianos",
+                    "Distingue entre fracciones propias, impropias y números mixtos",
+                    "Encuentra fracciones equivalentes mediante amplificación y simplificación"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 6), // May 6, 2025
+                title: "Figuras Geométricas Planas",
+                subject: "math",
+                topics: [
+                    "Polígonos: clasificación según número de lados y propiedades",
+                    "Triángulos: clasificación por lados y por ángulos",
+                    "Cuadriláteros: paralelogramos, trapecios y trapezoides"
+                ],
+                logros: [
+                    "Identifica y clasifica polígonos según su número de lados y propiedades",
+                    "Clasifica triángulos según sus lados y ángulos",
+                    "Reconoce y describe las propiedades de los diferentes tipos de cuadriláteros"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 13), // May 13, 2025
+                title: "Perímetro y Área",
+                subject: "math",
+                topics: [
+                    "Concepto de perímetro",
+                    "Cálculo del perímetro de polígonos",
+                    "Concepto de área"
+                ],
+                logros: [
+                    "Calcula el perímetro de diferentes polígonos",
+                    "Resuelve problemas que involucran el cálculo de perímetros",
+                    "Calcula el área de cuadrados y rectángulos utilizando la fórmula correspondiente"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 20), // May 20, 2025
+                title: "Unidades de Medida",
+                subject: "math",
+                topics: [
+                    "Medidas de longitud: mm, cm, m, km",
+                    "Medidas de peso/masa: g, kg, t",
+                    "Medidas de capacidad: ml, l"
+                ],
+                logros: [
+                    "Utiliza unidades apropiadas para medir longitudes, pesos y capacidades",
+                    "Convierte entre diferentes unidades de la misma magnitud",
+                    "Estima medidas de objetos cotidianos"
+                ]
+            },
+            {
+                date: new Date(2025, 4, 27), // May 27, 2025
+                title: "Recolección y Organización de Datos",
+                subject: "math",
+                topics: [
+                    "Recolección de datos mediante encuestas simples",
+                    "Tablas de frecuencia",
+                    "Pictogramas y gráficos de barras"
+                ],
+                logros: [
+                    "Recolecta y organiza datos mediante encuestas sencillas",
+                    "Construye tablas de frecuencia para representar datos",
+                    "Elabora e interpreta pictogramas y gráficos de barras"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 3), // June 3, 2025
+                title: "Medidas de Tendencia Central",
+                subject: "math",
+                topics: [
+                    "La media aritmética (promedio)",
+                    "La moda",
+                    "La mediana"
+                ],
+                logros: [
+                    "Calcula la media aritmética de un conjunto de datos",
+                    "Identifica la moda en un conjunto de datos",
+                    "Determina la mediana en un conjunto de datos ordenados"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 10), // June 10, 2025
+                title: "Probabilidad Básica",
+                subject: "math",
+                topics: [
+                    "Experimentos aleatorios simples",
+                    "Eventos posibles, imposibles y seguros",
+                    "Probabilidad de eventos simples"
+                ],
+                logros: [
+                    "Identifica eventos posibles, imposibles y seguros en experimentos aleatorios",
+                    "Enumera los resultados posibles de un experimento aleatorio simple",
+                    "Calcula la probabilidad de eventos simples como una fracción"
+                ]
+            },
+            {
+                date: new Date(2025, 5, 17), // June 17, 2025
+                title: "Patrones y Secuencias",
+                subject: "math",
+                topics: [
+                    "Secuencias numéricas crecientes y decrecientes",
+                    "Patrones geométricos",
+                    "Regla de formación de una secuencia"
+                ],
+                logros: [
+                    "Identifica y completa secuencias numéricas crecientes y decrecientes",
+                    "Reconoce y continúa patrones geométricos",
+                    "Determina la regla de formación de una secuencia dada"
+                ]
+            }
+        ];
+
+        // Combine all lessons
+        const allLessons = [...scienceLessons, ...mathLessons];
+
+        // Variables to keep track of current month and year
+        let currentMonth = 3; // April (0-indexed)
+        let currentYear = 2025;
+
+        // DOM elements
+        const calendarContainer = document.getElementById('calendar-container');
+        const calendarTitle = document.getElementById('calendar-title');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        const eventModal = document.getElementById('event-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const monthSelect = document.getElementById('month-select');
+
+        // Month names
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        // Day names
+        const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        // Initialize calendar
+        function initCalendar() {
+            generateCalendar(currentMonth, currentYear);
+            
+            // Event listeners
+            prevMonthBtn.addEventListener('click', showPreviousMonth);
+            nextMonthBtn.addEventListener('click', showNextMonth);
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            monthSelect.addEventListener('change', function() {
+                currentMonth = parseInt(this.value);
+                generateCalendar(currentMonth, currentYear);
+            });
+            
+            // Initially set the select value
+            monthSelect.value = currentMonth;
+        }
+
+        // Generate calendar
+        function generateCalendar(month, year) {
+            calendarContainer.innerHTML = '';
+            
+            // Update calendar title
+            calendarTitle.textContent = `${monthNames[month]} ${year}`;
+            
+            // Add day headers
+            dayNames.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day header';
+                dayHeader.textContent = day;
+                calendarContainer.appendChild(dayHeader);
+            });
+            
+            // Get first day of month and total days in month
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Add empty cells for days before first day of month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarContainer.appendChild(emptyDay);
+            }
+            
+            // Add cells for days in month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'date';
+                dateDiv.textContent = day;
+                dayCell.appendChild(dateDiv);
+                
+                // Check if there are events on this day
+                const eventsForDay = allLessons.filter(lesson => 
+                    lesson.date.getDate() === day && 
+                    lesson.date.getMonth() === month && 
+                    lesson.date.getFullYear() === year
+                );
+                
+                eventsForDay.forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = `event ${event.subject}`;
+                    eventDiv.textContent = event.title;
+                    eventDiv.addEventListener('click', () => showEventDetails(event));
+                    dayCell.appendChild(eventDiv);
+                });
+                
+                calendarContainer.appendChild(dayCell);
+            }
+            
+            // Add empty cells for days after last day of month
+            const lastDay = new Date(year, month, daysInMonth).getDay();
+            for (let i = lastDay; i < 6; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarContainer.appendChild(emptyDay);
+            }
+        }
+
+        // Show previous month
+        function showPreviousMonth() {
+            if (currentMonth === 3) return; // Don't go before April 2025
+            
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            
+            monthSelect.value = currentMonth;
+            generateCalendar(currentMonth, currentYear);
+        }
+
+        // Show next month
+        function showNextMonth() {
+            if (currentMonth === 5) return; // Don't go after June 2025
+            
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            
+            monthSelect.value = currentMonth;
+            generateCalendar(currentMonth, currentYear);
+        }
+
+        // Show event details in modal
+        function showEventDetails(event) {
+            const subjectLabel = event.subject === 'science' ? 'Natural Sciences' : 'Mathematics';
+            modalTitle.textContent = `${event.title} - ${subjectLabel} - ${event.date.toLocaleDateString()}`;
+            
+            let content = `
+                <div class="topic-header">Main Topics:</div>
+                <ul class="topic-list">
+                    ${event.topics.map(topic => `<li>${topic}</li>`).join('')}
+                </ul>
+                
+                <div class="logro-header">Indicadores de Logro:</div>
+                <ol class="logro-list">
+                    ${event.logros.map(logro => `<li>${logro}</li>`).join('')}
+                </ol>
+            `;
+            
+            modalContent.innerHTML = content;
+            eventModal.style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            eventModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === eventModal) {
+                closeModal();
+            }
+        });
+
+        // Initialize calendar on page load
+        document.addEventListener('DOMContentLoaded', initCalendar);
+    </script>
+</body>
+</html>
